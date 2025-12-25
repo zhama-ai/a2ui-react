@@ -1,6 +1,6 @@
 {
   "name": "@zhama/a2ui",
-  "version": "1.0.0",
+  "version": "0.10.0",
   "description": "A2UI Protocol - Agent-to-User Interface Protocol React implementation based on Google A2UI",
   "type": "module",
   "main": "dist/index.cjs",
