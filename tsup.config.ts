@@ -1,8 +1,7 @@
 import { defineConfig } from 'tsup';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = !isProduction;
-
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = !isDevelopment;
 export default defineConfig({
   // 多入口点
   entry: {
@@ -24,17 +23,19 @@ export default defineConfig({
   // 外部依赖 - React 相关及 markdown
   external: ['react', 'react-dom', 'react-markdown'],
 
-  // 生成类型定义（暂时禁用，React 19 类型兼容问题）
-  dts: false,
+  // 生成类型定义
+  dts: {
+    resolve: true, // 自动解析类型依赖
+  },
 
   // 代码分割：库包不需要
   splitting: false,
 
   // 源码映射策略
-  sourcemap: isDevelopment || process.env.ENABLE_SOURCEMAP === 'true',
+  sourcemap: !isProduction || process.env.ENABLE_SOURCEMAP === 'true',
 
-  // 压缩策略：开发环境不压缩，生产环境压缩
-  minify: isProduction && process.env.ENABLE_MINIFY !== 'false',
+  // 压缩策略：始终启用压缩（发布库需要）
+  minify: true,
 
   // 清理输出目录
   clean: true,
@@ -51,6 +52,6 @@ export default defineConfig({
   },
   injectStyle: false,
 
-  // 构建成功提示
-  onSuccess: 'echo "✅ @zhama/a2ui build completed"',
+  // 复制 CSS 文件到 dist/styles
+  onSuccess: 'cp src/styles/*.css dist/styles/ && echo "✅ @zhama/a2ui build completed"',
 });

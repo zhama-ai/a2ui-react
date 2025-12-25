@@ -1,6 +1,6 @@
 {
   "name": "@zhama/a2ui",
-  "version": "0.10.0",
+  "version": "0.10.5",
   "description": "A2UI Protocol - Agent-to-User Interface Protocol React implementation based on Google A2UI",
   "type": "module",
   "main": "dist/index.cjs",
@@ -9,41 +9,36 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "development": "./src/index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./types": {
       "types": "./dist/types/index.d.ts",
-      "development": "./src/types/index.ts",
       "import": "./dist/types/index.js",
       "require": "./dist/types/index.cjs",
       "default": "./dist/types/index.js"
     },
     "./data": {
       "types": "./dist/data/index.d.ts",
-      "development": "./src/data/index.ts",
       "import": "./dist/data/index.js",
       "require": "./dist/data/index.cjs",
       "default": "./dist/data/index.js"
     },
     "./events": {
       "types": "./dist/events/index.d.ts",
-      "development": "./src/events/index.ts",
       "import": "./dist/events/index.js",
       "require": "./dist/events/index.cjs",
       "default": "./dist/events/index.js"
     },
     "./styles": {
       "types": "./dist/styles/index.d.ts",
-      "development": "./src/styles/index.ts",
       "import": "./dist/styles/index.js",
       "require": "./dist/styles/index.cjs",
       "default": "./dist/styles/index.js"
     },
-    "./styles/a2ui-variables.css": "./src/styles/a2ui-variables.css",
-    "./styles/a2ui.css": "./src/styles/a2ui.css",
+    "./styles/a2ui-variables.css": "./dist/styles/a2ui-variables.css",
+    "./styles/a2ui.css": "./dist/styles/a2ui.css",
     "./tailwind.preset": {
       "import": "./tailwind.preset.js",
       "require": "./tailwind.preset.js",
@@ -51,14 +46,12 @@
     },
     "./ui": {
       "types": "./dist/ui/index.d.ts",
-      "development": "./src/ui/index.ts",
       "import": "./dist/ui/index.js",
       "require": "./dist/ui/index.cjs",
       "default": "./dist/ui/index.js"
     },
     "./context": {
       "types": "./dist/context/index.d.ts",
-      "development": "./src/context/index.tsx",
       "import": "./dist/context/index.js",
       "require": "./dist/context/index.cjs",
       "default": "./dist/context/index.js"
@@ -69,7 +62,7 @@
     "dist/**/*.cjs",
     "dist/**/*.d.ts",
     "dist/**/*.d.cts",
-    "src/styles/a2ui-variables.css",
+    "dist/styles/*.css",
     "tailwind.preset.js"
   ],
   "publishConfig": {
