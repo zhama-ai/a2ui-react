@@ -1,8 +1,8 @@
 name: Publish to npm
 
-on:
-  release:
-    types: [created]
+# on:
+#   release:
+#     types: [created]
 
 jobs:
   publish:
@@ -10,38 +10,38 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Type check
         run: pnpm run type-check
-      
+
       - name: Lint
         run: pnpm run lint
-      
+
       - name: Build
         run: pnpm run build
-      
+
       # TODO: Add tests
       # - name: Test
       #   run: pnpm run test
-      
+
       - name: Publish to npm
         run: pnpm publish --no-git-checks --access public
         env:

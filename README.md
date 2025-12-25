@@ -397,8 +397,8 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 - 🐛 **Issues**: [GitHub Issues](https://github.com/zhama/a2ui/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/zhama/a2ui/discussions)
-- 📧 **Email**: support@zhama.ai
-- 🌐 **Website**: [https://zhama.ai](https://zhama.ai)
+- 📧 **Email**: support@zhama.com
+- 🌐 **Website**: [https://zhama.com](https://zhama.com)
 
 ### ❓ FAQ
 
@@ -830,7 +830,7 @@ zhama/a2ui/
 
 - 🐛 **问题反馈**: [GitHub Issues](https://github.com/zhama-ai/a2ui-react/issues)
 - 💬 **讨论**: [GitHub Discussions](https://github.com/zhama-ai/a2ui-react/discussions)
-- 📧 **邮箱**: support@zhama.ai
+- 📧 **邮箱**: support@zhama.com
 
 ### ❓ 常见问题
 
@@ -884,7 +884,7 @@ A2UI 是协议优先，专为 AI 生成设计。shadcn/ui 是开发者优先，�
 
 <div align="center">
 
-Made with ❤️ by [Zhama AI](https://zhama.ai)
+Made with ❤️ by [Zhama AI](https://zhama.com)
 
 **如果你觉得有帮助，请给个 Star ⭐！**
 

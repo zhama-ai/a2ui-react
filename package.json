@@ -148,8 +148,8 @@
   ],
   "author": {
     "name": "Zhama AI",
-    "email": "support@zhama.ai",
-    "url": "https://zhama.ai"
+    "email": "support@zhama.com",
+    "url": "https://zhama.com"
   },
   "license": "MIT",
   "repository": {
@@ -158,7 +158,7 @@
   },
   "bugs": {
     "url": "https://github.com/zhama/a2ui/issues",
-    "email": "support@zhama.ai"
+    "email": "support@zhama.com"
   },
   "homepage": "https://github.com/zhama/a2ui#readme",
   "engines": {

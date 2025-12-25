@@ -19,7 +19,7 @@ The @zhama/a2ui team takes security bugs seriously. We appreciate your efforts t
 
 Instead, please report security vulnerabilities by email to:
 
-📧 **security@zhama.ai**
+📧 **security@zhama.com**
 
 Include the following information:
 - Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
@@ -115,7 +115,7 @@ We will not pursue legal action against researchers who follow these guidelines.
 
 ## Questions?
 
-If you have questions about this security policy, please contact us at security@zhama.ai
+If you have questions about this security policy, please contact us at security@zhama.com
 
 ---
 
