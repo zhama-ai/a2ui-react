@@ -1,0 +1,168 @@
+{
+  "name": "@zhama/a2ui",
+  "version": "1.0.0",
+  "description": "A2UI Protocol - Agent-to-User Interface Protocol React implementation based on Google A2UI",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "development": "./src/types/index.ts",
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.cjs",
+      "default": "./dist/types/index.js"
+    },
+    "./data": {
+      "types": "./dist/data/index.d.ts",
+      "development": "./src/data/index.ts",
+      "import": "./dist/data/index.js",
+      "require": "./dist/data/index.cjs",
+      "default": "./dist/data/index.js"
+    },
+    "./events": {
+      "types": "./dist/events/index.d.ts",
+      "development": "./src/events/index.ts",
+      "import": "./dist/events/index.js",
+      "require": "./dist/events/index.cjs",
+      "default": "./dist/events/index.js"
+    },
+    "./styles": {
+      "types": "./dist/styles/index.d.ts",
+      "development": "./src/styles/index.ts",
+      "import": "./dist/styles/index.js",
+      "require": "./dist/styles/index.cjs",
+      "default": "./dist/styles/index.js"
+    },
+    "./styles/a2ui-variables.css": "./src/styles/a2ui-variables.css",
+    "./styles/a2ui.css": "./src/styles/a2ui.css",
+    "./tailwind.preset": {
+      "import": "./tailwind.preset.js",
+      "require": "./tailwind.preset.js",
+      "default": "./tailwind.preset.js"
+    },
+    "./ui": {
+      "types": "./dist/ui/index.d.ts",
+      "development": "./src/ui/index.ts",
+      "import": "./dist/ui/index.js",
+      "require": "./dist/ui/index.cjs",
+      "default": "./dist/ui/index.js"
+    },
+    "./context": {
+      "types": "./dist/context/index.d.ts",
+      "development": "./src/context/index.tsx",
+      "import": "./dist/context/index.js",
+      "require": "./dist/context/index.cjs",
+      "default": "./dist/context/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.cjs",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.cts",
+    "src/styles/a2ui-variables.css",
+    "tailwind.preset.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "echo 'Development mode: using source files directly'",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run clean && pnpm run build",
+    "prepack": "pnpm run type-check && pnpm run lint"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.469.0",
+    "react-markdown": "^9.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.16.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/ui": "^4.0.16",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "globals": "^15.12.0",
+    "jsdom": "^27.3.0",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.15.0",
+    "vitest": "^4.0.16"
+  },
+  "keywords": [
+    "a2ui",
+    "agent-to-ui",
+    "ai",
+    "artificial-intelligence",
+    "llm",
+    "large-language-model",
+    "protocol",
+    "ui-generation",
+    "dynamic-ui",
+    "react",
+    "react-components",
+    "typescript",
+    "tailwind",
+    "google-a2ui",
+    "conversational-ui",
+    "chatbot",
+    "agent"
+  ],
+  "author": {
+    "name": "Zhama AI",
+    "email": "support@zhama.ai",
+    "url": "https://zhama.ai"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhama/a2ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhama/a2ui/issues",
+    "email": "support@zhama.ai"
+  },
+  "homepage": "https://github.com/zhama/a2ui#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

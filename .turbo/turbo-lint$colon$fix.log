@@ -1,0 +1,386 @@
+
+
+> @zhama/a2ui@1.0.0 lint:fix /Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui
+> eslint . --fix
+
+[0m[0m
+[0m[4m/Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/examples/basic-demo/dist/assets/index-tFICzTlI.js[24m[0m
+[0m     [2m34:3[22m   [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m     [2m35:3[22m   [33mwarning[39m  'd' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m     [2m37:3[22m   [33mwarning[39m  'p' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m     [2m51:13[22m  [33mwarning[39m  'h' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m     [2m58:32[22m  [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m     [2m65:3[22m   [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m    [2m107:8[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m    [2m107:8[22m   [31merror[39m    Unexpected constant condition                                              [2mno-constant-condition[22m[0m
+[0m    [2m380:15[22m  [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m   [2m1451:3[22m   [33mwarning[39m  'ke' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m   [2m1542:18[22m  [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m1568:15[22m  [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m1581:3[22m   [33mwarning[39m  've' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m   [2m1819:13[22m  [31merror[39m    Unreachable code                                                           [2mno-unreachable[22m[0m
+[0m   [2m4537:23[22m  [31merror[39m    'e' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m   [2m4682:18[22m  [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m   [2m4685:18[22m  [31merror[39m    'e' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m   [2m5747:21[22m  [33mwarning[39m  'c' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m6055:35[22m  [31merror[39m    't' is assigned a value but never used                                     [2mno-unused-vars[22m[0m
+[0m   [2m6181:11[22m  [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m6182:11[22m  [33mwarning[39m  'i' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m6211:9[22m   [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m6764:20[22m  [33mwarning[39m  'i' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m6985:7[22m   [31merror[39m    Unreachable code                                                           [2mno-unreachable[22m[0m
+[0m  [2m27113:1[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m27118:1[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m27172:1[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m28002:1[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m28424:3[22m   [31merror[39m    Unreachable code                                                           [2mno-unreachable[22m[0m
+[0m[0m
+[0m[4m/Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/examples/basic-demo/dist/assets/ui-CGV1RKSH.js[24m[0m
+[0m  [2m77:7[22m  [31merror[39m  Unreachable code  [2mno-unreachable[22m[0m
+[0m[0m
+[0m[4m/Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/examples/basic-demo/dist/assets/vendor-Z2Iecplj.js[24m[0m
+[0m     [2m6:3[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m     [2m7:3[22m    [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m    [2m60:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m    [2m65:28[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m    [2m69:12[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m141:12[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m142:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m170:9[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m248:11[22m   [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m258:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m261:16[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m   [2m264:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m370:3[22m    [33mwarning[39m  'f' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m371:3[22m    [33mwarning[39m  'd' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m372:3[22m    [33mwarning[39m  'p' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m373:3[22m    [33mwarning[39m  'm' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m434:17[22m   [33mwarning[39m  'i' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m435:15[22m   [33mwarning[39m  's' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m442:15[22m   [33mwarning[39m  'g' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m443:15[22m   [33mwarning[39m  'v' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m444:15[22m   [33mwarning[39m  'y' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m478:33[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m492:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m566:21[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m610:21[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m674:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m702:320[22m  [31merror[39m    Unexpected combined character in character class                           [2mno-misleading-character-class[22m[0m
+[0m   [2m755:15[22m   [31merror[39m    Unnecessary escape character: \-                                           [2mno-useless-escape[22m[0m
+[0m   [2m760:15[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m   [2m861:5[22m    [33mwarning[39m  'U' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m   [2m894:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m916:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m   [2m940:13[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m   [2m989:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1004:20[22m   [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1004:23[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m1080:13[22m   [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1081:11[22m   [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1084:14[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1121:9[22m    [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1132:14[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1147:7[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1168:8[22m    [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1170:11[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1174:11[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1174:40[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1195:12[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1197:17[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1234:7[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1263:5[22m    [33mwarning[39m  'de' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1277:38[22m   [31merror[39m    'MSApp' is not defined                                                     [2mno-undef[22m[0m
+[0m  [2m1278:27[22m   [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1278:30[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1279:13[22m   [31merror[39m    'MSApp' is not defined                                                     [2mno-undef[22m[0m
+[0m  [2m1340:53[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1346:13[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m1432:9[22m    [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m1484:9[22m    [31merror[39m    Expected to return a value in method 'get'                                 [2mgetter-return[22m[0m
+[0m  [2m1490:14[22m   [31merror[39m    'fe' is defined but never used                                             [2mno-unused-vars[22m[0m
+[0m  [2m1493:24[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1493:27[22m   [31merror[39m    'l' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1493:30[22m   [31merror[39m    'a' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1493:33[22m   [31merror[39m    'u' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1493:36[22m   [31merror[39m    'o' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1493:39[22m   [31merror[39m    'i' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1505:5[22m    [33mwarning[39m  '$e' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1510:15[22m   [31merror[39m    'e' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:18[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:21[22m   [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:24[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:27[22m   [31merror[39m    'l' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:30[22m   [31merror[39m    'a' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:33[22m   [31merror[39m    'u' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:36[22m   [31merror[39m    'o' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1510:39[22m   [31merror[39m    'i' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m1544:14[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1565:18[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1608:7[22m    [33mwarning[39m  'Ke' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1609:5[22m    [33mwarning[39m  'Ye' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1610:5[22m    [33mwarning[39m  'Xe' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1611:5[22m    [33mwarning[39m  'Ge' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1612:5[22m    [33mwarning[39m  'Ze' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1613:5[22m    [33mwarning[39m  'Je' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1614:5[22m    [33mwarning[39m  'en' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1615:5[22m    [33mwarning[39m  'nn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1616:5[22m    [33mwarning[39m  'tn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1617:5[22m    [33mwarning[39m  'rn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1618:5[22m    [33mwarning[39m  'ln' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1621:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1741:10[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1767:5[22m    [33mwarning[39m  'zn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1771:5[22m    [33mwarning[39m  'Mn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1772:5[22m    [33mwarning[39m  'Fn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1773:5[22m    [33mwarning[39m  'On' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1774:5[22m    [33mwarning[39m  'Dn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1867:12[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1868:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1886:7[22m    [33mwarning[39m  'Wn' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m1922:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m1942:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2055:7[22m    [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2056:7[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2057:7[22m    [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2058:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2087:11[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m2106:17[22m   [31merror[39m    Invalid typeof comparison value                                            [2mvalid-typeof[22m[0m
+[0m  [2m2114:17[22m   [31merror[39m    Invalid typeof comparison value                                            [2mvalid-typeof[22m[0m
+[0m  [2m2126:5[22m    [33mwarning[39m  'ct' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2136:5[22m    [33mwarning[39m  'ft' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2137:5[22m    [33mwarning[39m  'dt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2138:5[22m    [33mwarning[39m  'pt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2139:5[22m    [33mwarning[39m  'mt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2174:5[22m    [33mwarning[39m  'ht' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2175:5[22m    [33mwarning[39m  'gt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2176:5[22m    [33mwarning[39m  'vt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2177:5[22m    [33mwarning[39m  'yt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2178:5[22m    [33mwarning[39m  'bt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2183:5[22m    [33mwarning[39m  'kt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2184:5[22m    [33mwarning[39m  'wt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2185:5[22m    [33mwarning[39m  'St' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2199:5[22m    [33mwarning[39m  'xt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2237:5[22m    [33mwarning[39m  'Et' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2245:7[22m    [33mwarning[39m  'Pt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2282:5[22m    [33mwarning[39m  'Nt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2283:5[22m    [33mwarning[39m  'zt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2297:5[22m    [33mwarning[39m  'Tt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2309:5[22m    [33mwarning[39m  'Lt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2310:5[22m    [33mwarning[39m  'Rt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2326:5[22m    [33mwarning[39m  'Mt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2327:5[22m    [33mwarning[39m  'Ft' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2328:5[22m    [33mwarning[39m  'Ot' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2331:7[22m    [33mwarning[39m  'It' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2332:5[22m    [33mwarning[39m  'Ut' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2333:5[22m    [33mwarning[39m  'Vt' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2435:9[22m    [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2482:10[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2484:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2485:16[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2544:7[22m    [33mwarning[39m  'gr' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2581:7[22m    [33mwarning[39m  'xr' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2587:5[22m    [33mwarning[39m  'Er' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m2593:7[22m    [33mwarning[39m  't' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2594:24[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m2656:18[22m   [31merror[39m    'e' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:21[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:24[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:27[22m   [31merror[39m    'l' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:30[22m   [31merror[39m    'a' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:33[22m   [31merror[39m    'u' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:36[22m   [31merror[39m    'o' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:39[22m   [31merror[39m    'i' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2656:42[22m   [31merror[39m    's' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m2669:9[22m    [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2674:16[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2675:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2720:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2750:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2772:9[22m    [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m2774:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2776:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2781:13[22m   [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m2797:13[22m   [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m2852:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2856:16[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2857:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2881:20[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m2886:32[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m2927:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2932:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m2967:11[22m   [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m2976:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3045:10[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3065:10[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3068:9[22m    [33mwarning[39m  's' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m3081:10[22m   [31merror[39m    Unexpected control character(s) in regular expression: \x00                [2mno-control-regex[22m[0m
+[0m  [2m3157:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3192:7[22m    [33mwarning[39m  'xl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3203:7[22m    [33mwarning[39m  'Nl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3204:5[22m    [33mwarning[39m  'zl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3205:5[22m    [33mwarning[39m  'Tl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3214:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m3271:9[22m    [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m3289:7[22m    [33mwarning[39m  'Hl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3293:5[22m    [33mwarning[39m  'Kl' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3344:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3444:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3606:20[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3661:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3705:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3754:7[22m    [33mwarning[39m  'wa' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3755:5[22m    [33mwarning[39m  'Sa' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3756:5[22m    [33mwarning[39m  'xa' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m3846:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3907:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3910:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m3933:15[22m   [33mwarning[39m  'h' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m3944:15[22m   [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m3991:11[22m   [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4010:14[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m4056:7[22m    [33mwarning[39m  'lu' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m4057:5[22m    [33mwarning[39m  'au' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m4112:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4143:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4198:9[22m    [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4216:9[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4218:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4219:7[22m    [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4255:14[22m   [31merror[39m    'r' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m4385:9[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4401:18[22m   [31merror[39m    's' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m4401:21[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m4420:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4488:11[22m   [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4513:13[22m   [33mwarning[39m  'e' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4516:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4635:49[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m4683:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4741:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4748:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4768:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4787:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4815:7[22m    [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4816:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m4862:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4867:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4870:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4873:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4880:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m4886:14[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m4925:12[22m   [31merror[39m    Expected a conditional expression and instead saw an assignment            [2mno-cond-assign[22m[0m
+[0m  [2m4986:5[22m    [33mwarning[39m  'Do' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m5051:61[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5198:7[22m    [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m5268:16[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5273:16[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5282:9[22m    [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m5286:12[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5338:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5348:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5382:18[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5383:21[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5384:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5394:23[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5415:74[22m   [31merror[39m    Unnecessary escape character: \/                                           [2mno-useless-escape[22m[0m
+[0m  [2m5469:23[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5482:30[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5748:18[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5748:41[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5750:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5751:30[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5758:20[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5763:15[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5768:22[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5769:29[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5771:32[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5782:24[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m5787:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5796:5[22m    [33mwarning[39m  'Zo' is never reassigned. Use 'const' instead                              [2mprefer-const[22m[0m
+[0m  [2m5915:16[22m   [31merror[39m    'o' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m5915:19[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m5919:7[22m    [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m5920:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m5958:15[22m   [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6003:15[22m   [33mwarning[39m  'u' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6004:13[22m   [33mwarning[39m  'o' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6054:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6062:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6069:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6071:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6089:19[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6091:19[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6156:21[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6194:68[22m   [31merror[39m    Do not access Object.prototype method 'hasOwnProperty' from target object  [2mno-prototype-builtins[22m[0m
+[0m  [2m6227:7[22m    [31merror[39m    Expected a 'break' statement before 'case'                                 [2mno-fallthrough[22m[0m
+[0m  [2m6237:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6246:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6251:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6264:18[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m6264:21[22m   [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m6267:18[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m6267:21[22m   [31merror[39m    't' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m6269:11[22m   [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6297:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6307:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6315:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6319:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6331:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6411:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6419:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6428:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6436:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6458:3[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6569:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6571:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6593:19[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6597:25[22m   [33mwarning[39m  'a' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6601:32[22m   [31merror[39m    'o' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m6751:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m6827:13[22m   [33mwarning[39m  'o' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m6879:17[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7005:21[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7018:34[22m   [31merror[39m    'w' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m7031:29[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7062:25[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7086:31[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7126:26[22m   [31merror[39m    'n' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m7126:29[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m7147:9[22m    [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m7148:9[22m    [33mwarning[39m  'r' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m7150:76[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7155:13[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7158:15[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7252:22[22m   [31merror[39m    'S' is defined but never used                                              [2mno-unused-vars[22m[0m
+[0m  [2m7252:25[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m7308:9[22m    [33mwarning[39m  'n' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m7316:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7497:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7578:19[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7616:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7618:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7620:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7693:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7897:7[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7916:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7933:9[22m    [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7968:14[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m7975:11[22m   [31merror[39m    Unexpected var, use let or const instead                                   [2mno-var[22m[0m
+[0m  [2m8045:6[22m    [31merror[39m    'ze' is a function                                                         [2mno-func-assign[22m[0m
+[0m  [2m8046:6[22m    [31merror[39m    'Te' is a function                                                         [2mno-func-assign[22m[0m
+[0m  [2m8085:16[22m   [31merror[39m    '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            [2mno-undef[22m[0m
+[0m  [2m8089:16[22m   [31merror[39m    'fe' is defined but never used                                             [2mno-unused-vars[22m[0m
+[0m  [2m8089:20[22m   [31merror[39m    Empty block statement                                                      [2mno-empty[22m[0m
+[0m  [2m8142:11[22m   [33mwarning[39m  'l' is never reassigned. Use 'const' instead                               [2mprefer-const[22m[0m
+[0m  [2m8196:30[22m   [31merror[39m    '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            [2mno-undef[22m[0m
+[0m  [2m8199:11[22m   [31merror[39m    '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            [2mno-undef[22m[0m
+[0m[0m
+[0m[4m/Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/examples/basic-demo/src/services/mock-agent.ts[24m[0m
+[0m  [2m101:35[22m  [33mwarning[39m  'message' is defined but never used. Allowed unused args must match /^_/u  [2m@typescript-eslint/no-unused-vars[22m[0m
+[0m[0m
+[0m[4m/Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/tsup.config.ts[24m[0m
+[0m  [2m0:0[22m  [31merror[39m  Parsing error: /Users/yangtao/workspace/AI/zhama/platform/tego-os/zhama/a2ui/tsup.config.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject[0m
+[0m[0m
+[0m[31m[1m✖ 367 problems (236 errors, 131 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[0m
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

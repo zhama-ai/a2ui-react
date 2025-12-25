@@ -1,0 +1,143 @@
+/**
+ * A2UI Unified CSS
+ *
+ * 包含：
+ * 1. 完整的 CSS 变量定义 (Design Tokens)
+ * 2. 基础元素样式重置 (Base/Reset)
+ * 3. A2UI 核心布局类 (.a2ui-root)
+ */
+
+@import './a2ui-variables.css';
+
+/* ============ 核心容器样式 ============ */
+.a2ui-root {
+  /* 基础文字样式 */
+  font-family: var(--font-sans);
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(at 0% 0%, hsla(var(--primary), 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(var(--accent), 0.05) 0px, transparent 50%),
+    radial-gradient(
+      at 50% 100%,
+      hsla(var(--primary), 0.03) 0px,
+      transparent 50%
+    );
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 容器布局 */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  padding-top: 2rem;
+}
+
+/* ============ 列表微调 ============ */
+.a2ui-list {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============ 装饰性背景 ============ */
+.a2ui-bg-dot {
+  background-image: radial-gradient(
+    hsl(var(--foreground) / 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+
+.a2ui-bg-grid {
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ============ 玻璃拟态 ============ */
+.a2ui-glass {
+  background: hsla(var(--background), 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsla(var(--border), 0.5);
+}
+
+/* ============ 卡片装饰 ============ */
+.a2ui-card-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)),
+    hsl(var(--muted) / 0.3)
+  );
+}
+
+/* ============ 渐变文字 ============ */
+.a2ui-text-gradient {
+  background: linear-gradient(
+    to bottom right,
+    hsl(var(--foreground)),
+    hsl(var(--primary))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 确保内部所有元素使用 border-box */
+.a2ui-root *,
+.a2ui-root *::before,
+.a2ui-root *::after {
+  box-sizing: border-box;
+}
+
+/* ============ 基础元素 Reset (仅在 .a2ui-root 内生效) ============ */
+.a2ui-root h1,
+.a2ui-root h2,
+.a2ui-root h3,
+.a2ui-root h4,
+.a2ui-root h5,
+.a2ui-root h6 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.a2ui-root p {
+  margin: 0;
+}
+
+.a2ui-root ul,
+.a2ui-root ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ============ 滚动条样式 ============ */
+.a2ui-root::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.a2ui-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.a2ui-root::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.a2ui-root::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ============ 辅助类 ============ */
+.a2ui-full-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
