@@ -19,6 +19,9 @@ export default tseslint.config(
       '*.config.js',
       '**/*.d.ts',
       '**/*.config.bundled_*.mjs',
+      'examples/**/node_modules/**',
+      'examples/**/dist/**',
+      'examples/**/build/**',
     ],
   },
 
