@@ -286,15 +286,6 @@ style.textContent = css;
 document.head.appendChild(style);
 ```
 
-#### Alignment with Official Lit Implementation
-
-| Official Lit | @zhama/a2ui |
-|--------------|-------------|
-| `layout-p-4` | `a2-p-4` |
-| `color-bgc-p50` | `a2-bgc-p50` |
-| `typography-f-sf` | `a2-font-sans` |
-| `border-br-4` | `a2-br-4` |
-| `behavior-ho-80` | `a2-ho-80` |
 
 ### 🧩 Available Components
 
@@ -782,15 +773,6 @@ style.textContent = css;
 document.head.appendChild(style);
 ```
 
-#### 与官方 Lit 实现对齐
-
-| 官方 Lit | @zhama/a2ui |
-|----------|-------------|
-| `layout-p-4` | `a2-p-4` |
-| `color-bgc-p50` | `a2-bgc-p50` |
-| `typography-f-sf` | `a2-font-sans` |
-| `border-br-4` | `a2-br-4` |
-| `behavior-ho-80` | `a2-ho-80` |
 
 ### 🧩 可用组件
 
