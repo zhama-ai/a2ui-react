@@ -131,4 +131,3 @@ export interface UpdateDataItem {
  * 路径映射表
  */
 export type PathMappings = Record<string, string>;
-

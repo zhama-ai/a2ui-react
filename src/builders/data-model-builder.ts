@@ -21,10 +21,7 @@ export const DEFAULT_PATH_MAPPINGS: PathMappings = {
  * @param obj - JavaScript 对象
  * @param prefix - 路径前缀（用于嵌套对象的 key 生成）
  */
-export function objectToValueMap(
-  obj: Record<string, unknown>,
-  prefix = ''
-): A2UIValueMap[] {
+export function objectToValueMap(obj: Record<string, unknown>, prefix = ''): A2UIValueMap[] {
   const entries: A2UIValueMap[] = [];
 
   for (const [key, value] of Object.entries(obj)) {
@@ -85,10 +82,7 @@ export function valueToValueMap(key: string, value: unknown): A2UIValueMap {
  * @param path - 原始路径
  * @param pathMappings - 可选路径映射表
  */
-export function normalizePath(
-  path: string,
-  pathMappings: PathMappings = {}
-): string {
+export function normalizePath(path: string, pathMappings: PathMappings = {}): string {
   // 1. 将 . 分隔符转换为 /
   let normalizedPath = path.replace(/\./g, '/');
 
@@ -123,9 +117,7 @@ export function updatesToValueMap(
   const entries: A2UIValueMap[] = [];
 
   for (const update of updates) {
-    const rawPath = update.path.startsWith('/')
-      ? update.path
-      : `${basePath}/${update.path}`;
+    const rawPath = update.path.startsWith('/') ? update.path : `${basePath}/${update.path}`;
     const normalizedPath = normalizePath(rawPath, pathMappings);
 
     if (update.value !== null && typeof update.value === 'object' && !Array.isArray(update.value)) {
@@ -158,10 +150,7 @@ export function flattenObjectToValueMap(
     const fullPath = `${basePath}/${key}`;
 
     if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
-      const nestedEntries = flattenObjectToValueMap(
-        value as Record<string, unknown>,
-        fullPath
-      );
+      const nestedEntries = flattenObjectToValueMap(value as Record<string, unknown>, fullPath);
       entries.push(...nestedEntries);
     } else {
       entries.push(valueToValueMap(fullPath, value));
@@ -186,4 +175,3 @@ export function valueToValueMapEntry(path: string, value: unknown): A2UIValueMap
 export function jsValueToA2UIValue(value: unknown): A2UIValueMap {
   return valueToValueMap('', value);
 }
-

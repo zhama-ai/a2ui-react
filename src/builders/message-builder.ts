@@ -6,8 +6,9 @@
  */
 
 import type { ServerToClientMessage, ComponentInstance } from '../types/types';
-import type { UpdateDataItem } from './types';
+
 import { objectToValueMap, updatesToValueMap, valueToValueMap } from './data-model-builder';
+import type { UpdateDataItem } from './types';
 
 /**
  * 组件 ID 计数器
@@ -166,9 +167,7 @@ export function createA2UIMessages(
   dataModel?: Record<string, unknown>,
   surfaceId = '@default'
 ): ServerToClientMessage[] {
-  const messages: ServerToClientMessage[] = [
-    createSurfaceUpdate(components, surfaceId),
-  ];
+  const messages: ServerToClientMessage[] = [createSurfaceUpdate(components, surfaceId)];
 
   if (dataModel) {
     messages.push(createDataModelInit(dataModel, surfaceId));
@@ -196,4 +195,3 @@ export function createA2UIMessagesWithData(
 ): ServerToClientMessage[] {
   return createA2UIMessages(rootId, components, dataModel, surfaceId);
 }
-

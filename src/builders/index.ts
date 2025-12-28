@@ -101,4 +101,3 @@ export {
   valueToValueMapEntry,
   jsValueToA2UIValue,
 } from './data-model-builder';
-

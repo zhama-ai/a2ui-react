@@ -5,6 +5,7 @@
  * 用于创建符合 A2UI 协议的组件结构
  */
 
+import { generateId } from './message-builder';
 import type {
   ComponentDefinition,
   ButtonResult,
@@ -19,7 +20,6 @@ import type {
   TabItem,
   ActionDefinition,
 } from './types';
-import { generateId } from './message-builder';
 
 // ============================================================================
 // 基础组件
@@ -31,10 +31,7 @@ import { generateId } from './message-builder';
  * @param text - 文本内容
  * @param options - 组件选项
  */
-export function createText(
-  text: string,
-  options: TextOptions = {}
-): ComponentDefinition {
+export function createText(text: string, options: TextOptions = {}): ComponentDefinition {
   const id = options.id || generateId('text');
   return {
     id,
@@ -55,10 +52,7 @@ export function createText(
  * @param path - 数据路径，如 "/progress/percentage"
  * @param options - 组件选项
  */
-export function createBoundText(
-  path: string,
-  options: TextOptions = {}
-): ComponentDefinition {
+export function createBoundText(path: string, options: TextOptions = {}): ComponentDefinition {
   const id = options.id || generateId('bound_text');
   return {
     id,
@@ -78,10 +72,7 @@ export function createBoundText(
  * @param name - 图标名称
  * @param options - 组件选项
  */
-export function createIcon(
-  name: string,
-  options: IconOptions = {}
-): ComponentDefinition {
+export function createIcon(name: string, options: IconOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('icon'),
     component: {
@@ -102,10 +93,7 @@ export function createIcon(
  * @param namePath - 图标名称的数据路径
  * @param options - 组件选项
  */
-export function createBoundIcon(
-  namePath: string,
-  options: IconOptions = {}
-): ComponentDefinition {
+export function createBoundIcon(namePath: string, options: IconOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('bound_icon'),
     component: {
@@ -130,10 +118,7 @@ export function createBoundIcon(
  * @param childIds - 子组件 ID 数组
  * @param options - 布局选项
  */
-export function createColumn(
-  childIds: string[],
-  options: LayoutOptions = {}
-): ComponentDefinition {
+export function createColumn(childIds: string[], options: LayoutOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('column'),
     component: {
@@ -151,10 +136,7 @@ export function createColumn(
  * @param childIds - 子组件 ID 数组
  * @param options - 布局选项
  */
-export function createRow(
-  childIds: string[],
-  options: LayoutOptions = {}
-): ComponentDefinition {
+export function createRow(childIds: string[], options: LayoutOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('row'),
     component: {
@@ -173,10 +155,7 @@ export function createRow(
  * @param childIds - 子组件 ID 数组
  * @param options - 卡片选项
  */
-export function createCard(
-  childIds: string[],
-  options: CardOptions = {}
-): ComponentDefinition {
+export function createCard(childIds: string[], options: CardOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('card'),
     component: {
@@ -193,10 +172,7 @@ export function createCard(
  * @param childIds - 子组件 ID 数组
  * @param options - 列表选项
  */
-export function createList(
-  childIds: string[],
-  options: ListOptions = {}
-): ComponentDefinition {
+export function createList(childIds: string[], options: ListOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('list'),
     component: {
@@ -214,15 +190,12 @@ export function createList(
  * @param tabs - Tab 项目数组
  * @param options - Tabs 选项
  */
-export function createTabs(
-  tabs: TabItem[],
-  options: TabsOptions = {}
-): ComponentDefinition {
+export function createTabs(tabs: TabItem[], options: TabsOptions = {}): ComponentDefinition {
   return {
     id: options.id || generateId('tabs'),
     component: {
       Tabs: {
-        tabItems: tabs.map(tab => ({
+        tabItems: tabs.map((tab) => ({
           title: { literalString: tab.title },
           child: tab.contentId,
         })),
@@ -494,4 +467,3 @@ export function createConditional(
     },
   };
 }
-
