@@ -31,7 +31,7 @@ function App() {
             surfaceId="main"
             surface={processor.getSurface('main')}
             processor={processor}
-          />
+    />
         </div>
       </ThemeProvider>
     </StyleProvider>

@@ -71,12 +71,9 @@ export const baseStyles = `
     text-decoration: none;
   }
 
+  /* 按钮基础重置 - 只设置继承属性，不覆盖工具类 */
   .a2ui-root button {
     font: inherit;
-    color: inherit;
-    background: none;
-    border: none;
-    padding: 0;
     margin: 0;
     cursor: pointer;
   }

@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
     <StyleProvider>
       {/* ThemeProvider provides theme context for A2UI components */}
       <ThemeProvider>
-        <App />
+    <App />
       </ThemeProvider>
     </StyleProvider>
   </StrictMode>
