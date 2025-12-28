@@ -39,11 +39,6 @@
     },
     "./styles/a2ui-variables.css": "./dist/styles/a2ui-variables.css",
     "./styles/a2ui.css": "./dist/styles/a2ui.css",
-    "./tailwind.preset": {
-      "import": "./tailwind.preset.js",
-      "require": "./tailwind.preset.js",
-      "default": "./tailwind.preset.js"
-    },
     "./ui": {
       "types": "./dist/ui/index.d.ts",
       "import": "./dist/ui/index.js",
@@ -62,8 +57,7 @@
     "dist/**/*.cjs",
     "dist/**/*.d.ts",
     "dist/**/*.d.cts",
-    "dist/styles/*.css",
-    "tailwind.preset.js"
+    "dist/styles/*.css"
   ],
   "publishConfig": {
     "access": "public"
@@ -133,7 +127,6 @@
     "react",
     "react-components",
     "typescript",
-    "tailwind",
     "google-a2ui",
     "conversational-ui",
     "chatbot",

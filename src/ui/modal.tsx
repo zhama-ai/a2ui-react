@@ -41,7 +41,7 @@ export function Modal({ entryPoint, content }: ModalProps) {
 
   if (!showModal) {
     return (
-      <button type="button" onClick={() => setShowModal(true)} className="cursor-pointer">
+      <button type="button" onClick={() => setShowModal(true)} className="a2-cursor-pointer">
         {entryPoint}
       </button>
     );
@@ -60,10 +60,10 @@ export function Modal({ entryPoint, content }: ModalProps) {
       }}
     >
       <section className={cn(theme.components.Modal.element)}>
-        <div className="mb-2 flex justify-end">
+        <div className="a2-mb-2 a2-dsp-flexhor a2-jc-end">
           <button
             type="button"
-            className="rounded p-1 hover:bg-gray-100"
+            className="a2-br-2 a2-p-1 a2-ho-80 a2-transition-colors"
             onClick={closeModal}
             aria-label="Close modal"
           >

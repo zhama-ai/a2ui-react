@@ -29,13 +29,13 @@ export function Audio({ component, processor, surfaceId, url, description }: Aud
     : undefined;
 
   if (!audioUrl) {
-    return <div className="text-gray-400">(no audio)</div>;
+    return <div className="a2-c-n50">(no audio)</div>;
   }
 
   return (
     <section className={cn(theme.components.AudioPlayer)}>
-      {desc && <p className="mb-2 text-sm">{desc}</p>}
-      <audio controls src={audioUrl} className="w-full" />
+      {desc && <p className="a2-mb-2 a2-text-bm">{desc}</p>}
+      <audio controls src={audioUrl} className="a2-w-full" />
     </section>
   );
 }

@@ -54,7 +54,7 @@ export function Tabs({ component, processor, surfaceId, titles, children }: Tabs
   return (
     <section className={cn(theme.components.Tabs.container)}>
       {renderTabs()}
-      <div className="mt-4">{selectedChild}</div>
+      <div className="a2-mt-4">{selectedChild}</div>
     </section>
   );
 }

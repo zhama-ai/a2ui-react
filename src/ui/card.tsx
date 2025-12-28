@@ -16,8 +16,17 @@ export interface CardProps {
   children?: ReactNode;
 }
 
-export function Card({ children }: CardProps) {
+export function Card({ component, children }: CardProps) {
   const theme = useTheme();
 
-  return <section className={cn(theme.components.Card)}>{children}</section>;
+  // 支持动态padding - 从component.properties.padding读取
+  const properties = (component as any).properties ?? {};
+  const paddingValue = properties.padding;
+  const style = paddingValue !== undefined ? { padding: `${paddingValue * 0.25}rem` } : undefined;
+
+  return (
+    <section className={cn(theme.components.Card)} style={style}>
+      {children}
+    </section>
+  );
 }

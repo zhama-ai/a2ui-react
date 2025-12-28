@@ -33,8 +33,13 @@ export function Surface({
     }
 
     return (
-      <div className="mb-4 flex justify-center">
-        <img src={surface.styles.logoUrl} alt="Logo" className="w-1/2 max-w-[220px]" />
+      <div className="a2-mb-4 a2-dsp-flexhor a2-jc-center">
+        <img
+          src={surface.styles.logoUrl}
+          alt="Logo"
+          className="a2-w-50"
+          style={{ maxWidth: '220px' }}
+        />
       </div>
     );
   };
@@ -53,10 +58,11 @@ export function Surface({
 
   return (
     <div
-      className="a2ui-surface a2ui-root flex flex-col gap-8 p-10 pb-20"
+      className="a2ui-surface a2ui-root a2-dsp-flexvert a2-gap-8 a2-p-10"
       style={
         {
           '--p-50': surface.styles?.primaryColor ?? 'var(--primary)',
+          paddingBottom: '80px',
         } as React.CSSProperties
       }
     >

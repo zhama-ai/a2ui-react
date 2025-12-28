@@ -156,12 +156,14 @@ export type { A2UIAction, A2UIEventDetailMap, A2UIEventType } from './events/a2u
 export { A2UI_EVENT_NAME } from './events/a2ui';
 
 // ============ Styles - 样式系统 ============
-export { merge, appendToAll, classesToString, stylesToCSS } from './styles/utils';
-export { defaultTheme, createTheme } from './styles/default-theme';
+export { merge, appendToAll, classesToString, stylesToCSS, cn as cnStyles } from './styles/utils';
+export { defaultTheme, createTheme, mergeStyles, cloneDefaultTheme } from './styles/default-theme';
+export { structuralStyles, getA2UIStyles } from './styles/core';
 
 // ============ Context - React Context ============
 export { ThemeProvider, useTheme, ThemeContext } from './context/theme';
 export { ProcessorProvider, useProcessor, ProcessorContext } from './context/processor';
+export { StyleProvider, getStylesCSS, createStyleElement } from './context/style-provider';
 
 // ============ UI Components - React 组件 ============
 export {

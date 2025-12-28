@@ -30,7 +30,7 @@ export function Image({
   const imageUrl = extractStringValue(url, component, processor, surfaceId);
 
   if (!imageUrl) {
-    return <div className="text-gray-400">(no image)</div>;
+    return <div className="a2-c-n50">(no image)</div>;
   }
 
   const classes = merge(

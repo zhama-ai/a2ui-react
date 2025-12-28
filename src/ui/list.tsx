@@ -20,7 +20,7 @@ export interface ListProps {
 export function List({ direction = 'vertical', children }: ListProps) {
   const theme = useTheme();
 
-  const directionClass = direction === 'horizontal' ? 'flex-row overflow-x-auto' : 'flex-col';
+  const directionClass = direction === 'horizontal' ? 'a2-flex-row a2-overflow-x-auto' : 'a2-flex-col';
 
   return <section className={cn(theme.components.List, directionClass)}>{children}</section>;
 }

@@ -109,24 +109,41 @@ export function extractNumberValue(
 }
 
 /**
- * 合并 className
+ * 合并 className（支持 string 和 Record<string, boolean>）
  */
 export function cn(
-  ...classes: (string | Record<string, boolean> | undefined | null | false)[]
+  ...inputs: (string | Record<string, boolean> | undefined | null | false)[]
 ): string {
   const result: string[] = [];
 
-  for (const cls of classes) {
-    if (!cls) continue;
+  for (const input of inputs) {
+    if (!input) continue;
 
-    if (typeof cls === 'string') {
-      result.push(cls);
-    } else if (typeof cls === 'object') {
-      for (const [key, value] of Object.entries(cls)) {
+    if (typeof input === 'string') {
+      result.push(input);
+    } else if (typeof input === 'object') {
+      for (const [key, value] of Object.entries(input)) {
         if (value) result.push(key);
       }
     }
   }
 
   return result.join(' ');
+}
+
+/**
+ * 将样式对象转换为内联样式
+ */
+export function styleMap(styles: Record<string, string | number | undefined>): React.CSSProperties {
+  const cssProperties: Record<string, string | number> = {};
+
+  for (const [key, value] of Object.entries(styles)) {
+    if (value === undefined) continue;
+
+    // 将 kebab-case 转换为 camelCase
+    const camelKey = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+    cssProperties[camelKey] = value;
+  }
+
+  return cssProperties as React.CSSProperties;
 }

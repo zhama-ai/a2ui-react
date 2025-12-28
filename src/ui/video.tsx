@@ -20,12 +20,12 @@ export function Video({ component, processor, surfaceId, url }: VideoProps) {
   const videoUrl = extractStringValue(url, component, processor, surfaceId);
 
   if (!videoUrl) {
-    return <div className="text-gray-400">(no video)</div>;
+    return <div className="a2-c-n50">(no video)</div>;
   }
 
   return (
     <section className={cn(theme.components.Video)}>
-      <video controls src={videoUrl} className="w-full" />
+      <video controls src={videoUrl} className="a2-w-full" />
     </section>
   );
 }

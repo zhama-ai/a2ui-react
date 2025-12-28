@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-12-28
+
+### 🚀 Major Refactor: Independent Style System
+
+#### Changed
+- **Removed Tailwind CSS dependency** - A2UI now has a completely independent style system
+- **New CSS utility class system** with `a2-` prefix to avoid conflicts with host applications
+- **Built-in dark mode support** using CSS `light-dark()` function
+- **OKLCH color system** with 6 color palettes (Primary, Secondary, Tertiary, Neutral, NeutralVariant, Error)
+
+#### Added
+- `StyleProvider` component for automatic style injection
+- `getStylesCSS()` and `createStyleElement()` for SSR and Shadow DOM support
+- Complete structural styles generated at build time
+
+#### Removed
+- Tailwind CSS preset (`tailwind.preset.js`)
+- Examples directory (will be recreated with new style system)
+
+---
+
 ## [1.0.0] - 2025-12-25
 
 ### 🎉 Initial Release
@@ -23,12 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Image
   - Tabs
   - Surface
-- Theme system based on Tailwind CSS
 - Custom component registration support
 - Event handling system (A2UIAction)
 - ContentModel to ComponentNode rendering pipeline
-- Comprehensive examples:
-  - basic-demo with 7 scenes (Welcome, Learning, Practice, Feedback, Progress, Conversation)
 - Multi-entry point exports:
   - Main package (`@zhama/a2ui`)
   - Types (`@zhama/a2ui/types`)
@@ -54,7 +72,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prettier formatting
 - TypeScript strict mode
 - tsup build system
-- Tailwind CSS preset
 
 ---
 

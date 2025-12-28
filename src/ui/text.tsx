@@ -37,7 +37,7 @@ export function Text({
   const textValue = extractStringValue(text, component, processor, surfaceId);
 
   if (!textValue) {
-    return <span className="text-gray-400">(empty)</span>;
+    return <span className="a2-c-n50">(empty)</span>;
   }
 
   const classes = merge(

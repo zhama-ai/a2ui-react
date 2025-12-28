@@ -32,7 +32,7 @@ export function Divider({ axis = 'horizontal', thickness = 1, color }: DividerPr
     style.borderWidth = thickness;
   }
 
-  const axisClass = axis === 'vertical' ? 'border-l h-full' : 'border-t w-full';
+  const axisClass = axis === 'vertical' ? 'a2-border-l a2-h-full' : 'a2-border-t a2-w-full';
 
   return <hr className={cn(theme.components.Divider, axisClass)} style={style} />;
 }

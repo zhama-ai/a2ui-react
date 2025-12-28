@@ -49,16 +49,17 @@ export function Icon({
   // @ts-expect-error - Dynamic icon lookup from Lucide library using computed string keys
   const LucideIcon = LucideIcons[pascalName] ?? LucideIcons[iconName];
 
-  const variantMap: Record<string, string> = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600',
-    red: 'bg-red-50 text-red-600',
-    primary: 'bg-primary/10 text-primary',
+  // 变体样式映射 - 使用 CSS 变量定义的颜色
+  const variantStyles: Record<string, React.CSSProperties> = {
+    blue: { backgroundColor: 'oklch(95% 0.04 240)', color: 'oklch(55% 0.15 240)' },
+    green: { backgroundColor: 'oklch(95% 0.04 160)', color: 'oklch(55% 0.15 160)' },
+    purple: { backgroundColor: 'oklch(95% 0.04 285)', color: 'oklch(55% 0.15 285)' },
+    orange: { backgroundColor: 'oklch(95% 0.04 60)', color: 'oklch(55% 0.15 60)' },
+    red: { backgroundColor: 'oklch(95% 0.04 25)', color: 'oklch(55% 0.15 25)' },
+    primary: { backgroundColor: 'light-dark(var(--p-5), var(--p-95))', color: 'light-dark(var(--p-50), var(--p-40))' },
   };
 
-  const variantClass = variant ? variantMap[variant] : variantMap.primary;
+  const variantStyle = variant ? variantStyles[variant] : variantStyles.primary;
 
   const renderIcon = () => {
     if (LucideIcon) {
@@ -78,12 +79,8 @@ export function Icon({
   if (container) {
     return (
       <div
-        className={cn(
-          'flex shrink-0 items-center justify-center rounded-xl transition-all duration-300',
-          'group-hover:scale-110 group-hover:shadow-sm',
-          variantClass
-        )}
-        style={{ width: 40, height: 40 }}
+        className="a2-dsp-flex a2-flex-0 a2-al-center a2-jc-center a2-br-xl a2-transition"
+        style={{ width: 40, height: 40, ...variantStyle }}
       >
         {renderIcon()}
       </div>

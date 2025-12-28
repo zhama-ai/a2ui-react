@@ -471,7 +471,7 @@ function ComponentRenderer({
         }
       }
       return (
-        <div key={component.id} className="rounded border border-yellow-300 p-2 text-yellow-600">
+        <div key={component.id} className="a2-br-2 a2-border a2-bc-e30 a2-p-2 a2-c-e50">
           Unknown component type: {component.type}
         </div>
       );

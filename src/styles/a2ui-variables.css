@@ -1,106 +1,31 @@
 /**
- * A2UI Default CSS Variables
+ * A2UI CSS Variables (Legacy)
  *
- * 基于 shadcn/ui 的设计系统，提供完整的 CSS 变量定义
+ * 此文件已不再使用，样式系统已迁移到 JavaScript 生成的 CSS。
  *
- * 使用方式：
- * 1. 直接导入：@import '@zhama/a2ui/styles/a2ui-variables.css';
- * 2. 可选覆盖：在导入后重新定义 :root 中的变量
+ * 新的使用方式：
+ *
+ * 1. React 应用 - 使用 StyleProvider 自动注入样式：
+ *    import { StyleProvider } from '@zhama/a2ui';
+ *    <StyleProvider><App /></StyleProvider>
+ *
+ * 2. SSR 或手动注入 - 获取 CSS 字符串：
+ *    import { getStylesCSS } from '@zhama/a2ui';
+ *    const css = getStylesCSS();
+ *
+ * 3. 主题定制 - 使用 createTheme：
+ *    import { createTheme } from '@zhama/a2ui';
+ *    const customTheme = createTheme({ ... });
+ *
+ * 颜色系统使用 OKLCH 色彩空间，自动支持 light-dark() 适配：
+ * - p (Primary): 主色调
+ * - s (Secondary): 次要色
+ * - t (Tertiary): 第三色
+ * - n (Neutral): 中性色/灰色
+ * - nv (Neutral Variant): 中性变体
+ * - e (Error): 错误色
+ *
+ * 每个颜色有 0-100 的色阶 (0=最亮, 100=最暗)
  */
 
-/* ============ 亮色主题 ============ */
-:root {
-  /* 基础颜色 */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-
-  /* 卡片颜色 */
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-
-  /* 弹出层颜色 */
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-
-  /* 主色调 - 蓝色系 */
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-
-  /* 次要色 */
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-
-  /* 柔和色 - 用于背景 */
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  /* 强调色 */
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  /* 危险色 - 红色系 */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  /* 边框和输入框 */
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
-
-  /* 圆角 */
-  --radius: 0.5rem;
-
-  /* 字体 */
-  --font-sans:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', sans-serif;
-  --font-mono:
-    'Fira Code', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New',
-    monospace;
-}
-
-/* ============ 深色主题 ============ */
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
-}
-
-/*
- * ============ 注意 ============
- *
- * 此文件只包含 CSS 变量定义，不包含全局样式。
- * 全局样式（如 html/body 高度、字体、滚动条等）应由使用方自行定义。
- *
- * 使用方可参考以下样式添加到自己的 globals.css：
- *
- * html, body, #root { height: 100%; width: 100%; }
- * body {
- *   background-color: hsl(var(--background));
- *   color: hsl(var(--foreground));
- * }
- */
+/* 此文件保留用于向后兼容，实际样式由 JavaScript 生成 */

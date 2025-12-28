@@ -444,6 +444,7 @@ export interface ResolvedList {
 export interface ResolvedCard {
   child?: AnyComponentNode;
   children?: AnyComponentNode[];
+  padding?: number;
 }
 
 export interface ResolvedTabItem {
