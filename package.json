@@ -37,8 +37,6 @@
       "require": "./dist/styles/index.cjs",
       "default": "./dist/styles/index.js"
     },
-    "./styles/a2ui-variables.css": "./dist/styles/a2ui-variables.css",
-    "./styles/a2ui.css": "./dist/styles/a2ui.css",
     "./ui": {
       "types": "./dist/ui/index.d.ts",
       "import": "./dist/ui/index.js",
@@ -56,8 +54,7 @@
     "dist/**/*.js",
     "dist/**/*.cjs",
     "dist/**/*.d.ts",
-    "dist/**/*.d.cts",
-    "dist/styles/*.css"
+    "dist/**/*.d.cts"
   ],
   "publishConfig": {
     "access": "public"

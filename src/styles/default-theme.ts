@@ -271,10 +271,9 @@ export const defaultTheme: Theme = {
     // 颜色说明：neutral 色阶中，数值越大颜色越深
     // n90/n95 = 深色（用于亮色背景），n10/n20 = 浅色（用于暗色背景）
     // light-dark() 会自动反转：亮色模式用 n90，暗色模式用 n10
+    // 注意：不要设置 a2-w-full，否则会破坏 Row 布局
     Text: {
-      all: {
-        'a2-w-full': true,
-      },
+      all: {},
       h1: {
         'a2-font-sans': true,
         'a2-fw-600': true,

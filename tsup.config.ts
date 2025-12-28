@@ -46,12 +46,9 @@ export default defineConfig({
   // 输出目录
   outDir: 'dist',
 
-  // CSS 处理
-  loader: {
-    '.css': 'copy',
-  },
+  // CSS 处理 - 样式现在通过 StyleProvider 动态生成
   injectStyle: false,
 
-  // 复制 CSS 文件到 dist/styles
-  onSuccess: 'cp src/styles/*.css dist/styles/ && echo "✅ @zhama/a2ui build completed"',
+  // 构建完成回调
+  onSuccess: 'echo "✅ @zhama/a2ui build completed"',
 });
