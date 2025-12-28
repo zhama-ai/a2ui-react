@@ -19,6 +19,7 @@ export * as Events from './events';
 export * as Types from './types';
 export * as Styles from './styles';
 export * as UI from './ui';
+export * as Builders from './builders';
 
 // ============ Types - 类型定义 ============
 export type {
@@ -203,3 +204,72 @@ export type { A2UIComponentProps } from './ui';
 
 // ============ Utils ============
 export { extractStringValue, extractNumberValue, cn } from './ui/utils';
+
+// ============ Builders - 消息和组件构建器 ============
+export type {
+  // 组件相关类型
+  ComponentDefinition,
+  ButtonResult,
+  TextOptions,
+  IconOptions,
+  LayoutOptions,
+  CardOptions,
+  ListOptions,
+  TabsOptions,
+  DividerOptions,
+  ButtonOptions,
+  TabItem,
+  ActionDefinition,
+  // 数据模型相关类型
+  A2UIValueMap,
+  UpdateDataItem,
+  PathMappings,
+} from './builders';
+
+export {
+  // ID 生成
+  generateId,
+  resetIdCounter,
+  // 消息构建
+  createBeginRendering,
+  createSurfaceUpdate,
+  createDataModelInit,
+  createDataModelUpdate,
+  createPathUpdate,
+  createDeleteSurface,
+  createA2UIMessages,
+  createA2UIMessagesWithData,
+  // 基础组件
+  createText,
+  createBoundText,
+  createIcon,
+  createBoundIcon,
+  // 布局组件
+  createColumn,
+  createRow,
+  createCard,
+  createList,
+  createTabs,
+  createDivider,
+  // 交互组件
+  createButton,
+  createSimpleButton,
+  // 表单组件
+  createTextField,
+  createCheckbox,
+  createSlider,
+  // 媒体组件
+  createImage,
+  createVideo,
+  // 条件渲染
+  createConditional,
+  // DataModel 工具
+  DEFAULT_PATH_MAPPINGS,
+  objectToValueMap,
+  valueToValueMap,
+  updatesToValueMap,
+  flattenObjectToValueMap,
+  normalizePath,
+  valueToValueMapEntry,
+  jsValueToA2UIValue,
+} from './builders';
