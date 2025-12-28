@@ -79,11 +79,13 @@ export class A2uiMessageProcessor implements MessageProcessor {
 
   processMessages(messages: ServerToClientMessage[]): void {
     console.log('[A2UI] processMessages called with', messages.length, 'messages');
-    
+
     for (const message of messages) {
-      const msgTypes = Object.keys(message).filter(k => message[k as keyof ServerToClientMessage]);
+      const msgTypes = Object.keys(message).filter(
+        (k) => message[k as keyof ServerToClientMessage]
+      );
       console.log('[A2UI] Processing message types:', msgTypes);
-      
+
       if (message.beginRendering) {
         this.handleBeginRendering(message.beginRendering, message.beginRendering.surfaceId);
       }
@@ -122,7 +124,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
     }
 
     const result = this.getDataByPath(surface.dataModel, finalPath);
-    
+
     // 调试：记录数据查找结果
     if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
       console.debug('[A2UI] getData:', {
@@ -132,7 +134,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
         dataModelKeys: Array.from(surface.dataModel.keys()),
       });
     }
-    
+
     return result;
   }
 
@@ -352,23 +354,23 @@ export class A2uiMessageProcessor implements MessageProcessor {
   private handleDataModelUpdate(message: DataModelUpdate, surfaceId: SurfaceID): void {
     const surface = this.getOrCreateSurface(surfaceId);
     const path = message.path ?? '/';
-    
+
     // 调试：记录 DataModel 更新
     if (process.env.NODE_ENV === 'development') {
       console.log('[A2UI] handleDataModelUpdate:', {
         surfaceId,
         path,
         contentsLength: Array.isArray(message.contents) ? message.contents.length : 'not array',
-        contentsSample: Array.isArray(message.contents) 
-          ? message.contents.slice(0, 3).map((c: { key?: string }) => c.key) 
+        contentsSample: Array.isArray(message.contents)
+          ? message.contents.slice(0, 3).map((c: { key?: string }) => c.key)
           : message.contents,
         existingKeys: Array.from(surface.dataModel.keys()),
       });
     }
-    
+
     // 增量更新模式：如果路径是根路径且 DataModel 已有数据，则合并而不是替换
     const isIncrementalUpdate = path === '/' && surface.dataModel.size > 0;
-    
+
     if (isIncrementalUpdate && Array.isArray(message.contents)) {
       // 增量合并：遍历每个条目，单独更新对应路径
       for (const entry of message.contents) {
@@ -388,7 +390,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
           }
         }
       }
-      
+
       if (process.env.NODE_ENV === 'development') {
         console.log('[A2UI] Incremental merge applied:', {
           updatedEntries: message.contents.length,
@@ -398,17 +400,18 @@ export class A2uiMessageProcessor implements MessageProcessor {
       // 完整更新模式：替换整个路径
       this.setDataByPath(surface.dataModel, path, message.contents as DataValue);
     }
-    
+
     // 调试：记录更新后的 DataModel
     if (process.env.NODE_ENV === 'development') {
       console.log('[A2UI] DataModel after update:', {
         keys: Array.from(surface.dataModel.keys()),
-        progressKeys: surface.dataModel.get('progress') instanceof Map 
-          ? Array.from((surface.dataModel.get('progress') as Map<string, unknown>).keys())
-          : 'not a Map',
+        progressKeys:
+          surface.dataModel.get('progress') instanceof Map
+            ? Array.from((surface.dataModel.get('progress') as Map<string, unknown>).keys())
+            : 'not a Map',
       });
     }
-    
+
     this.rebuildComponentTree(surface);
   }
 

@@ -56,7 +56,10 @@ export function Icon({
     purple: { backgroundColor: 'oklch(95% 0.04 285)', color: 'oklch(55% 0.15 285)' },
     orange: { backgroundColor: 'oklch(95% 0.04 60)', color: 'oklch(55% 0.15 60)' },
     red: { backgroundColor: 'oklch(95% 0.04 25)', color: 'oklch(55% 0.15 25)' },
-    primary: { backgroundColor: 'light-dark(var(--p-5), var(--p-95))', color: 'light-dark(var(--p-50), var(--p-40))' },
+    primary: {
+      backgroundColor: 'light-dark(var(--p-5), var(--p-95))',
+      color: 'light-dark(var(--p-50), var(--p-40))',
+    },
   };
 
   const variantStyle = variant ? variantStyles[variant] : variantStyles.primary;

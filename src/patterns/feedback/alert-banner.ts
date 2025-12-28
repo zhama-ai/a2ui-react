@@ -140,20 +140,22 @@ export function createAlertBanner(options: AlertBannerOptions): PatternResult {
       `${id}-action`,
       action.text,
       action.action,
-      actionContext, {
-      styles: {
-        backgroundColor: isSolid ? 'rgba(255,255,255,0.2)' : config.color,
-        color: isSolid ? '#ffffff' : '#ffffff',
-        border: 'none',
-        padding: '6px 12px',
-        borderRadius: '6px',
-        fontSize: '13px',
-        fontWeight: '500',
-        cursor: 'pointer',
-        marginLeft: '16px',
-        whiteSpace: 'nowrap',
-      },
-    });
+      actionContext,
+      {
+        styles: {
+          backgroundColor: isSolid ? 'rgba(255,255,255,0.2)' : config.color,
+          color: isSolid ? '#ffffff' : '#ffffff',
+          border: 'none',
+          padding: '6px 12px',
+          borderRadius: '6px',
+          fontSize: '13px',
+          fontWeight: '500',
+          cursor: 'pointer',
+          marginLeft: '16px',
+          whiteSpace: 'nowrap',
+        },
+      }
+    );
     containerChildIds.push(actionBtnResult.buttonId);
     components.push(...actionBtnResult.allComponents);
   }
@@ -162,15 +164,15 @@ export function createAlertBanner(options: AlertBannerOptions): PatternResult {
   if (dismissible) {
     const dismissBtnResult = createButton(`${id}-dismiss`, '✕', dismissAction, [], {
       styles: {
-      backgroundColor: 'transparent',
-      color: isSolid ? 'rgba(255,255,255,0.8)' : '#9ca3af',
-      border: 'none',
-      padding: '4px 8px',
-      borderRadius: '4px',
-      fontSize: '14px',
-      cursor: 'pointer',
-      marginLeft: action ? '8px' : '16px',
-    },
+        backgroundColor: 'transparent',
+        color: isSolid ? 'rgba(255,255,255,0.8)' : '#9ca3af',
+        border: 'none',
+        padding: '4px 8px',
+        borderRadius: '4px',
+        fontSize: '14px',
+        cursor: 'pointer',
+        marginLeft: action ? '8px' : '16px',
+      },
     });
     containerChildIds.push(dismissBtnResult.buttonId);
     components.push(...dismissBtnResult.allComponents);

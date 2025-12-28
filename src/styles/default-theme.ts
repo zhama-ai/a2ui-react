@@ -551,9 +551,7 @@ export function createTheme(customTheme: Partial<Theme>): Theme {
 /**
  * 合并样式类映射
  */
-export function mergeStyles(
-  ...classes: Array<Record<string, boolean>>
-): Record<string, boolean> {
+export function mergeStyles(...classes: Array<Record<string, boolean>>): Record<string, boolean> {
   const result: Record<string, boolean> = {};
 
   for (const cls of classes) {

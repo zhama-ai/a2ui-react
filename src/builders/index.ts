@@ -51,6 +51,8 @@ export {
   // 完整消息数组
   createA2UIMessages,
   createA2UIMessagesWithData,
+  createA2UIMessagesWithOptions,
+  type CreateA2UIMessagesOptions,
 } from './message-builder';
 
 // ============================================================================

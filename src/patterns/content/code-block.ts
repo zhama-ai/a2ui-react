@@ -113,16 +113,18 @@ export function createCodeBlock(options: CodeBlockOptions): PatternResult {
         `${id}-copy-btn`,
         copyAction.text || '复制',
         copyAction.action,
-        copyContext, {
-      styles: {
-          backgroundColor: 'transparent',
-          color: '#6b7280',
-          border: 'none',
-          padding: '4px 8px',
-          fontSize: '12px',
-          cursor: 'pointer',
-        },
-    });
+        copyContext,
+        {
+          styles: {
+            backgroundColor: 'transparent',
+            color: '#6b7280',
+            border: 'none',
+            padding: '4px 8px',
+            fontSize: '12px',
+            cursor: 'pointer',
+          },
+        }
+      );
       headerChildIds.push(copyBtnResult.buttonId);
       components.push(...copyBtnResult.allComponents);
     }
@@ -136,18 +138,20 @@ export function createCodeBlock(options: CodeBlockOptions): PatternResult {
         `${id}-run-btn`,
         runAction.text || '▶ 运行',
         runAction.action,
-        runContext, {
-      styles: {
-          backgroundColor: '#10b981',
-          color: '#ffffff',
-          border: 'none',
-          padding: '4px 12px',
-          borderRadius: '4px',
-          fontSize: '12px',
-          cursor: 'pointer',
-          marginLeft: '8px',
-        },
-    });
+        runContext,
+        {
+          styles: {
+            backgroundColor: '#10b981',
+            color: '#ffffff',
+            border: 'none',
+            padding: '4px 12px',
+            borderRadius: '4px',
+            fontSize: '12px',
+            cursor: 'pointer',
+            marginLeft: '8px',
+          },
+        }
+      );
       headerChildIds.push(runBtnResult.buttonId);
       components.push(...runBtnResult.allComponents);
     }

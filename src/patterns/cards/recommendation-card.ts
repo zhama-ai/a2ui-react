@@ -230,17 +230,17 @@ export function createRecommendationCard(options: RecommendationCardOptions): Pa
 
     const btnResult = createButton(`${id}-action-btn`, action.text, action.action, actionContext, {
       styles: {
-      backgroundColor: color,
-      color: '#ffffff',
-      border: 'none',
-      padding: isCompact ? '6px 12px' : '10px 20px',
-      borderRadius: '8px',
-      fontSize: isCompact ? '12px' : '14px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      marginTop: isCompact ? '12px' : '16px',
-      alignSelf: 'flex-start',
-    },
+        backgroundColor: color,
+        color: '#ffffff',
+        border: 'none',
+        padding: isCompact ? '6px 12px' : '10px 20px',
+        borderRadius: '8px',
+        fontSize: isCompact ? '12px' : '14px',
+        fontWeight: '500',
+        cursor: 'pointer',
+        marginTop: isCompact ? '12px' : '16px',
+        alignSelf: 'flex-start',
+      },
     });
     containerChildIds.push(btnResult.buttonId);
     components.push(...btnResult.allComponents);

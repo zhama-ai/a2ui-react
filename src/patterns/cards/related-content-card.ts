@@ -150,18 +150,20 @@ export function createRelatedContentCard(options: RelatedContentCardOptions): Pa
       `${itemId}-btn`,
       item.action.text,
       item.action.action,
-      actionContext, {
-      styles: {
-        backgroundColor: 'transparent',
-        color: '#3b82f6',
-        border: 'none',
-        padding: '4px 8px',
-        borderRadius: '4px',
-        fontSize: '12px',
-        fontWeight: '500',
-        cursor: 'pointer',
-      },
-    });
+      actionContext,
+      {
+        styles: {
+          backgroundColor: 'transparent',
+          color: '#3b82f6',
+          border: 'none',
+          padding: '4px 8px',
+          borderRadius: '4px',
+          fontSize: '12px',
+          fontWeight: '500',
+          cursor: 'pointer',
+        },
+      }
+    );
     itemChildIds.push(btnResult.buttonId);
     components.push(...btnResult.allComponents);
     components.push(

@@ -48,12 +48,12 @@ export function Column({
   // 支持通过属性动态设置间距
   const props = (component as any).properties ?? {};
   const spaceYValue = props.spaceY;
-  
+
   // 使用内联样式支持动态间距值（1 单位 = 4px）
   const style = spaceYValue !== undefined ? { gap: `${spaceYValue * 4}px` } : undefined;
 
   return (
-    <section 
+    <section
       className={cn(theme.components.Column, alignmentClass, distributionClass)}
       style={style}
     >

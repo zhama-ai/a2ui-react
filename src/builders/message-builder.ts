@@ -38,15 +38,18 @@ export function resetIdCounter(): void {
  *
  * @param rootId - 根组件 ID
  * @param surfaceId - Surface ID，默认为 '@default'
+ * @param styles - 可选的样式配置，如 { primaryColor: '#3b82f6' }
  */
 export function createBeginRendering(
   rootId: string,
-  surfaceId = '@default'
+  surfaceId = '@default',
+  styles?: Record<string, string>
 ): ServerToClientMessage {
   return {
     beginRendering: {
       surfaceId,
       root: rootId,
+      ...(styles && { styles }),
     },
   };
 }
@@ -149,6 +152,22 @@ export function createDeleteSurface(surfaceId: string): ServerToClientMessage {
 }
 
 /**
+ * A2UI 消息创建选项
+ */
+export interface CreateA2UIMessagesOptions {
+  /** 根组件 ID */
+  rootId: string;
+  /** 组件定义数组 */
+  components: ComponentInstance[] | unknown[];
+  /** 可选的初始数据模型 */
+  dataModel?: Record<string, unknown>;
+  /** Surface ID，默认为 '@default' */
+  surfaceId?: string;
+  /** 样式配置，如 { primaryColor: '#3b82f6' } */
+  styles?: Record<string, string>;
+}
+
+/**
  * 创建完整的 A2UI 消息数组
  *
  * 符合协议要求的顺序：
@@ -165,7 +184,8 @@ export function createA2UIMessages(
   rootId: string,
   components: ComponentInstance[] | unknown[],
   dataModel?: Record<string, unknown>,
-  surfaceId = '@default'
+  surfaceId = '@default',
+  styles?: Record<string, string>
 ): ServerToClientMessage[] {
   const messages: ServerToClientMessage[] = [createSurfaceUpdate(components, surfaceId)];
 
@@ -173,9 +193,28 @@ export function createA2UIMessages(
     messages.push(createDataModelInit(dataModel, surfaceId));
   }
 
-  messages.push(createBeginRendering(rootId, surfaceId));
+  messages.push(createBeginRendering(rootId, surfaceId, styles));
 
   return messages;
+}
+
+/**
+ * 使用选项对象创建完整的 A2UI 消息数组
+ *
+ * @example
+ * ```ts
+ * const messages = createA2UIMessagesWithOptions({
+ *   rootId: 'root',
+ *   components,
+ *   styles: { primaryColor: '#10b981' },  // 绿色主题
+ * });
+ * ```
+ */
+export function createA2UIMessagesWithOptions(
+  options: CreateA2UIMessagesOptions
+): ServerToClientMessage[] {
+  const { rootId, components, dataModel, surfaceId = '@default', styles } = options;
+  return createA2UIMessages(rootId, components, dataModel, surfaceId, styles);
 }
 
 /**

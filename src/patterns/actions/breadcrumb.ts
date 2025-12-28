@@ -94,19 +94,19 @@ export function createBreadcrumb(options: BreadcrumbOptions): PatternResult {
         : [];
 
       const btnResult = createButton(itemId, displayText, item.action, context, {
-      styles: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        backgroundColor: isPills ? '#f3f4f6' : 'transparent',
-        border: 'none',
-        padding: isPills ? '4px 8px' : '0',
-        borderRadius: isPills ? '4px' : '0',
-        cursor: 'pointer',
-        transition: 'color 0.2s',
-        fontSize: isCompact ? '12px' : '14px',
-        color: '#6b7280',
-      },
-    });
+        styles: {
+          display: 'inline-flex',
+          alignItems: 'center',
+          backgroundColor: isPills ? '#f3f4f6' : 'transparent',
+          border: 'none',
+          padding: isPills ? '4px 8px' : '0',
+          borderRadius: isPills ? '4px' : '0',
+          cursor: 'pointer',
+          transition: 'color 0.2s',
+          fontSize: isCompact ? '12px' : '14px',
+          color: '#6b7280',
+        },
+      });
       components.push(...btnResult.allComponents);
       actualItemId = btnResult.buttonId;
     } else {

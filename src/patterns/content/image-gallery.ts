@@ -179,16 +179,16 @@ export function createImageGallery(options: ImageGalleryOptions): PatternResult 
       // 使用图片标题作为按钮文本
       const buttonText = image.title || image.alt || `查看图片 ${index + 1}`;
       const imgBtnResult = createButton(imageId, buttonText, clickAction.action, context, {
-      styles: {
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: 'transparent',
-        border: 'none',
-        padding: '0',
-        cursor: 'pointer',
-        textAlign: 'left',
-      },
-    });
+        styles: {
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: 'transparent',
+          border: 'none',
+          padding: '0',
+          cursor: 'pointer',
+          textAlign: 'left',
+        },
+      });
       components.push(...imgBtnResult.allComponents);
       actualImageId = imgBtnResult.buttonId;
     } else {

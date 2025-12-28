@@ -47,14 +47,18 @@ export function extractStringValue(
         console.warn('[A2UI] extractStringValue: null value for path:', val.path);
         return '';
       }
-      
+
       // 支持数字类型自动转换为字符串
       if (typeof textValue === 'number') {
         return String(textValue);
       }
-      
+
       if (typeof textValue !== 'string') {
-        console.warn('[A2UI] extractStringValue: non-string value for path:', val.path, typeof textValue);
+        console.warn(
+          '[A2UI] extractStringValue: non-string value for path:',
+          val.path,
+          typeof textValue
+        );
         return '';
       }
 

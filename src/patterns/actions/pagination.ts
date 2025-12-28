@@ -113,22 +113,24 @@ export function createPagination(options: PaginationOptions): PatternResult {
       `${id}-prev`,
       '←',
       action,
-      [...baseContext, { key: 'page', value: `${current - 1}` }], {
-      styles: {
-        width: '36px',
-        height: '36px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
-        border: '1px solid #d1d5db',
-        borderRadius: '8px',
-        fontSize: '14px',
-        color: current === 1 ? '#9ca3af' : '#374151',
-        cursor: current === 1 ? 'not-allowed' : 'pointer',
-        opacity: current === 1 ? '0.5' : '1',
-      },
-    });
+      [...baseContext, { key: 'page', value: `${current - 1}` }],
+      {
+        styles: {
+          width: '36px',
+          height: '36px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#ffffff',
+          border: '1px solid #d1d5db',
+          borderRadius: '8px',
+          fontSize: '14px',
+          color: current === 1 ? '#9ca3af' : '#374151',
+          cursor: current === 1 ? 'not-allowed' : 'pointer',
+          opacity: current === 1 ? '0.5' : '1',
+        },
+      }
+    );
     itemIds.push(prevResult.buttonId);
     components.push(...prevResult.allComponents);
 
@@ -149,22 +151,24 @@ export function createPagination(options: PaginationOptions): PatternResult {
       `${id}-next`,
       '→',
       action,
-      [...baseContext, { key: 'page', value: `${current + 1}` }], {
-      styles: {
-        width: '36px',
-        height: '36px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
-        border: '1px solid #d1d5db',
-        borderRadius: '8px',
-        fontSize: '14px',
-        color: current === total ? '#9ca3af' : '#374151',
-        cursor: current === total ? 'not-allowed' : 'pointer',
-        opacity: current === total ? '0.5' : '1',
-      },
-    });
+      [...baseContext, { key: 'page', value: `${current + 1}` }],
+      {
+        styles: {
+          width: '36px',
+          height: '36px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#ffffff',
+          border: '1px solid #d1d5db',
+          borderRadius: '8px',
+          fontSize: '14px',
+          color: current === total ? '#9ca3af' : '#374151',
+          cursor: current === total ? 'not-allowed' : 'pointer',
+          opacity: current === total ? '0.5' : '1',
+        },
+      }
+    );
     itemIds.push(nextResult.buttonId);
     components.push(...nextResult.allComponents);
   } else {
@@ -174,18 +178,20 @@ export function createPagination(options: PaginationOptions): PatternResult {
       `${id}-prev`,
       isCompact ? '‹' : '上一页',
       action,
-      [...baseContext, { key: 'page', value: `${current - 1}` }], {
-      styles: {
-        padding: isCompact ? '6px 10px' : '8px 16px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #d1d5db',
-        borderRadius: '6px',
-        fontSize: isCompact ? '12px' : '14px',
-        color: current === 1 ? '#9ca3af' : '#374151',
-        cursor: current === 1 ? 'not-allowed' : 'pointer',
-        opacity: current === 1 ? '0.5' : '1',
-      },
-    });
+      [...baseContext, { key: 'page', value: `${current - 1}` }],
+      {
+        styles: {
+          padding: isCompact ? '6px 10px' : '8px 16px',
+          backgroundColor: '#ffffff',
+          border: '1px solid #d1d5db',
+          borderRadius: '6px',
+          fontSize: isCompact ? '12px' : '14px',
+          color: current === 1 ? '#9ca3af' : '#374151',
+          cursor: current === 1 ? 'not-allowed' : 'pointer',
+          opacity: current === 1 ? '0.5' : '1',
+        },
+      }
+    );
     itemIds.push(prevResult.buttonId);
     components.push(...prevResult.allComponents);
 
@@ -215,22 +221,24 @@ export function createPagination(options: PaginationOptions): PatternResult {
           `${id}-page-${page}`,
           `${page}`,
           action,
-          [...baseContext, { key: 'page', value: `${page}` }], {
-      styles: {
-            width: isCompact ? '28px' : '36px',
-            height: isCompact ? '28px' : '36px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: isCurrent ? '#3b82f6' : '#ffffff',
-            border: isCurrent ? 'none' : '1px solid #d1d5db',
-            borderRadius: '6px',
-            fontSize: isCompact ? '12px' : '14px',
-            fontWeight: isCurrent ? '600' : '500',
-            color: isCurrent ? '#ffffff' : '#374151',
-            cursor: isCurrent ? 'default' : 'pointer',
-          },
-    });
+          [...baseContext, { key: 'page', value: `${page}` }],
+          {
+            styles: {
+              width: isCompact ? '28px' : '36px',
+              height: isCompact ? '28px' : '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: isCurrent ? '#3b82f6' : '#ffffff',
+              border: isCurrent ? 'none' : '1px solid #d1d5db',
+              borderRadius: '6px',
+              fontSize: isCompact ? '12px' : '14px',
+              fontWeight: isCurrent ? '600' : '500',
+              color: isCurrent ? '#ffffff' : '#374151',
+              cursor: isCurrent ? 'default' : 'pointer',
+            },
+          }
+        );
         itemIds.push(pageResult.buttonId);
         components.push(...pageResult.allComponents);
       }
@@ -241,18 +249,20 @@ export function createPagination(options: PaginationOptions): PatternResult {
       `${id}-next`,
       isCompact ? '›' : '下一页',
       action,
-      [...baseContext, { key: 'page', value: `${current + 1}` }], {
-      styles: {
-        padding: isCompact ? '6px 10px' : '8px 16px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #d1d5db',
-        borderRadius: '6px',
-        fontSize: isCompact ? '12px' : '14px',
-        color: current === total ? '#9ca3af' : '#374151',
-        cursor: current === total ? 'not-allowed' : 'pointer',
-        opacity: current === total ? '0.5' : '1',
-      },
-    });
+      [...baseContext, { key: 'page', value: `${current + 1}` }],
+      {
+        styles: {
+          padding: isCompact ? '6px 10px' : '8px 16px',
+          backgroundColor: '#ffffff',
+          border: '1px solid #d1d5db',
+          borderRadius: '6px',
+          fontSize: isCompact ? '12px' : '14px',
+          color: current === total ? '#9ca3af' : '#374151',
+          cursor: current === total ? 'not-allowed' : 'pointer',
+          opacity: current === total ? '0.5' : '1',
+        },
+      }
+    );
     itemIds.push(nextResult.buttonId);
     components.push(...nextResult.allComponents);
   }

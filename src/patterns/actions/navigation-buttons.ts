@@ -60,16 +60,16 @@ export function createNavigationButtons(options: NavigationButtonsOptions): Patt
 
     const prevResult = createButton(`${id}-prev`, prevText, prev.action, prevContext, {
       styles: {
-      backgroundColor: 'transparent',
-      color: prev.disabled ? '#9ca3af' : '#374151',
-      border: isMinimal ? 'none' : '1px solid #d1d5db',
-      padding: isCompact ? '8px 16px' : '10px 20px',
-      fontSize: isCompact ? '13px' : '14px',
-      fontWeight: '500',
-      borderRadius: '8px',
-      cursor: prev.disabled ? 'not-allowed' : 'pointer',
-      opacity: prev.disabled ? '0.5' : '1',
-    },
+        backgroundColor: 'transparent',
+        color: prev.disabled ? '#9ca3af' : '#374151',
+        border: isMinimal ? 'none' : '1px solid #d1d5db',
+        padding: isCompact ? '8px 16px' : '10px 20px',
+        fontSize: isCompact ? '13px' : '14px',
+        fontWeight: '500',
+        borderRadius: '8px',
+        cursor: prev.disabled ? 'not-allowed' : 'pointer',
+        opacity: prev.disabled ? '0.5' : '1',
+      },
     });
     containerChildIds.push(prevResult.buttonId);
     components.push(...prevResult.allComponents);
@@ -109,16 +109,16 @@ export function createNavigationButtons(options: NavigationButtonsOptions): Patt
 
     const nextResult = createButton(`${id}-next`, nextText, next.action, nextContext, {
       styles: {
-      backgroundColor: isPrimary ? '#3b82f6' : 'transparent',
-      color: isPrimary ? '#ffffff' : next.disabled ? '#9ca3af' : '#374151',
-      border: isPrimary ? 'none' : isMinimal ? 'none' : '1px solid #d1d5db',
-      padding: isCompact ? '8px 16px' : '10px 20px',
-      fontSize: isCompact ? '13px' : '14px',
-      fontWeight: '500',
-      borderRadius: '8px',
-      cursor: next.disabled ? 'not-allowed' : 'pointer',
-      opacity: next.disabled ? '0.5' : '1',
-    },
+        backgroundColor: isPrimary ? '#3b82f6' : 'transparent',
+        color: isPrimary ? '#ffffff' : next.disabled ? '#9ca3af' : '#374151',
+        border: isPrimary ? 'none' : isMinimal ? 'none' : '1px solid #d1d5db',
+        padding: isCompact ? '8px 16px' : '10px 20px',
+        fontSize: isCompact ? '13px' : '14px',
+        fontWeight: '500',
+        borderRadius: '8px',
+        cursor: next.disabled ? 'not-allowed' : 'pointer',
+        opacity: next.disabled ? '0.5' : '1',
+      },
     });
     containerChildIds.push(nextResult.buttonId);
     components.push(...nextResult.allComponents);

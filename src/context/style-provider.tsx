@@ -95,4 +95,3 @@ export function createStyleElement(): HTMLStyleElement {
   style.textContent = structuralStyles;
   return style;
 }
-

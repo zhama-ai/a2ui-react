@@ -61,7 +61,9 @@ export interface CardOptions {
  */
 export interface ListOptions {
   id?: string;
-  direction?: 'vertical' | 'horizontal';
+  direction?: 'vertical' | 'horizontal' | 'grid';
+  /** 网格列数（仅在 direction='grid' 时生效） */
+  columns?: number;
 }
 
 /**

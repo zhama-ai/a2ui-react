@@ -116,16 +116,18 @@ export function createFaqList(options: FaqListOptions): PatternResult {
         `${faqId}-toggle`,
         isExpanded ? '−' : '+',
         toggleAction,
-        [{ key: 'faqIndex', value: `${index}` }], {
-      styles: {
-          backgroundColor: 'transparent',
-          border: 'none',
-          fontSize: '20px',
-          color: '#6b7280',
-          cursor: 'pointer',
-          padding: '0 4px',
-        },
-    });
+        [{ key: 'faqIndex', value: `${index}` }],
+        {
+          styles: {
+            backgroundColor: 'transparent',
+            border: 'none',
+            fontSize: '20px',
+            color: '#6b7280',
+            cursor: 'pointer',
+            padding: '0 4px',
+          },
+        }
+      );
       questionChildIds.push(toggleBtnResult.buttonId);
       components.push(...toggleBtnResult.allComponents);
     }

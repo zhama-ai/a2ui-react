@@ -382,17 +382,17 @@ export function createCourseCard(options: CourseCardOptions): PatternResult {
 
     const btnResult = createButton(`${id}-action-btn`, action.text, action.action, actionContext, {
       styles: {
-      width: '100%',
-      backgroundColor: color,
-      color: '#ffffff',
-      border: 'none',
-      padding: isCompact ? '8px' : '10px',
-      borderRadius: '8px',
-      fontSize: '14px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      marginTop: '12px',
-    },
+        width: '100%',
+        backgroundColor: color,
+        color: '#ffffff',
+        border: 'none',
+        padding: isCompact ? '8px' : '10px',
+        borderRadius: '8px',
+        fontSize: '14px',
+        fontWeight: '500',
+        cursor: 'pointer',
+        marginTop: '12px',
+      },
     });
     infoChildIds.push(btnResult.buttonId);
     components.push(...btnResult.allComponents);

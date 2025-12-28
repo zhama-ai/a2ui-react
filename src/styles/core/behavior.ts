@@ -206,4 +206,3 @@ export function generateBehaviorStyles(): string {
 }
 
 export const behaviorStyles = generateBehaviorStyles();
-

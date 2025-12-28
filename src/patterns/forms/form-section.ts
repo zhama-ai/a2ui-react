@@ -140,16 +140,18 @@ export function createFormSection(options: FormSectionOptions): PatternResult {
           `${id}-extra-action-${idx}`,
           action.text,
           action.action,
-          actionContext, {
-      styles: {
-            backgroundColor: 'transparent',
-            color: '#6b7280',
-            border: 'none',
-            padding: '10px 16px',
-            fontSize: '14px',
-            cursor: 'pointer',
-          },
-    });
+          actionContext,
+          {
+            styles: {
+              backgroundColor: 'transparent',
+              color: '#6b7280',
+              border: 'none',
+              padding: '10px 16px',
+              fontSize: '14px',
+              cursor: 'pointer',
+            },
+          }
+        );
         actionIds.push(extraBtnResult.buttonId);
         components.push(...extraBtnResult.allComponents);
       });
@@ -174,19 +176,21 @@ export function createFormSection(options: FormSectionOptions): PatternResult {
         `${id}-cancel`,
         cancelAction.text,
         cancelAction.action,
-        cancelContext, {
-      styles: {
-          backgroundColor: 'transparent',
-          color: '#374151',
-          border: '1px solid #d1d5db',
-          padding: '10px 20px',
-          borderRadius: '8px',
-          fontSize: '14px',
-          fontWeight: '500',
-          cursor: 'pointer',
-          marginRight: '12px',
-        },
-    });
+        cancelContext,
+        {
+          styles: {
+            backgroundColor: 'transparent',
+            color: '#374151',
+            border: '1px solid #d1d5db',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            fontSize: '14px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            marginRight: '12px',
+          },
+        }
+      );
       actionIds.push(cancelBtnResult.buttonId);
       components.push(...cancelBtnResult.allComponents);
     }
@@ -201,18 +205,20 @@ export function createFormSection(options: FormSectionOptions): PatternResult {
         `${id}-submit`,
         submitAction.text,
         submitAction.action,
-        submitContext, {
-      styles: {
-          backgroundColor: '#3b82f6',
-          color: '#ffffff',
-          border: 'none',
-          padding: '10px 24px',
-          borderRadius: '8px',
-          fontSize: '14px',
-          fontWeight: '500',
-          cursor: 'pointer',
-        },
-    });
+        submitContext,
+        {
+          styles: {
+            backgroundColor: '#3b82f6',
+            color: '#ffffff',
+            border: 'none',
+            padding: '10px 24px',
+            borderRadius: '8px',
+            fontSize: '14px',
+            fontWeight: '500',
+            cursor: 'pointer',
+          },
+        }
+      );
       actionIds.push(submitBtnResult.buttonId);
       components.push(...submitBtnResult.allComponents);
     }

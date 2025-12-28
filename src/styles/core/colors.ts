@@ -212,4 +212,3 @@ export function generateColorStyles(): string {
 }
 
 export const colorStyles = generateColorStyles();
-

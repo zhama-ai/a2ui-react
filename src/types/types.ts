@@ -437,8 +437,10 @@ export interface ResolvedButton {
 
 export interface ResolvedList {
   children: AnyComponentNode[];
-  direction?: 'vertical' | 'horizontal';
+  direction?: 'vertical' | 'horizontal' | 'grid';
   alignment?: 'start' | 'center' | 'end' | 'stretch';
+  /** 网格列数（仅在 direction='grid' 时生效） */
+  columns?: number;
 }
 
 export interface ResolvedCard {

@@ -179,6 +179,7 @@ export function createList(childIds: string[], options: ListOptions = {}): Compo
       List: {
         children: { explicitList: childIds },
         ...(options.direction && { direction: options.direction }),
+        ...(options.columns && { columns: options.columns }),
       },
     },
   };
@@ -271,7 +272,7 @@ export function createButton(
   const fullContext = [...(action.context || []), { key: '_buttonText', value: text }];
 
   // 转换为 A2UI 协议格式：{ key, value: string } -> { key, value: { literalString: string } }
-  const protocolContext = fullContext.map(item => ({
+  const protocolContext = fullContext.map((item) => ({
     key: item.key,
     value: {
       literalString: String(item.value),

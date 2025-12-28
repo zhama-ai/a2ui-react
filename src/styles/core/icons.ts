@@ -42,4 +42,3 @@ export function generateIconStyles(): string {
 }
 
 export const iconStyles = generateIconStyles();
-

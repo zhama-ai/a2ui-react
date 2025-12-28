@@ -48,15 +48,12 @@ export function Row({
   // 支持通过属性动态设置间距
   const props = (component as any).properties ?? {};
   const gapValue = props.gap;
-  
+
   // 使用内联样式支持动态间距值（1 单位 = 4px = 0.25rem）
   const style = gapValue !== undefined ? { gap: `${gapValue * 4}px` } : undefined;
 
   return (
-    <section 
-      className={cn(theme.components.Row, alignmentClass, distributionClass)}
-      style={style}
-    >
+    <section className={cn(theme.components.Row, alignmentClass, distributionClass)} style={style}>
       {children}
     </section>
   );

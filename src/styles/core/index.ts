@@ -4,12 +4,12 @@
  * 合并所有样式模块，生成完整的 CSS 字符串
  */
 
-import { layoutStyles } from './layout';
-import { colorStyles } from './colors';
-import { typographyStyles } from './typography';
-import { borderStyles } from './border';
 import { behaviorStyles } from './behavior';
+import { borderStyles } from './border';
+import { colorStyles } from './colors';
 import { iconStyles } from './icons';
+import { layoutStyles } from './layout';
+import { typographyStyles } from './typography';
 
 export * from './shared';
 export { layoutStyles } from './layout';
@@ -130,4 +130,3 @@ export const structuralStyles = [
 export function getA2UIStyles(): string {
   return structuralStyles;
 }
-

@@ -8,7 +8,9 @@
 export const GRID = 4;
 
 /** 调色板色调值 */
-export const SHADES = [0, 5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 95, 98, 99, 100] as const;
+export const SHADES = [
+  0, 5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 95, 98, 99, 100,
+] as const;
 
 /** 调色板前缀 */
 export const PALETTE_KEYS = ['p', 's', 't', 'n', 'nv', 'e'] as const;
@@ -46,4 +48,3 @@ export function getInverseKey(key: string): string {
 
   return `${prefix}${inverseShade}`;
 }
-

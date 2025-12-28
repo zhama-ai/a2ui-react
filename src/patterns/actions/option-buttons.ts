@@ -124,9 +124,7 @@ export function createOptionButtons(options: OptionButtonsOptions): PatternResul
 
     // 添加反馈图标到文本
     if (showFeedback && option.selected) {
-      buttonText = option.isCorrect
-        ? `✓ ${buttonText}`
-        : `✗ ${buttonText}`;
+      buttonText = option.isCorrect ? `✓ ${buttonText}` : `✗ ${buttonText}`;
     }
 
     // 构建上下文
