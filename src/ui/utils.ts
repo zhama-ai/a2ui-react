@@ -22,6 +22,7 @@ export function extractStringValue(
       return val.literal ?? '';
     } else if (val && 'path' in val && val.path) {
       if (!processor || !component) {
+        console.warn('[A2UI] extractStringValue: no processor or component for path:', val.path);
         return '(no model)';
       }
 
@@ -31,7 +32,29 @@ export function extractStringValue(
         surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
       );
 
-      if (textValue === null || typeof textValue !== 'string') {
+      // 调试：记录数据绑定结果
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('[A2UI] extractStringValue:', {
+          path: val.path,
+          value: textValue,
+          type: typeof textValue,
+          componentId: component.id,
+          surfaceId,
+        });
+      }
+
+      if (textValue === null) {
+        console.warn('[A2UI] extractStringValue: null value for path:', val.path);
+        return '';
+      }
+      
+      // 支持数字类型自动转换为字符串
+      if (typeof textValue === 'number') {
+        return String(textValue);
+      }
+      
+      if (typeof textValue !== 'string') {
+        console.warn('[A2UI] extractStringValue: non-string value for path:', val.path, typeof textValue);
         return '';
       }
 

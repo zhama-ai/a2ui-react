@@ -20,6 +20,7 @@ export * as Types from './types';
 export * as Styles from './styles';
 export * as UI from './ui';
 export * as Builders from './builders';
+export * as Patterns from './patterns';
 
 // ============ Types - 类型定义 ============
 export type {
@@ -273,3 +274,97 @@ export {
   valueToValueMapEntry,
   jsValueToA2UIValue,
 } from './builders';
+
+// ============ Patterns - 通用 UI 模式 ============
+export {
+  // Stats 模式
+  createStatsGrid,
+  createProgressBar,
+  createScoreCard,
+  createMetadataRow,
+  createBadge,
+  createBadgeGroup,
+  createStreakIndicator,
+  createRankCard,
+  createComparisonCard,
+  // Cards 模式
+  createTopicCard,
+  createContentCard,
+  createRecommendationCard,
+  createRelatedContentCard,
+  createCourseCard,
+  createAchievementCard,
+  createAchievementList,
+  // Actions 模式
+  createActionButtonGroup,
+  createQuickActions,
+  createOptionButtons,
+  createNavigationButtons,
+  createBreadcrumb,
+  createStepIndicator,
+  createPagination,
+  // Feedback 模式
+  createFeedbackCard,
+  createMessageCard,
+  createToast,
+  createAlertBanner,
+  createResultBanner,
+  createMotivationBanner,
+  // Charts 模式
+  createTimeline,
+  createKnowledgeMap,
+  createActivityHeatmap,
+  createProgressChart,
+  createTrendChart,
+  // Content 模式
+  createTextSection,
+  createQuote,
+  createCodeBlock,
+  createKeyPoints,
+  createStepList,
+  createFaqList,
+  createComparisonTable,
+  createImageGallery,
+  // Forms 模式
+  createFormGroup,
+  createFieldSet,
+  createValidationHint,
+  createFormSection,
+  // Scene 渲染
+  SceneRenderer,
+  createSceneRenderer,
+  renderSimpleScene,
+  renderSceneToMessages,
+  SceneTemplates,
+  createSceneConfig,
+  createLayout,
+  createResponsiveGrid,
+  createSplitLayout,
+  createCenteredLayout,
+  createCardContainer,
+} from './patterns';
+
+// Pattern Types
+export type {
+  PatternResult,
+  PatternMessagesResult,
+  PatternOptions,
+  StatItem,
+  ProgressData,
+  ActionButton,
+  AchievementData,
+  MetadataItem,
+  Badge,
+  FeedbackMessage,
+  TimelineItem,
+  KnowledgeNode,
+  ContentSection,
+  TextSectionData,
+  CodeBlockData,
+  QuoteData,
+  KeyPointsData,
+  StepListData,
+  FaqListData,
+  ComparisonTableData,
+  FormField,
+} from './patterns';

@@ -78,7 +78,12 @@ export class A2uiMessageProcessor implements MessageProcessor {
   }
 
   processMessages(messages: ServerToClientMessage[]): void {
+    console.log('[A2UI] processMessages called with', messages.length, 'messages');
+    
     for (const message of messages) {
+      const msgTypes = Object.keys(message).filter(k => message[k as keyof ServerToClientMessage]);
+      console.log('[A2UI] Processing message types:', msgTypes);
+      
       if (message.beginRendering) {
         this.handleBeginRendering(message.beginRendering, message.beginRendering.surfaceId);
       }
@@ -103,7 +108,10 @@ export class A2uiMessageProcessor implements MessageProcessor {
     surfaceId = A2uiMessageProcessor.DEFAULT_SURFACE_ID
   ): DataValue | null {
     const surface = this.getOrCreateSurface(surfaceId);
-    if (!surface) return null;
+    if (!surface) {
+      console.warn('[A2UI] getData: surface not found:', surfaceId);
+      return null;
+    }
 
     let finalPath: string;
 
@@ -113,7 +121,19 @@ export class A2uiMessageProcessor implements MessageProcessor {
       finalPath = this.resolvePath(relativePath, node.dataContextPath);
     }
 
-    return this.getDataByPath(surface.dataModel, finalPath);
+    const result = this.getDataByPath(surface.dataModel, finalPath);
+    
+    // 调试：记录数据查找结果
+    if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
+      console.debug('[A2UI] getData:', {
+        relativePath,
+        finalPath,
+        result,
+        dataModelKeys: Array.from(surface.dataModel.keys()),
+      });
+    }
+    
+    return result;
   }
 
   setData(
@@ -332,7 +352,63 @@ export class A2uiMessageProcessor implements MessageProcessor {
   private handleDataModelUpdate(message: DataModelUpdate, surfaceId: SurfaceID): void {
     const surface = this.getOrCreateSurface(surfaceId);
     const path = message.path ?? '/';
-    this.setDataByPath(surface.dataModel, path, message.contents as DataValue);
+    
+    // 调试：记录 DataModel 更新
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[A2UI] handleDataModelUpdate:', {
+        surfaceId,
+        path,
+        contentsLength: Array.isArray(message.contents) ? message.contents.length : 'not array',
+        contentsSample: Array.isArray(message.contents) 
+          ? message.contents.slice(0, 3).map((c: { key?: string }) => c.key) 
+          : message.contents,
+        existingKeys: Array.from(surface.dataModel.keys()),
+      });
+    }
+    
+    // 增量更新模式：如果路径是根路径且 DataModel 已有数据，则合并而不是替换
+    const isIncrementalUpdate = path === '/' && surface.dataModel.size > 0;
+    
+    if (isIncrementalUpdate && Array.isArray(message.contents)) {
+      // 增量合并：遍历每个条目，单独更新对应路径
+      for (const entry of message.contents) {
+        if (isObject(entry) && 'key' in entry) {
+          const entryKey = (entry as { key: string }).key;
+          const valueKey = this.findValueKey(entry as Record<string, unknown>);
+          if (valueKey) {
+            let value: DataValue = (entry as Record<string, unknown>)[valueKey] as DataValue;
+            // 处理嵌套的 valueMap
+            if (valueKey === 'valueMap' && Array.isArray(value)) {
+              value = this.convertKeyValueArrayToMap(value);
+            } else if (typeof value === 'string') {
+              value = this.parseIfJsonString(value);
+            }
+            // 使用 entryKey 作为路径更新
+            this.setDataByPath(surface.dataModel, entryKey, value);
+          }
+        }
+      }
+      
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[A2UI] Incremental merge applied:', {
+          updatedEntries: message.contents.length,
+        });
+      }
+    } else {
+      // 完整更新模式：替换整个路径
+      this.setDataByPath(surface.dataModel, path, message.contents as DataValue);
+    }
+    
+    // 调试：记录更新后的 DataModel
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[A2UI] DataModel after update:', {
+        keys: Array.from(surface.dataModel.keys()),
+        progressKeys: surface.dataModel.get('progress') instanceof Map 
+          ? Array.from((surface.dataModel.get('progress') as Map<string, unknown>).keys())
+          : 'not a Map',
+      });
+    }
+    
     this.rebuildComponentTree(surface);
   }
 

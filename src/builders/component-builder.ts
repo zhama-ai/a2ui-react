@@ -268,10 +268,15 @@ export function createButton(
   }
 
   // 将按钮文本添加到 context 中，用于生成友好的消息
-  const actionWithText: ActionDefinition = {
-    ...action,
-    context: [...(action.context || []), { key: '_buttonText', value: text }],
-  };
+  const fullContext = [...(action.context || []), { key: '_buttonText', value: text }];
+
+  // 转换为 A2UI 协议格式：{ key, value: string } -> { key, value: { literalString: string } }
+  const protocolContext = fullContext.map(item => ({
+    key: item.key,
+    value: {
+      literalString: String(item.value),
+    },
+  }));
 
   return {
     button: {
@@ -279,7 +284,10 @@ export function createButton(
       component: {
         Button: {
           child: childId,
-          action: actionWithText,
+          action: {
+            name: action.name,
+            context: protocolContext,
+          },
         },
       },
     },
