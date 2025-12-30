@@ -1,5 +1,5 @@
 /**
- * A2UI Slider Component
+ * A2UI Slider Component - v0.9 Protocol
  */
 
 import { useTheme } from '../context/theme';
@@ -13,8 +13,9 @@ export interface SliderProps {
   processor: MessageProcessor | null;
   surfaceId: SurfaceID | null;
   value: ResolvedSlider['value'];
-  minValue?: ResolvedSlider['minValue'];
-  maxValue?: ResolvedSlider['maxValue'];
+  min?: ResolvedSlider['min'];
+  max?: ResolvedSlider['max'];
+  label?: ResolvedSlider['label'];
 }
 
 export function Slider({
@@ -22,30 +23,16 @@ export function Slider({
   processor,
   surfaceId,
   value,
-  minValue,
-  maxValue,
+  min = 0,
+  max = 100,
 }: SliderProps) {
   const theme = useTheme();
 
   const currentValue = extractNumberValue(value, component, processor, surfaceId);
 
-  // 提取 min/max 值，支持 NumberValue 对象或原始数字
-  const min =
-    typeof minValue === 'number'
-      ? minValue
-      : minValue
-        ? extractNumberValue(minValue, component, processor, surfaceId)
-        : 0;
-
-  const max =
-    typeof maxValue === 'number'
-      ? maxValue
-      : maxValue
-        ? extractNumberValue(maxValue, component, processor, surfaceId)
-        : 100;
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!value || !processor || !('path' in value) || !value.path) return;
+    if (!value || !processor) return;
+    if (typeof value !== 'object' || !('path' in value) || !value.path) return;
 
     processor.setData(
       component,

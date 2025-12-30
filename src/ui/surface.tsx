@@ -19,9 +19,9 @@ export interface PrimaryColorScale {
   '--p-20'?: string;
   '--p-25'?: string;
   '--p-30'?: string;
-  '--p-35'?: string;  // 按钮背景色
+  '--p-35'?: string; // 按钮背景色
   '--p-40'?: string;
-  '--p-50'?: string;  // 主色
+  '--p-50'?: string; // 主色
   '--p-60'?: string;
   '--p-70'?: string;
   '--p-80'?: string;
@@ -97,16 +97,13 @@ export function Surface({
     paddingBottom: '80px',
     ...themeColors,
     // 兼容旧的 primaryColor 配置
-    ...(surface.styles?.primaryColor && !themeColors?.['--p-50'] 
-      ? { '--p-50': surface.styles.primaryColor } 
+    ...(surface.styles?.primaryColor && !themeColors?.['--p-50']
+      ? { '--p-50': surface.styles.primaryColor }
       : {}),
   } as React.CSSProperties;
 
   return (
-    <div
-      className="a2ui-surface a2ui-root a2-dsp-flexvert a2-gap-8 a2-p-10"
-      style={styleOverrides}
-    >
+    <div className="a2ui-surface a2ui-root a2-dsp-flexvert a2-gap-8 a2-p-10" style={styleOverrides}>
       {renderLogo()}
       {renderSurface()}
     </div>

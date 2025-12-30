@@ -1,5 +1,5 @@
 /**
- * A2UI TextField Component
+ * A2UI TextField Component - v0.9 Protocol
  */
 
 import { useTheme } from '../context/theme';
@@ -19,7 +19,7 @@ export interface TextFieldProps {
   surfaceId: SurfaceID | null;
   label: ResolvedTextField['label'];
   text?: ResolvedTextField['text'];
-  type?: ResolvedTextField['type'];
+  usageHint?: ResolvedTextField['usageHint'];
   validationRegexp?: ResolvedTextField['validationRegexp'];
 }
 
@@ -29,7 +29,7 @@ export function TextField({
   surfaceId,
   label,
   text,
-  type = 'shortText',
+  usageHint = 'shortText',
 }: TextFieldProps) {
   const theme = useTheme();
 
@@ -37,7 +37,8 @@ export function TextField({
   const textValue = text ? extractStringValue(text, component, processor, surfaceId) : '';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (!text || !processor || !('path' in text) || !text.path) return;
+    if (!text || !processor) return;
+    if (typeof text !== 'object' || !('path' in text) || !text.path) return;
 
     processor.setData(
       component,
@@ -47,8 +48,9 @@ export function TextField({
     );
   };
 
-  const inputType = type === 'number' ? 'number' : type === 'date' ? 'date' : 'text';
-  const isLongText = type === 'longText';
+  const inputType =
+    usageHint === 'number' ? 'number' : usageHint === 'obscured' ? 'password' : 'text';
+  const isLongText = usageHint === 'longText';
 
   return (
     <section className={cn(theme.components.TextField.container)}>

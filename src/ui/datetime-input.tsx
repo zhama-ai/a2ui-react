@@ -35,7 +35,9 @@ export function DateTimeInput({
   const currentValue = extractStringValue(value, component, processor, surfaceId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!value || !processor || !('path' in value) || !value.path) return;
+    if (!value || !processor) return;
+    // v0.9: value 可以是 string 或 { path: string }
+    if (typeof value !== 'object' || !('path' in value) || !value.path) return;
 
     processor.setData(
       component,

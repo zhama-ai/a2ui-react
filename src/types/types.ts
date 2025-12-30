@@ -1,48 +1,103 @@
 /**
- * A2UI Core Types
- * 核心协议类型定义
+ * A2UI Types - v0.9 Protocol
+ *
+ * 类型定义完全基于 A2UI v0.9 协议
+ * 协议类型从 @zhama/a2ui-core 重导出
  */
 
-import type {
-  AudioPlayer,
-  Button,
-  Checkbox,
-  DateTimeInput,
-  Divider,
-  Icon,
-  Image,
-  MultipleChoice,
-  Slider,
-  Text,
-  TextField,
-  Video,
-  Action,
-} from './components';
-import type { StringValue } from './primitives';
+// ============================================================================
+// 从 @zhama/a2ui-core 重导出协议类型
+// ============================================================================
 
-export type { Action } from './components';
 export type {
-  ClientToServerMessage as A2UIClientEventMessage,
-  ClientCapabilitiesDynamic,
-} from './client-event';
+  // Primitives (v0.9 格式)
+  StringOrPath,
+  NumberOrPath,
+  BooleanOrPath,
+  StringArrayOrPath,
+  // Components
+  Action,
+  ComponentInstance,
+  ComponentType,
+  AnyComponent,
+  TextComponent,
+  ImageComponent,
+  IconComponent,
+  VideoComponent,
+  AudioPlayerComponent,
+  RowComponent,
+  ColumnComponent,
+  ListComponent,
+  CardComponent,
+  TabsComponent,
+  DividerComponent,
+  ModalComponent,
+  ButtonComponent,
+  CheckBoxComponent,
+  TextFieldComponent,
+  DateTimeInputComponent,
+  ChoicePickerComponent,
+  SliderComponent,
+  ChildrenProperty,
+  // Messages v0.9
+  CreateSurfaceMessage,
+  UpdateComponentsMessage,
+  UpdateDataModelMessage,
+  DeleteSurfaceMessage,
+  ServerToClientMessageV09,
+  // Client Events
+  UserActionEvent,
+  DataChangeEvent,
+  ClientToServerMessage,
+  // Data
+  DataValue,
+  DataObject,
+  DataArray,
+  // Theme
+  Theme as A2UITheme,
+} from '@zhama/a2ui-core';
 
-// ============ Message Processor ============
+export {
+  STANDARD_CATALOG_ID,
+  A2UI_EXTENSION_URI,
+  A2UI_MIME_TYPE,
+  isV09Message,
+} from '@zhama/a2ui-core';
 
+// 类型别名 - 保持 API 兼容
+import type { ServerToClientMessageV09 } from '@zhama/a2ui-core';
+export type ServerToClientMessage = ServerToClientMessageV09;
+
+// ============================================================================
+// React 渲染器类型
+// ============================================================================
+
+import type {
+  Action,
+  DataValue as CoreDataValue,
+  DataObject as CoreDataObject,
+  DataArray as CoreDataArray,
+  ComponentInstance,
+} from '@zhama/a2ui-core';
+
+/** Message Processor 接口 */
 export interface MessageProcessor {
   getSurfaces(): ReadonlyMap<string, Surface>;
   clearSurfaces(): void;
   processMessages(messages: ServerToClientMessage[]): void;
-  getData(node: AnyComponentNode, relativePath: string, surfaceId: string): DataValue | null;
+  getData(node: AnyComponentNode, relativePath: string, surfaceId: string): CoreDataValue | null;
   setData(
     node: AnyComponentNode | null,
     relativePath: string,
-    value: DataValue,
+    value: CoreDataValue,
     surfaceId: string
   ): void;
   resolvePath(path: string, dataContextPath?: string): string;
 }
 
-// ============ Theme ============
+// ============================================================================
+// Theme（渲染器主题）
+// ============================================================================
 
 export interface Theme {
   components: {
@@ -180,7 +235,9 @@ export interface Theme {
   };
 }
 
-// ============ User Action ============
+// ============================================================================
+// User Action
+// ============================================================================
 
 export interface UserAction {
   actionName: string;
@@ -189,17 +246,11 @@ export interface UserAction {
   context?: Record<string, unknown>;
 }
 
-// ============ Data Model ============
+// ============================================================================
+// Data Model（渲染器内部使用）
+// ============================================================================
 
-// 使用接口避免循环引用
-export interface DataObject {
-  [key: string]: DataValue;
-}
-
-export type DataMap = Map<string, DataValue>;
-export type DataArray = DataValue[];
-
-export type DataValue = string | number | boolean | null | DataMap | DataObject | DataArray;
+export type DataMap = Map<string, CoreDataValue>;
 
 export interface ComponentArrayTemplate {
   componentId: string;
@@ -212,58 +263,15 @@ export interface ComponentArrayReference {
 }
 
 export type ComponentProperties = {
-  children?: ComponentArrayReference;
+  children?: ComponentArrayReference | string[];
   child?: string;
   [k: string]: unknown;
 };
 
-export interface ComponentInstance {
-  id: string;
-  weight?: number;
-  component?: Record<string, ComponentProperties>;
-}
+// ============================================================================
+// Resolved Values（解析后的值，用于渲染）
+// ============================================================================
 
-// ============ Server Messages ============
-
-export interface BeginRenderingMessage {
-  surfaceId: string;
-  root: string;
-  styles?: Record<string, string>;
-}
-
-export interface SurfaceUpdateMessage {
-  surfaceId: string;
-  components: ComponentInstance[];
-}
-
-export interface DataModelUpdate {
-  surfaceId: string;
-  path?: string;
-  contents: ValueMap[];
-}
-
-export type ValueMap = DataObject & {
-  key: string;
-  valueString?: string;
-  valueNumber?: number;
-  valueBoolean?: boolean;
-  valueMap?: ValueMap[];
-};
-
-export interface DeleteSurfaceMessage {
-  surfaceId: string;
-}
-
-export interface ServerToClientMessage {
-  beginRendering?: BeginRenderingMessage;
-  surfaceUpdate?: SurfaceUpdateMessage;
-  dataModelUpdate?: DataModelUpdate;
-  deleteSurface?: DeleteSurfaceMessage;
-}
-
-// ============ Resolved Values ============
-
-// 使用接口避免循环引用
 export interface ResolvedMap {
   [key: string]: ResolvedValue;
 }
@@ -279,7 +287,9 @@ export type ResolvedValue =
   | ResolvedMap
   | ResolvedArray;
 
-// ============ Component Nodes ============
+// ============================================================================
+// Component Nodes（渲染树节点）
+// ============================================================================
 
 interface BaseComponentNode {
   id: string;
@@ -404,19 +414,80 @@ export type AnyComponentNode =
   | SliderNode
   | CustomNode;
 
-// ============ Resolved Component Properties ============
+// ============================================================================
+// Resolved Component Properties（v0.9 格式）
+// ============================================================================
 
-export type ResolvedText = Text;
-export type ResolvedIcon = Icon;
-export type ResolvedImage = Image;
-export type ResolvedVideo = Video;
-export type ResolvedAudioPlayer = AudioPlayer;
-export type ResolvedDivider = Divider;
-export type ResolvedCheckbox = Checkbox;
-export type ResolvedTextField = TextField;
-export type ResolvedDateTimeInput = DateTimeInput;
-export type ResolvedMultipleChoice = MultipleChoice;
-export type ResolvedSlider = Slider;
+export interface ResolvedText {
+  text: string | { path: string };
+  usageHint?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'caption' | 'body';
+}
+
+export interface ResolvedIcon {
+  name: string | { path: string };
+  size?: number | string;
+  color?: string;
+  container?: boolean;
+  variant?: string;
+}
+
+export interface ResolvedImage {
+  url: string | { path: string };
+  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  usageHint?: 'icon' | 'avatar' | 'smallFeature' | 'mediumFeature' | 'largeFeature' | 'header';
+}
+
+export interface ResolvedVideo {
+  url: string | { path: string };
+}
+
+export interface ResolvedAudioPlayer {
+  url: string | { path: string };
+  description?: string | { path: string };
+}
+
+export interface ResolvedDivider {
+  axis?: 'horizontal' | 'vertical';
+  thickness?: number;
+  color?: string;
+}
+
+export interface ResolvedCheckbox {
+  label: string | { path: string };
+  value: boolean | { path: string };
+}
+
+export interface ResolvedTextField {
+  label: string | { path: string };
+  text?: string | { path: string };
+  usageHint?: 'longText' | 'number' | 'shortText' | 'obscured';
+  validationRegexp?: string;
+}
+
+export interface ResolvedDateTimeInput {
+  value: string | { path: string };
+  enableDate?: boolean;
+  enableTime?: boolean;
+  outputFormat?: string;
+  label?: string | { path: string };
+}
+
+export interface ResolvedMultipleChoice {
+  label?: string | { path: string };
+  usageHint?: 'multipleSelection' | 'mutuallyExclusive';
+  options?: Array<{
+    label: string | { path: string };
+    value: string;
+  }>;
+  value?: string[] | { path: string };
+}
+
+export interface ResolvedSlider {
+  label?: string | { path: string };
+  min?: number;
+  max?: number;
+  value: number | { path: string };
+}
 
 export interface ResolvedRow {
   children: AnyComponentNode[];
@@ -433,13 +504,13 @@ export interface ResolvedColumn {
 export interface ResolvedButton {
   child: AnyComponentNode;
   action: Action;
+  primary?: boolean;
 }
 
 export interface ResolvedList {
   children: AnyComponentNode[];
   direction?: 'vertical' | 'horizontal' | 'grid';
   alignment?: 'start' | 'center' | 'end' | 'stretch';
-  /** 网格列数（仅在 direction='grid' 时生效） */
   columns?: number;
 }
 
@@ -450,7 +521,7 @@ export interface ResolvedCard {
 }
 
 export interface ResolvedTabItem {
-  title: StringValue;
+  title: string | { path: string };
   child: AnyComponentNode;
 }
 
@@ -467,14 +538,34 @@ export interface CustomNodeProperties {
   [k: string]: ResolvedValue;
 }
 
-// ============ Surface ============
+// ============================================================================
+// Surface（渲染状态）
+// ============================================================================
 
 export type SurfaceID = string;
 
 export interface Surface {
+  /** 根组件 ID */
   rootComponentId: string | null;
+  /** 渲染树 */
   componentTree: AnyComponentNode | null;
+  /** 数据模型 */
   dataModel: DataMap;
+  /** 组件映射 */
   components: Map<string, ComponentInstance>;
+  /** 样式配置 */
   styles: Record<string, string>;
+  /** Catalog ID (v0.9) */
+  catalogId?: string;
+}
+
+// ============================================================================
+// 客户端消息类型
+// ============================================================================
+
+export type { ClientToServerMessage as A2UIClientEventMessage } from '@zhama/a2ui-core';
+
+export interface ClientCapabilitiesDynamic {
+  customComponents?: string[];
+  [key: string]: unknown;
 }

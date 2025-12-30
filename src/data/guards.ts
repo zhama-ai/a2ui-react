@@ -1,9 +1,10 @@
 /**
- * A2UI Type Guards
+ * A2UI Type Guards - v0.9 Protocol
  * 类型守卫函数
  */
 
-import type { BooleanValue, NumberValue, StringValue } from '../types/primitives';
+import type { StringOrPath, NumberOrPath, BooleanOrPath } from '@zhama/a2ui-core';
+
 import type {
   AnyComponentNode,
   ComponentArrayReference,
@@ -26,11 +27,13 @@ import type {
   ResolvedText,
   ResolvedTextField,
   ResolvedVideo,
-  ValueMap,
 } from '../types/types';
 
-export function isValueMap(value: unknown): value is ValueMap {
-  return isObject(value) && 'key' in value;
+/**
+ * 检查是否是 v0.9 的值映射对象
+ */
+export function isValueMap(value: unknown): value is Record<string, unknown> {
+  return isObject(value);
 }
 
 export function isPath(key: string, value: unknown): value is string {
@@ -46,31 +49,31 @@ export function isComponentArrayReference(value: unknown): value is ComponentArr
   return 'explicitList' in value || 'template' in value;
 }
 
-export function isStringValue(value: unknown): value is StringValue {
-  return (
-    isObject(value) &&
-    ('path' in value ||
-      ('literal' in value && typeof value.literal === 'string') ||
-      'literalString' in value)
-  );
+/**
+ * v0.9 StringOrPath 类型守卫
+ */
+export function isStringValue(value: unknown): value is StringOrPath {
+  if (typeof value === 'string') return true;
+  if (isObject(value) && 'path' in value && typeof value.path === 'string') return true;
+  return false;
 }
 
-export function isNumberValue(value: unknown): value is NumberValue {
-  return (
-    isObject(value) &&
-    ('path' in value ||
-      ('literal' in value && typeof value.literal === 'number') ||
-      'literalNumber' in value)
-  );
+/**
+ * v0.9 NumberOrPath 类型守卫
+ */
+export function isNumberValue(value: unknown): value is NumberOrPath {
+  if (typeof value === 'number') return true;
+  if (isObject(value) && 'path' in value && typeof value.path === 'string') return true;
+  return false;
 }
 
-export function isBooleanValue(value: unknown): value is BooleanValue {
-  return (
-    isObject(value) &&
-    ('path' in value ||
-      ('literal' in value && typeof value.literal === 'boolean') ||
-      'literalBoolean' in value)
-  );
+/**
+ * v0.9 BooleanOrPath 类型守卫
+ */
+export function isBooleanValue(value: unknown): value is BooleanOrPath {
+  if (typeof value === 'boolean') return true;
+  if (isObject(value) && 'path' in value && typeof value.path === 'string') return true;
+  return false;
 }
 
 export function isAnyComponentNode(value: unknown): value is AnyComponentNode {

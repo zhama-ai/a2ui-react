@@ -1,115 +1,152 @@
 /**
- * A2UI UI Utilities
+ * A2UI UI Utilities - v0.9 Protocol
  */
 
+import type { StringOrPath, NumberOrPath, BooleanOrPath } from '@zhama/a2ui-core';
+
 import { A2uiMessageProcessor } from '../data/model-processor';
-import type { NumberValue, StringValue } from '../types/primitives';
 import type { AnyComponentNode, MessageProcessor } from '../types/types';
 
 /**
- * 从 StringValue 提取实际字符串值
+ * 从 StringOrPath 提取实际字符串值 (v0.9 格式)
  */
 export function extractStringValue(
-  val: StringValue | null,
+  val: StringOrPath | null,
   component: AnyComponentNode | null,
   processor: MessageProcessor | null,
   surfaceId: string | null
 ): string {
-  if (val !== null && typeof val === 'object') {
-    if ('literalString' in val) {
-      return val.literalString ?? '';
-    } else if ('literal' in val && val.literal !== undefined) {
-      return val.literal ?? '';
-    } else if (val && 'path' in val && val.path) {
-      if (!processor || !component) {
-        console.warn('[A2UI] extractStringValue: no processor or component for path:', val.path);
-        return '(no model)';
-      }
+  if (val === null) return '';
 
-      const textValue = processor.getData(
-        component,
-        val.path,
-        surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
-      );
+  // v0.9: 直接字符串字面值
+  if (typeof val === 'string') {
+    return val;
+  }
 
-      // 调试：记录数据绑定结果
-      if (process.env.NODE_ENV === 'development') {
-        console.debug('[A2UI] extractStringValue:', {
-          path: val.path,
-          value: textValue,
-          type: typeof textValue,
-          componentId: component.id,
-          surfaceId,
-        });
-      }
-
-      if (textValue === null) {
-        console.warn('[A2UI] extractStringValue: null value for path:', val.path);
-        return '';
-      }
-
-      // 支持数字类型自动转换为字符串
-      if (typeof textValue === 'number') {
-        return String(textValue);
-      }
-
-      if (typeof textValue !== 'string') {
-        console.warn(
-          '[A2UI] extractStringValue: non-string value for path:',
-          val.path,
-          typeof textValue
-        );
-        return '';
-      }
-
-      return textValue;
+  // v0.9: { path: string } 数据绑定
+  if (typeof val === 'object' && 'path' in val && val.path) {
+    if (!processor || !component) {
+      console.warn('[A2UI] extractStringValue: no processor or component for path:', val.path);
+      return '(no model)';
     }
+
+    const textValue = processor.getData(
+      component,
+      val.path,
+      surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
+    );
+
+    if (textValue === null) {
+      console.warn('[A2UI] extractStringValue: null value for path:', val.path);
+      return '';
+    }
+
+    // 支持数字类型自动转换为字符串
+    if (typeof textValue === 'number') {
+      return String(textValue);
+    }
+
+    if (typeof textValue !== 'string') {
+      console.warn(
+        '[A2UI] extractStringValue: non-string value for path:',
+        val.path,
+        typeof textValue
+      );
+      return '';
+    }
+
+    return textValue;
   }
 
   return '';
 }
 
 /**
- * 从 NumberValue 提取实际数字值
+ * 从 NumberOrPath 提取实际数字值 (v0.9 格式)
  */
 export function extractNumberValue(
-  val: NumberValue | null,
+  val: NumberOrPath | null,
   component: AnyComponentNode | null,
   processor: MessageProcessor | null,
   surfaceId: string | null
 ): number {
-  if (val !== null && typeof val === 'object') {
-    if ('literalNumber' in val) {
-      return val.literalNumber ?? 0;
-    } else if ('literal' in val && val.literal !== undefined) {
-      return val.literal ?? 0;
-    } else if (val && 'path' in val && val.path) {
-      if (!processor || !component) {
-        return -1;
-      }
+  if (val === null) return 0;
 
-      let numberValue = processor.getData(
-        component,
-        val.path,
-        surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
-      );
+  // v0.9: 直接数字字面值
+  if (typeof val === 'number') {
+    return val;
+  }
 
-      if (typeof numberValue === 'string') {
-        numberValue = Number.parseInt(numberValue, 10);
-        if (Number.isNaN(numberValue)) {
-          numberValue = null;
-        }
-      }
-
-      if (numberValue === null || typeof numberValue !== 'number') {
-        return -1;
-      }
-
-      return numberValue;
+  // v0.9: { path: string } 数据绑定
+  if (typeof val === 'object' && 'path' in val && val.path) {
+    if (!processor || !component) {
+      return -1;
     }
+
+    let numberValue = processor.getData(
+      component,
+      val.path,
+      surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
+    );
+
+    if (typeof numberValue === 'string') {
+      numberValue = Number.parseInt(numberValue, 10);
+      if (Number.isNaN(numberValue)) {
+        numberValue = null;
+      }
+    }
+
+    if (numberValue === null || typeof numberValue !== 'number') {
+      return -1;
+    }
+
+    return numberValue;
   }
 
   return 0;
+}
+
+/**
+ * 从 BooleanOrPath 提取实际布尔值 (v0.9 格式)
+ */
+export function extractBooleanValue(
+  val: BooleanOrPath | null,
+  component: AnyComponentNode | null,
+  processor: MessageProcessor | null,
+  surfaceId: string | null
+): boolean {
+  if (val === null) return false;
+
+  // v0.9: 直接布尔字面值
+  if (typeof val === 'boolean') {
+    return val;
+  }
+
+  // v0.9: { path: string } 数据绑定
+  if (typeof val === 'object' && 'path' in val && val.path) {
+    if (!processor || !component) {
+      return false;
+    }
+
+    const boolValue = processor.getData(
+      component,
+      val.path,
+      surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
+    );
+
+    if (typeof boolValue === 'boolean') {
+      return boolValue;
+    }
+
+    // 支持字符串 "true" / "false"
+    if (typeof boolValue === 'string') {
+      return boolValue.toLowerCase() === 'true';
+    }
+
+    return false;
+  }
+
+  return false;
 }
 
 /**

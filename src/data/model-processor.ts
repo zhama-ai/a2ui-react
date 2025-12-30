@@ -1,24 +1,23 @@
 /**
- * A2UI Message Processor
- * 处理并整合服务器消息，构建 UI Surface 层级模型
+ * A2UI Message Processor - v0.9 Protocol
+ * 处理 A2UI v0.9 消息，构建 UI Surface 层级模型
  */
 
 import type {
   ServerToClientMessage,
   AnyComponentNode,
-  BeginRenderingMessage,
-  DataArray,
   DataMap,
-  DataModelUpdate,
-  DataValue,
-  DeleteSurfaceMessage,
   ResolvedMap,
   ResolvedValue,
   Surface,
   SurfaceID,
-  SurfaceUpdateMessage,
   MessageProcessor,
   ComponentInstance,
+  CreateSurfaceMessage,
+  UpdateComponentsMessage,
+  UpdateDataModelMessage,
+  DeleteSurfaceMessage,
+  DataValue,
 } from '../types/types';
 
 import {
@@ -81,25 +80,17 @@ export class A2uiMessageProcessor implements MessageProcessor {
     console.log('[A2UI] processMessages called with', messages.length, 'messages');
 
     for (const message of messages) {
-      const msgTypes = Object.keys(message).filter(
-        (k) => message[k as keyof ServerToClientMessage]
-      );
-      console.log('[A2UI] Processing message types:', msgTypes);
-
-      if (message.beginRendering) {
-        this.handleBeginRendering(message.beginRendering, message.beginRendering.surfaceId);
-      }
-
-      if (message.surfaceUpdate) {
-        this.handleSurfaceUpdate(message.surfaceUpdate, message.surfaceUpdate.surfaceId);
-      }
-
-      if (message.dataModelUpdate) {
-        this.handleDataModelUpdate(message.dataModelUpdate, message.dataModelUpdate.surfaceId);
-      }
-
-      if (message.deleteSurface) {
-        this.handleDeleteSurface(message.deleteSurface);
+      // v0.9 消息类型检测
+      if ('createSurface' in message) {
+        this.handleCreateSurface(message as CreateSurfaceMessage);
+      } else if ('updateComponents' in message) {
+        this.handleUpdateComponents(message as UpdateComponentsMessage);
+      } else if ('updateDataModel' in message) {
+        this.handleUpdateDataModel(message as UpdateDataModelMessage);
+      } else if ('deleteSurface' in message) {
+        this.handleDeleteSurface(message as DeleteSurfaceMessage);
+      } else {
+        console.warn('[A2UI] Unknown message type:', Object.keys(message));
       }
     }
   }
@@ -124,17 +115,6 @@ export class A2uiMessageProcessor implements MessageProcessor {
     }
 
     const result = this.getDataByPath(surface.dataModel, finalPath);
-
-    // 调试：记录数据查找结果
-    if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') {
-      console.debug('[A2UI] getData:', {
-        relativePath,
-        finalPath,
-        result,
-        dataModelKeys: Array.from(surface.dataModel.keys()),
-      });
-    }
-
     return result;
   }
 
@@ -177,93 +157,84 @@ export class A2uiMessageProcessor implements MessageProcessor {
     return `/${path}`;
   }
 
-  private parseIfJsonString(value: DataValue): DataValue {
-    if (typeof value !== 'string') {
-      return value;
-    }
+  // ============================================================================
+  // v0.9 消息处理器
+  // ============================================================================
 
-    const trimmedValue = value.trim();
-    if (
-      (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) ||
-      (trimmedValue.startsWith('[') && trimmedValue.endsWith(']'))
-    ) {
-      try {
-        return JSON.parse(value);
-      } catch {
-        console.warn(`Failed to parse potential JSON string: "${value.substring(0, 50)}..."`);
-        return value;
+  private handleCreateSurface(message: CreateSurfaceMessage): void {
+    const { createSurface } = message;
+    const surfaceId = createSurface.surfaceId;
+
+    // v0.9: createSurface 只创建一个空的 surface
+    const surface = this.getOrCreateSurface(surfaceId);
+    surface.catalogId = createSurface.catalogId;
+  }
+
+  private handleUpdateComponents(message: UpdateComponentsMessage): void {
+    const { updateComponents } = message;
+    const surfaceId = updateComponents.surfaceId;
+
+    const surface = this.getOrCreateSurface(surfaceId);
+
+    // 更新组件
+    for (const component of updateComponents.components) {
+      surface.components.set(component.id, component);
+
+      // v0.9: 检查组件的 slotName 来确定根组件
+      // 通常第一个组件或标记为 'root' 的组件是根组件
+      if (!surface.rootComponentId) {
+        surface.rootComponentId = component.id;
       }
     }
 
-    return value;
+    this.rebuildComponentTree(surface);
   }
 
-  private convertKeyValueArrayToMap(arr: DataArray): DataMap {
-    const map = new this.mapCtor<string, DataValue>();
-    for (const item of arr) {
-      if (!isObject(item) || !('key' in item)) continue;
+  private handleUpdateDataModel(message: UpdateDataModelMessage): void {
+    const { updateDataModel } = message;
+    const surfaceId = updateDataModel.surfaceId;
 
-      const key = item.key as string;
-      const valueKey = this.findValueKey(item as Record<string, unknown>);
-      if (!valueKey) continue;
+    const surface = this.getOrCreateSurface(surfaceId);
 
-      let value: DataValue = (item as Record<string, unknown>)[valueKey] as DataValue;
-      if (valueKey === 'valueMap' && Array.isArray(value)) {
-        value = this.convertKeyValueArrayToMap(value);
-      } else if (typeof value === 'string') {
-        value = this.parseIfJsonString(value);
-      }
+    // v0.9 使用 path + op + value 格式
+    const path = updateDataModel.path ?? '/';
+    const op = updateDataModel.op ?? 'replace';
+    const value = updateDataModel.value;
 
-      this.setDataByPath(map, key, value);
+    if (op === 'remove') {
+      this.removeDataByPath(surface.dataModel, path);
+    } else if (value !== undefined) {
+      this.setDataByPath(surface.dataModel, path, value as DataValue);
     }
-    return map;
+
+    this.rebuildComponentTree(surface);
   }
+
+  private handleDeleteSurface(message: DeleteSurfaceMessage): void {
+    const { deleteSurface } = message;
+    this.surfaces.delete(deleteSurface.surfaceId);
+  }
+
+  // ============================================================================
+  // 数据模型工具
+  // ============================================================================
 
   private setDataByPath(root: DataMap, path: string, value: DataValue): void {
-    if (Array.isArray(value) && (value.length === 0 || (isObject(value[0]) && 'key' in value[0]))) {
-      if (
-        value.length === 1 &&
-        isObject(value[0]) &&
-        (value[0] as Record<string, unknown>).key === '.'
-      ) {
-        const item = value[0] as Record<string, unknown>;
-        const valueKey = this.findValueKey(item);
-
-        if (valueKey) {
-          value = item[valueKey] as DataValue;
-          if (valueKey === 'valueMap' && Array.isArray(value)) {
-            value = this.convertKeyValueArrayToMap(value);
-          } else if (typeof value === 'string') {
-            value = this.parseIfJsonString(value);
-          }
-        } else {
-          value = this.convertKeyValueArrayToMap(value as DataArray);
-        }
-      } else {
-        value = this.convertKeyValueArrayToMap(value as DataArray);
-      }
-    }
-
     const segments = this.normalizePath(path)
       .split('/')
       .filter((s) => s);
-    if (segments.length === 0) {
-      if (value instanceof Map || isObject(value)) {
-        if (!(value instanceof Map) && isObject(value)) {
-          value = new this.mapCtor(Object.entries(value)) as DataMap;
-        }
 
+    if (segments.length === 0) {
+      if (isObject(value) && !(value instanceof Map)) {
         root.clear();
-        for (const [key, v] of (value as DataMap).entries()) {
-          root.set(key, v);
+        for (const [key, v] of Object.entries(value)) {
+          root.set(key, v as DataValue);
         }
-      } else {
-        console.error('Cannot set root of DataModel to a non-Map value.');
       }
       return;
     }
 
-    let current: DataMap | DataArray = root;
+    let current: DataMap | DataValue[] = root;
     for (let i = 0; i < segments.length - 1; i++) {
       const segment = segments[i] as string;
       let target: DataValue | undefined;
@@ -275,21 +246,55 @@ export class A2uiMessageProcessor implements MessageProcessor {
       }
 
       if (target === undefined || typeof target !== 'object' || target === null) {
-        target = new this.mapCtor();
-        if (current instanceof this.mapCtor) {
-          current.set(segment, target);
+        const newMap = new this.mapCtor<string, DataValue>();
+        if (current instanceof Map) {
+          current.set(segment, newMap as unknown as DataValue);
         } else if (Array.isArray(current)) {
-          current[parseInt(segment, 10)] = target;
+          current[parseInt(segment, 10)] = newMap as unknown as DataValue;
         }
+        target = newMap as unknown as DataValue;
       }
-      current = target as DataMap | DataArray;
+      current = target as unknown as DataMap | DataValue[];
     }
 
     const finalSegment = segments[segments.length - 1] as string;
-    if (current instanceof this.mapCtor) {
+    if (current instanceof Map) {
       current.set(finalSegment, value);
     } else if (Array.isArray(current) && /^\d+$/.test(finalSegment)) {
       current[parseInt(finalSegment, 10)] = value;
+    }
+  }
+
+  private removeDataByPath(root: DataMap, path: string): void {
+    const segments = this.normalizePath(path)
+      .split('/')
+      .filter((s) => s);
+
+    if (segments.length === 0) {
+      root.clear();
+      return;
+    }
+
+    let current: DataMap | DataValue[] = root;
+    for (let i = 0; i < segments.length - 1; i++) {
+      const segment = segments[i] as string;
+      let target: DataValue | undefined;
+
+      if (current instanceof Map) {
+        target = current.get(segment);
+      } else if (Array.isArray(current) && /^\d+$/.test(segment)) {
+        target = current[parseInt(segment, 10)];
+      }
+
+      if (target === undefined || typeof target !== 'object' || target === null) {
+        return; // 路径不存在
+      }
+      current = target as DataMap | DataValue[];
+    }
+
+    const finalSegment = segments[segments.length - 1] as string;
+    if (current instanceof Map) {
+      current.delete(finalSegment);
     }
   }
 
@@ -304,7 +309,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
       .split('/')
       .filter((s) => s);
 
-    let current: DataValue | undefined = root;
+    let current: DataValue | undefined = root as unknown as DataValue;
     for (const segment of segments) {
       if (current === undefined || current === null) return null;
 
@@ -336,89 +341,6 @@ export class A2uiMessageProcessor implements MessageProcessor {
     return surface;
   }
 
-  private handleBeginRendering(message: BeginRenderingMessage, surfaceId: SurfaceID): void {
-    const surface = this.getOrCreateSurface(surfaceId);
-    surface.rootComponentId = message.root;
-    surface.styles = message.styles ?? {};
-    this.rebuildComponentTree(surface);
-  }
-
-  private handleSurfaceUpdate(message: SurfaceUpdateMessage, surfaceId: SurfaceID): void {
-    const surface = this.getOrCreateSurface(surfaceId);
-    for (const component of message.components) {
-      surface.components.set(component.id, component);
-    }
-    this.rebuildComponentTree(surface);
-  }
-
-  private handleDataModelUpdate(message: DataModelUpdate, surfaceId: SurfaceID): void {
-    const surface = this.getOrCreateSurface(surfaceId);
-    const path = message.path ?? '/';
-
-    // 调试：记录 DataModel 更新
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[A2UI] handleDataModelUpdate:', {
-        surfaceId,
-        path,
-        contentsLength: Array.isArray(message.contents) ? message.contents.length : 'not array',
-        contentsSample: Array.isArray(message.contents)
-          ? message.contents.slice(0, 3).map((c: { key?: string }) => c.key)
-          : message.contents,
-        existingKeys: Array.from(surface.dataModel.keys()),
-      });
-    }
-
-    // 增量更新模式：如果路径是根路径且 DataModel 已有数据，则合并而不是替换
-    const isIncrementalUpdate = path === '/' && surface.dataModel.size > 0;
-
-    if (isIncrementalUpdate && Array.isArray(message.contents)) {
-      // 增量合并：遍历每个条目，单独更新对应路径
-      for (const entry of message.contents) {
-        if (isObject(entry) && 'key' in entry) {
-          const entryKey = (entry as { key: string }).key;
-          const valueKey = this.findValueKey(entry as Record<string, unknown>);
-          if (valueKey) {
-            let value: DataValue = (entry as Record<string, unknown>)[valueKey] as DataValue;
-            // 处理嵌套的 valueMap
-            if (valueKey === 'valueMap' && Array.isArray(value)) {
-              value = this.convertKeyValueArrayToMap(value);
-            } else if (typeof value === 'string') {
-              value = this.parseIfJsonString(value);
-            }
-            // 使用 entryKey 作为路径更新
-            this.setDataByPath(surface.dataModel, entryKey, value);
-          }
-        }
-      }
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[A2UI] Incremental merge applied:', {
-          updatedEntries: message.contents.length,
-        });
-      }
-    } else {
-      // 完整更新模式：替换整个路径
-      this.setDataByPath(surface.dataModel, path, message.contents as DataValue);
-    }
-
-    // 调试：记录更新后的 DataModel
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[A2UI] DataModel after update:', {
-        keys: Array.from(surface.dataModel.keys()),
-        progressKeys:
-          surface.dataModel.get('progress') instanceof Map
-            ? Array.from((surface.dataModel.get('progress') as Map<string, unknown>).keys())
-            : 'not a Map',
-      });
-    }
-
-    this.rebuildComponentTree(surface);
-  }
-
-  private handleDeleteSurface(message: DeleteSurfaceMessage): void {
-    this.surfaces.delete(message.surfaceId);
-  }
-
   private rebuildComponentTree(surface: Surface): void {
     if (!surface.rootComponentId) {
       surface.componentTree = null;
@@ -433,10 +355,6 @@ export class A2uiMessageProcessor implements MessageProcessor {
       '/',
       ''
     );
-  }
-
-  private findValueKey(value: Record<string, unknown>): string | undefined {
-    return Object.keys(value).find((k) => k.startsWith('value'));
   }
 
   private buildNodeRecursive(
@@ -460,29 +378,31 @@ export class A2uiMessageProcessor implements MessageProcessor {
     visited.add(fullId);
 
     const componentData = components.get(baseComponentId) as ComponentInstance;
-    const componentProps = componentData.component ?? {};
-    const componentType = Object.keys(componentProps)[0] ?? 'Unknown';
-    const unresolvedProperties = componentProps[componentType as keyof typeof componentProps];
+
+    // v0.9 格式：组件类型直接在 component 字段
+    const componentType = componentData.component;
+    const unresolvedProperties = { ...componentData } as Record<string, unknown>;
+    delete unresolvedProperties.id;
+    delete unresolvedProperties.component;
 
     const resolvedProperties: ResolvedMap = {};
-    if (isObject(unresolvedProperties)) {
-      for (const [key, value] of Object.entries(unresolvedProperties)) {
-        resolvedProperties[key] = this.resolvePropertyValue(
-          value,
-          surface,
-          visited,
-          dataContextPath,
-          idSuffix
-        );
-      }
+    for (const [key, value] of Object.entries(unresolvedProperties)) {
+      resolvedProperties[key] = this.resolvePropertyValue(
+        value,
+        surface,
+        visited,
+        dataContextPath,
+        idSuffix
+      );
     }
 
     visited.delete(fullId);
 
+    const weight = (componentData as Record<string, unknown>).weight;
     const baseNode = {
       id: fullId,
       dataContextPath,
-      weight: componentData.weight ?? 'initial',
+      weight: typeof weight === 'number' || typeof weight === 'string' ? weight : undefined,
     };
 
     switch (componentType) {
@@ -514,11 +434,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
         if (!isResolvedAudioPlayer(resolvedProperties)) {
           throw new Error(`Invalid data; expected ${componentType}`);
         }
-        return {
-          ...baseNode,
-          type: 'AudioPlayer',
-          properties: resolvedProperties,
-        };
+        return { ...baseNode, type: 'AudioPlayer', properties: resolvedProperties };
 
       case 'Row':
         if (!isResolvedRow(resolvedProperties)) {
@@ -572,41 +488,25 @@ export class A2uiMessageProcessor implements MessageProcessor {
         if (!isResolvedCheckbox(resolvedProperties)) {
           throw new Error(`Invalid data; expected ${componentType}`);
         }
-        return {
-          ...baseNode,
-          type: 'CheckBox',
-          properties: resolvedProperties,
-        };
+        return { ...baseNode, type: 'CheckBox', properties: resolvedProperties };
 
       case 'TextField':
         if (!isResolvedTextField(resolvedProperties)) {
           throw new Error(`Invalid data; expected ${componentType}`);
         }
-        return {
-          ...baseNode,
-          type: 'TextField',
-          properties: resolvedProperties,
-        };
+        return { ...baseNode, type: 'TextField', properties: resolvedProperties };
 
       case 'DateTimeInput':
         if (!isResolvedDateTimeInput(resolvedProperties)) {
           throw new Error(`Invalid data; expected ${componentType}`);
         }
-        return {
-          ...baseNode,
-          type: 'DateTimeInput',
-          properties: resolvedProperties,
-        };
+        return { ...baseNode, type: 'DateTimeInput', properties: resolvedProperties };
 
       case 'MultipleChoice':
         if (!isResolvedMultipleChoice(resolvedProperties)) {
           throw new Error(`Invalid data; expected ${componentType}`);
         }
-        return {
-          ...baseNode,
-          type: 'MultipleChoice',
-          properties: resolvedProperties,
-        };
+        return { ...baseNode, type: 'MultipleChoice', properties: resolvedProperties };
 
       case 'Slider':
         if (!isResolvedSlider(resolvedProperties)) {
@@ -630,12 +530,12 @@ export class A2uiMessageProcessor implements MessageProcessor {
     dataContextPath: string,
     idSuffix = ''
   ): ResolvedValue {
-    // 1. If it's a string that matches a component ID, build that node.
+    // 1. 如果是字符串且匹配组件 ID，构建节点
     if (typeof value === 'string' && surface.components.has(value)) {
       return this.buildNodeRecursive(value, surface, visited, dataContextPath, idSuffix);
     }
 
-    // 2. If it's a ComponentArrayReference
+    // 2. 如果是 ComponentArrayReference
     if (isComponentArrayReference(value)) {
       if (value.explicitList) {
         return value.explicitList.map((id) =>
@@ -688,14 +588,14 @@ export class A2uiMessageProcessor implements MessageProcessor {
       }
     }
 
-    // 3. If it's a plain array, resolve each item
+    // 3. 如果是数组，解析每个元素
     if (Array.isArray(value)) {
       return value.map((item) =>
         this.resolvePropertyValue(item, surface, visited, dataContextPath, idSuffix)
       );
     }
 
-    // 4. If it's a plain object, resolve each property
+    // 4. 如果是对象，解析每个属性
     if (isObject(value)) {
       const newObj: ResolvedMap = {};
       for (const [key, propValue] of Object.entries(value)) {
@@ -721,7 +621,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
       return newObj;
     }
 
-    // 5. Otherwise, it's a primitive value
+    // 5. 原始值
     return value as ResolvedValue;
   }
 }

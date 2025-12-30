@@ -1,73 +1,66 @@
 /**
  * @zhama/a2ui
- * A2UI Protocol - Agent-to-User Interface Protocol
+ * A2UI Protocol - Agent-to-User Interface Protocol React 实现
  *
- * 基于 Google A2UI 协议的 React 实现
- *
- * 特点：
- * - 完整的 A2UI 协议实现
- * - 消息处理器 (MessageProcessor)
- * - Surface 管理
- * - 数据模型和数据绑定
- * - 主题系统
- * - 可扩展的组件注册
+ * 基于 A2UI v0.9 协议
  */
 
-// ============ Core - 核心模块 ============
+// ============ Core Modules ============
 export * as Data from './data';
 export * as Events from './events';
 export * as Types from './types';
 export * as Styles from './styles';
 export * as UI from './ui';
 export * as Builders from './builders';
-export * as Patterns from './patterns';
 
-// ============ Types - 类型定义 ============
+// ============ Types - 从 @zhama/a2ui-core 重导出 ============
 export type {
-  // Primitives
-  StringValue,
-  NumberValue,
-  BooleanValue,
-} from './types/primitives';
-
-export type {
+  // Primitives (v0.9)
+  StringOrPath,
+  NumberOrPath,
+  BooleanOrPath,
+  StringArrayOrPath,
   // Components
   Action,
-  Text as TextComponent,
-  Image as ImageComponent,
-  Icon as IconComponent,
-  Video as VideoComponent,
-  AudioPlayer,
-  Tabs as TabsComponent,
-  Divider as DividerComponent,
-  Modal as ModalComponent,
-  Button as ButtonComponent,
-  Checkbox as CheckboxComponent,
-  TextField as TextFieldComponent,
-  DateTimeInput as DateTimeInputComponent,
-  MultipleChoice as MultipleChoiceComponent,
-  Slider as SliderComponent,
-} from './types/components';
+  ComponentInstance,
+  ComponentType,
+  AnyComponent,
+  // Messages v0.9
+  CreateSurfaceMessage,
+  UpdateComponentsMessage,
+  UpdateDataModelMessage,
+  DeleteSurfaceMessage,
+  ServerToClientMessageV09,
+  // Client Events
+  UserActionEvent,
+  DataChangeEvent,
+  ClientToServerMessage,
+  // Data
+  DataValue,
+  DataObject,
+  DataArray,
+} from '@zhama/a2ui-core';
 
+export {
+  STANDARD_CATALOG_ID,
+  A2UI_EXTENSION_URI,
+  A2UI_MIME_TYPE,
+  isV09Message,
+} from '@zhama/a2ui-core';
+
+// 别名
+export type { ServerToClientMessageV09 as ServerToClientMessage } from '@zhama/a2ui-core';
+
+// ============ Types - 渲染器类型 ============
 export type {
   // Core Types
   MessageProcessor,
   Theme,
   UserAction,
-  DataValue,
-  DataObject,
   DataMap,
-  DataArray,
   ComponentArrayTemplate,
   ComponentArrayReference,
   ComponentProperties,
-  ComponentInstance,
-  BeginRenderingMessage,
-  SurfaceUpdateMessage,
-  DataModelUpdate,
-  ValueMap,
-  DeleteSurfaceMessage,
-  ServerToClientMessage,
   ResolvedValue,
   ResolvedMap,
   ResolvedArray,
@@ -116,6 +109,24 @@ export type {
   A2UIClientEventMessage,
   ClientCapabilitiesDynamic,
 } from './types/types';
+
+// 组件类型
+export type {
+  Text as TextComponent,
+  Image as ImageComponent,
+  Icon as IconComponent,
+  Video as VideoComponent,
+  AudioPlayer,
+  Tabs as TabsComponent,
+  Divider as DividerComponent,
+  Modal as ModalComponent,
+  Button as ButtonComponent,
+  Checkbox as CheckboxComponent,
+  TextField as TextFieldComponent,
+  DateTimeInput as DateTimeInputComponent,
+  MultipleChoice as MultipleChoiceComponent,
+  Slider as SliderComponent,
+} from './types/components';
 
 // ============ Data - 数据处理 ============
 export { A2uiMessageProcessor, createMessageProcessor } from './data/model-processor';
@@ -200,173 +211,69 @@ export {
   componentRegistry,
 } from './ui';
 
-// Alias exports for better DX
+// Alias exports
 export { Root as A2UIRoot } from './ui';
-
 export type { A2UIComponentProps } from './ui';
 
 // ============ Utils ============
 export { extractStringValue, extractNumberValue, cn } from './ui/utils';
 
-// ============ Builders - 消息和组件构建器 ============
-export type {
-  // 组件相关类型
-  ComponentDefinition,
-  ButtonResult,
-  TextOptions,
-  IconOptions,
-  LayoutOptions,
-  CardOptions,
-  ListOptions,
-  TabsOptions,
-  DividerOptions,
-  ButtonOptions,
-  TabItem,
-  ActionDefinition,
-  // 数据模型相关类型
-  A2UIValueMap,
-  UpdateDataItem,
-  PathMappings,
-} from './builders';
-
+// ============ Builders - v0.9 构建器 ============
 export {
   // ID 生成
   generateId,
   resetIdCounter,
-  // 消息构建
-  createBeginRendering,
-  createSurfaceUpdate,
-  createDataModelInit,
-  createDataModelUpdate,
-  createPathUpdate,
-  createDeleteSurface,
-  createA2UIMessages,
-  createA2UIMessagesWithData,
-  // 基础组件
-  createText,
-  createBoundText,
-  createIcon,
-  createBoundIcon,
-  // 布局组件
-  createColumn,
-  createRow,
-  createCard,
-  createList,
-  createTabs,
-  createDivider,
-  // 交互组件
-  createButton,
-  createSimpleButton,
-  // 表单组件
-  createTextField,
-  createCheckbox,
-  createSlider,
+  // 文本组件
+  text,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  caption,
+  body,
   // 媒体组件
-  createImage,
-  createVideo,
-  // 条件渲染
-  createConditional,
-  // DataModel 工具
-  DEFAULT_PATH_MAPPINGS,
+  image,
+  icon,
+  video,
+  audioPlayer,
+  // 布局组件
+  row,
+  column,
+  list,
+  card,
+  tabs,
+  divider,
+  modal,
+  // 交互组件
+  button,
+  textButton,
+  checkbox,
+  textField,
+  dateTimeInput,
+  choicePicker,
+  slider,
+  // 消息构建
+  createSurface,
+  updateComponents,
+  updateDataModel,
+  deleteSurface,
+  createV09Messages,
+  messagesToJsonl,
+  jsonlToMessages,
+  // 数据模型工具
   objectToValueMap,
   valueToValueMap,
+  normalizePath,
   updatesToValueMap,
   flattenObjectToValueMap,
-  normalizePath,
-  valueToValueMapEntry,
-  jsValueToA2UIValue,
+  valueMapToObject,
+  DEFAULT_PATH_MAPPINGS,
+  // Surface 工具
+  SURFACE_IDS,
+  createChatSurface,
+  createRecommendationSurface,
+  createInputFormSurface,
+  createOrchestrationSurface,
+  createStatusSurface,
 } from './builders';
-
-// ============ Patterns - 通用 UI 模式 ============
-export {
-  // Stats 模式
-  createStatsGrid,
-  createProgressBar,
-  createScoreCard,
-  createMetadataRow,
-  createBadge,
-  createBadgeGroup,
-  createStreakIndicator,
-  createRankCard,
-  createComparisonCard,
-  // Cards 模式
-  createTopicCard,
-  createContentCard,
-  createRecommendationCard,
-  createRelatedContentCard,
-  createCourseCard,
-  createAchievementCard,
-  createAchievementList,
-  // Actions 模式
-  createActionButtonGroup,
-  createQuickActions,
-  createOptionButtons,
-  createNavigationButtons,
-  createBreadcrumb,
-  createStepIndicator,
-  createPagination,
-  // Feedback 模式
-  createFeedbackCard,
-  createMessageCard,
-  createToast,
-  createAlertBanner,
-  createResultBanner,
-  createMotivationBanner,
-  // Charts 模式
-  createTimeline,
-  createKnowledgeMap,
-  createActivityHeatmap,
-  createProgressChart,
-  createTrendChart,
-  // Content 模式
-  createTextSection,
-  createQuote,
-  createCodeBlock,
-  createKeyPoints,
-  createStepList,
-  createFaqList,
-  createComparisonTable,
-  createImageGallery,
-  // Forms 模式
-  createFormGroup,
-  createFieldSet,
-  createValidationHint,
-  createFormSection,
-  // Scene 渲染
-  SceneRenderer,
-  createSceneRenderer,
-  renderSimpleScene,
-  renderSceneToMessages,
-  SceneTemplates,
-  createSceneConfig,
-  createLayout,
-  createResponsiveGrid,
-  createSplitLayout,
-  createCenteredLayout,
-  createCardContainer,
-} from './patterns';
-
-// Pattern Types
-export type {
-  PatternResult,
-  PatternMessagesResult,
-  PatternOptions,
-  StatItem,
-  ProgressData,
-  ActionButton,
-  AchievementData,
-  MetadataItem,
-  Badge,
-  FeedbackMessage,
-  TimelineItem,
-  KnowledgeNode,
-  ContentSection,
-  TextSectionData,
-  CodeBlockData,
-  QuoteData,
-  KeyPointsData,
-  StepListData,
-  FaqListData,
-  ComparisonTableData,
-  FormField,
-} from './patterns';

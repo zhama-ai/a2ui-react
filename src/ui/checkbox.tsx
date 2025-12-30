@@ -1,5 +1,5 @@
 /**
- * A2UI Checkbox Component
+ * A2UI Checkbox Component - v0.9 Protocol
  */
 
 import { useTheme } from '../context/theme';
@@ -11,7 +11,7 @@ import type {
   ResolvedCheckbox,
 } from '../types/types';
 
-import { extractStringValue, cn } from './utils';
+import { extractStringValue, extractBooleanValue, cn } from './utils';
 
 export interface CheckboxProps {
   component: AnyComponentNode;
@@ -25,23 +25,12 @@ export function Checkbox({ component, processor, surfaceId, label, value }: Chec
   const theme = useTheme();
 
   const labelText = extractStringValue(label, component, processor, surfaceId);
-
-  let checked = false;
-  if (value) {
-    if ('literalBoolean' in value && value.literalBoolean !== undefined) {
-      checked = value.literalBoolean;
-    } else if ('path' in value && value.path && processor && component) {
-      const dataValue = processor.getData(
-        component,
-        value.path,
-        surfaceId ?? A2uiMessageProcessor.DEFAULT_SURFACE_ID
-      );
-      checked = Boolean(dataValue);
-    }
-  }
+  const checked = extractBooleanValue(value, component, processor, surfaceId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!value || !processor || !('path' in value) || !value.path) return;
+    if (!value || !processor) return;
+    // v0.9: value 可以是 boolean 或 { path: string }
+    if (typeof value !== 'object' || !('path' in value) || !value.path) return;
 
     processor.setData(
       component,

@@ -403,7 +403,7 @@ function ComponentRenderer({
           surfaceId={surfaceId}
           label={node.properties.label}
           text={node.properties.text}
-          type={node.properties.type}
+          usageHint={node.properties.usageHint}
           validationRegexp={node.properties.validationRegexp}
         />
       );
@@ -432,9 +432,10 @@ function ComponentRenderer({
           component={node}
           processor={processor}
           surfaceId={surfaceId}
-          selections={node.properties.selections}
+          value={node.properties.value}
           options={node.properties.options}
-          maxAllowedSelections={node.properties.maxAllowedSelections}
+          label={node.properties.label}
+          usageHint={node.properties.usageHint}
         />
       );
     }
@@ -448,8 +449,9 @@ function ComponentRenderer({
           processor={processor}
           surfaceId={surfaceId}
           value={node.properties.value}
-          minValue={node.properties.minValue}
-          maxValue={node.properties.maxValue}
+          min={node.properties.min}
+          max={node.properties.max}
+          label={node.properties.label}
         />
       );
     }

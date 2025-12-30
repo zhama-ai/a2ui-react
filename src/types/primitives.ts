@@ -1,22 +1,17 @@
 /**
- * A2UI Primitive Types
- * 基础值类型，支持字面值和数据绑定路径
+ * A2UI Primitive Types - v0.9 Protocol
+ *
+ * 从 @zhama/a2ui-core 重导出基础类型
  */
 
-export interface StringValue {
-  path?: string;
-  literalString?: string;
-  literal?: string;
-}
+export type {
+  StringOrPath,
+  NumberOrPath,
+  BooleanOrPath,
+  StringArrayOrPath,
+} from '@zhama/a2ui-core';
 
-export interface NumberValue {
-  path?: string;
-  literalNumber?: number;
-  literal?: number;
-}
-
-export interface BooleanValue {
-  path?: string;
-  literalBoolean?: boolean;
-  literal?: boolean;
-}
+// 类型别名保持向后兼容
+export type StringValue = import('@zhama/a2ui-core').StringOrPath;
+export type NumberValue = import('@zhama/a2ui-core').NumberOrPath;
+export type BooleanValue = import('@zhama/a2ui-core').BooleanOrPath;

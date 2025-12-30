@@ -1,105 +1,90 @@
 /**
- * A2UI Builders
+ * A2UI Builders - v0.9 Protocol
  *
- * 提供便捷的函数来构建标准的 A2UI 协议消息和组件
- *
- * 主要模块：
- * - message-builder: A2UI 消息构建（surfaceUpdate, dataModelUpdate, beginRendering）
- * - component-builder: 组件定义构建（Text, Button, Column, Card 等）
- * - data-model-builder: DataModel 数据工具（ValueMap 转换等）
+ * 提供 A2UI v0.9 协议的消息和组件构建器
+ * 所有构建器从 @zhama/a2ui-core 重导出
  */
 
 // ============================================================================
-// Types - 类型定义
+// ID 生成器
 // ============================================================================
 
-export type {
-  // 组件相关类型
-  ComponentDefinition,
-  ButtonResult,
-  TextOptions,
-  IconOptions,
-  LayoutOptions,
-  CardOptions,
-  ListOptions,
-  TabsOptions,
-  DividerOptions,
-  ButtonOptions,
-  TabItem,
-  ActionDefinition,
-  // 数据模型相关类型
-  A2UIValueMap,
-  UpdateDataItem,
-  PathMappings,
-} from './types';
+export { generateId, resetIdCounter } from '@zhama/a2ui-core';
 
 // ============================================================================
-// Message Builder - A2UI 消息构建
+// 组件构建器 (v0.9 扁平格式)
 // ============================================================================
 
 export {
-  // ID 生成
-  generateId,
-  resetIdCounter,
-  // 消息构建
-  createBeginRendering,
-  createSurfaceUpdate,
-  createDataModelInit,
-  createDataModelUpdate,
-  createPathUpdate,
-  createDeleteSurface,
-  // 完整消息数组
-  createA2UIMessages,
-  createA2UIMessagesWithData,
-  createA2UIMessagesWithOptions,
-  type CreateA2UIMessagesOptions,
-} from './message-builder';
-
-// ============================================================================
-// Component Builder - 组件定义构建
-// ============================================================================
-
-export {
-  // 基础组件
-  createText,
-  createBoundText,
-  createIcon,
-  createBoundIcon,
-  // 布局组件
-  createColumn,
-  createRow,
-  createCard,
-  createList,
-  createTabs,
-  createDivider,
-  // 交互组件
-  createButton,
-  createSimpleButton,
-  // 表单组件
-  createTextField,
-  createCheckbox,
-  createSlider,
+  // 文本组件
+  text,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  caption,
+  body,
   // 媒体组件
-  createImage,
-  createVideo,
-  // 条件渲染
-  createConditional,
-} from './component-builder';
+  image,
+  icon,
+  video,
+  audioPlayer,
+  // 布局组件
+  row,
+  column,
+  list,
+  card,
+  tabs,
+  divider,
+  modal,
+  // 交互组件
+  button,
+  textButton,
+  checkbox,
+  textField,
+  dateTimeInput,
+  choicePicker,
+  slider,
+} from '@zhama/a2ui-core';
 
 // ============================================================================
-// Data Model Builder - DataModel 数据工具
+// 消息构建器 (v0.9 格式)
 // ============================================================================
 
 export {
-  // 常量
-  DEFAULT_PATH_MAPPINGS,
-  // ValueMap 转换
+  createSurface,
+  updateComponents,
+  updateDataModel,
+  deleteSurface,
+  createV09Messages,
+  messagesToJsonl,
+  jsonlToMessages,
+} from '@zhama/a2ui-core';
+
+// ============================================================================
+// 数据模型工具
+// ============================================================================
+
+export {
   objectToValueMap,
   valueToValueMap,
+  normalizePath,
   updatesToValueMap,
   flattenObjectToValueMap,
-  normalizePath,
-  // 兼容性函数
-  valueToValueMapEntry,
-  jsValueToA2UIValue,
-} from './data-model-builder';
+  valueMapToObject,
+  DEFAULT_PATH_MAPPINGS,
+} from '@zhama/a2ui-core';
+
+// ============================================================================
+// Surface 工具
+// ============================================================================
+
+export {
+  SURFACE_IDS,
+  createChatSurface,
+  createRecommendationSurface,
+  createInputFormSurface,
+  createOrchestrationSurface,
+  createStatusSurface,
+} from '@zhama/a2ui-core';
