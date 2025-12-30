@@ -1,51 +1,20 @@
 import { Send } from 'lucide-react';
 import { useState } from 'react';
 
-import { sendMessage } from '@/services/mock-agent';
 import { useChatStore } from '@/stores/chat-store';
 
 export function ChatPanel() {
-  const { messages, isLoading, addMessage, setLoading, setCurrentA2UI } = useChatStore();
+  const { messages, isLoading, sendMessage } = useChatStore();
   const [input, setInput] = useState('');
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userMessage = {
-      id: `msg-${Date.now()}`,
-      role: 'user' as const,
-      content: input.trim(),
-      timestamp: Date.now(),
-    };
-
-    addMessage(userMessage);
+    const messageContent = input.trim();
     setInput('');
-    setLoading(true);
 
-    try {
-      const response = await sendMessage(userMessage.content);
-
-      const assistantMessage = {
-        id: `msg-${Date.now()}`,
-        role: 'assistant' as const,
-        content: response.text,
-        timestamp: Date.now(),
-        contentModel: response.contentModel,
-      };
-
-      addMessage(assistantMessage);
-
-      if (response.contentModel) {
-        console.log('[ChatPanel] Setting ContentModel:', response.contentModel);
-        setCurrentA2UI(response.contentModel);
-      } else {
-        console.log('[ChatPanel] No ContentModel in response');
-      }
-    } catch (error) {
-      console.error('Failed to send message:', error);
-    } finally {
-      setLoading(false);
-    }
+    // sendMessage now handles adding messages and updating A2UI
+    await sendMessage(messageContent);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

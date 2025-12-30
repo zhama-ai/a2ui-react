@@ -1,16 +1,75 @@
-import { A2UIRoot } from '@zhama/a2ui';
-import type { A2UIAction } from '@zhama/a2ui/events';
+import { useMemo, useCallback } from 'react';
 
-import { renderContentModel } from '@/services/content-renderer';
+import { A2UIRoot, A2uiMessageProcessor, createMessageProcessor } from '@zhama/a2ui';
+import type { A2UIAction, ServerToClientMessageV09 } from '@zhama/a2ui';
+
 import { useChatStore } from '@/stores/chat-store';
 
 export function WorkspacePanel() {
-  const { currentA2UI, sendMessage } = useChatStore();
+  const { currentA2UIMessages, sendMessage } = useChatStore();
 
-  console.log('[WorkspacePanel] Current ContentModel:', currentA2UI);
+  // Create message processor (stable across renders)
+  const processor = useMemo(() => createMessageProcessor(), []);
 
-  if (!currentA2UI) {
-    console.log('[WorkspacePanel] No ContentModel, showing placeholder');
+  // Process messages when they change
+  const { surfaces, rootComponent } = useMemo(() => {
+    if (!currentA2UIMessages || currentA2UIMessages.length === 0) {
+      processor.clearSurfaces();
+      return { surfaces: new Map(), rootComponent: null };
+    }
+
+    // Process all messages
+    processor.processMessages(currentA2UIMessages as ServerToClientMessageV09[]);
+
+    const allSurfaces = processor.getSurfaces();
+    console.log('[WorkspacePanel] Processed surfaces:', allSurfaces);
+
+    // Get the first surface (or could support multiple)
+    const firstSurface = allSurfaces.values().next().value;
+    const root = firstSurface?.componentTree ?? null;
+
+    return { surfaces: allSurfaces, rootComponent: root };
+  }, [currentA2UIMessages, processor]);
+
+  // Handle button clicks / user actions - MUST be before any conditional returns
+  const handleAction = useCallback(
+    (event: A2UIAction) => {
+      console.log('[WorkspacePanel] Action triggered:', event);
+
+      // Handle navigation actions
+      if (event.action?.name === 'navigate' && event.action?.context) {
+        const topic = event.action.context.topic as string;
+        if (topic) {
+          sendMessage(`I want to learn about ${topic}`);
+        }
+        return;
+      }
+
+      // Handle submit action
+      if (event.action?.name === 'submit' && event.action?.context) {
+        console.log('[WorkspacePanel] Form submitted with context:', event.action.context);
+        sendMessage(`Form submitted: ${JSON.stringify(event.action.context)}`);
+        return;
+      }
+
+      // Handle generic actions
+      if (event.action?.name) {
+        sendMessage(`Action: ${event.action.name}`);
+      }
+    },
+    [sendMessage]
+  );
+
+  // Get surfaceId from the first surface
+  const surfaceId = useMemo(() => {
+    return surfaces.keys().next().value ?? null;
+  }, [surfaces]);
+
+  console.log('[WorkspacePanel] Current messages:', currentA2UIMessages);
+  console.log('[WorkspacePanel] Root component:', rootComponent);
+
+  // Conditional renders AFTER all hooks
+  if (!currentA2UIMessages || currentA2UIMessages.length === 0) {
     return (
       <div className="flex h-full items-center justify-center p-8">
         <div className="text-center">
@@ -22,44 +81,22 @@ export function WorkspacePanel() {
     );
   }
 
-  // Convert ContentModel to A2UI components
-  const components = renderContentModel(currentA2UI);
-
-  console.log('[WorkspacePanel] Rendered components:', components);
-
-  if (!components || components.length === 0) {
+  if (!rootComponent) {
     return (
       <div className="flex h-full items-center justify-center p-8">
         <div className="text-center">
-          <p className="text-lg text-muted-foreground">
-            Failed to render content. Please try again.
-          </p>
+          <p className="text-lg text-muted-foreground">Processing UI components...</p>
         </div>
       </div>
     );
   }
 
-  // Handle button clicks
-  const handleAction = (event: A2UIAction) => {
-    console.log('[WorkspacePanel] Action triggered:', event);
-
-    if (event.action?.type === 'postback' && event.action?.payload) {
-      // Send the payload as a message
-      const message =
-        typeof event.action.payload === 'string'
-          ? event.action.payload
-          : JSON.stringify(event.action.payload);
-
-      sendMessage(message);
-    }
-  };
-
   return (
     <div className="h-full overflow-auto p-6">
       <A2UIRoot
-        processor={null}
-        surfaceId={null}
-        childComponents={components}
+        processor={processor}
+        surfaceId={surfaceId}
+        childComponents={[rootComponent]}
         enableCustomElements={false}
         onAction={handleAction}
       />
