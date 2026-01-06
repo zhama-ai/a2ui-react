@@ -28,8 +28,8 @@ export const baseStyles = `
     font-family: var(--a2-font-sans);
     font-size: var(--a2-text-bm);
     line-height: 1.5;
-    color: light-dark(var(--n-10), var(--n-90));
-    background-color: light-dark(var(--n-0), var(--n-100));
+    color: hsl(var(--a2-foreground));
+    background-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;

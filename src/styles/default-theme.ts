@@ -45,13 +45,13 @@ export const defaultTheme: Theme = {
       'a2-al-center': true,
       'a2-jc-center': true,
       'a2-gap-2': true,
-      'a2-px-4': true,
-      'a2-py-2': true,
-      'a2-br-3': true, // 12px
+      'a2-px-6': true, // 增加水平内边距
+      'a2-py-3': true, // 增加垂直内边距
+      'a2-br-2': true, // 8px 圆角
       'a2-bw-0': true,
       'a2-bs-solid': true,
-      'a2-bgc-p35': true,
-      'a2-c-n0': true,
+      'a2-bg-primary': true, // 使用语义化类
+      'a2-text-primary-foreground': true, // 白色文字
       'a2-font-sans': true,
       'a2-fw-500': true,
       'a2-text-bm': true,
@@ -65,12 +65,13 @@ export const defaultTheme: Theme = {
     // Card - 卡片容器
     Card: {
       'a2-pos-rel': true,
-      'a2-br-4': true, // 16px
+      'a2-br-2': true, // 8px 圆角
       'a2-p-4': true,
-      'a2-bgc-n0': true,
+      'a2-bg-card': true, // 语义化背景
+      'a2-text-card-foreground': true, // 设置卡片内文字颜色
       'a2-border': true,
-      'a2-bc-n90': true,
-      'a2-shadow': true,
+      'a2-border-default': true, // 语义化边框
+      'a2-shadow-sm': true, // 轻微阴影
       'a2-transition': true,
       'a2-hover-shadow-md': true,
       'a2-overflow-hidden': true,
@@ -165,6 +166,7 @@ export const defaultTheme: Theme = {
       'a2-dsp-iflex': true,
       'a2-al-center': true,
       'a2-jc-center': true,
+      'a2-c-inherit': true, // 继承父元素颜色
     },
 
     // List - 列表
@@ -263,24 +265,22 @@ export const defaultTheme: Theme = {
       element: {
         'a2-dsp-flexhor': true,
         'a2-border-b': true,
-        'a2-bc-n90': true,
+        'a2-bc-n20': true, // 使用浅色边框
       },
     },
 
     // Text - 文本组件
-    // 颜色说明：neutral 色阶中，数值越大颜色越深
-    // n90/n95 = 深色（用于亮色背景），n10/n20 = 浅色（用于暗色背景）
-    // light-dark() 会自动反转：亮色模式用 n90，暗色模式用 n10
-    // 注意：不要设置 a2-w-full，否则会破坏 Row 布局
+    // 使用 color: inherit 让文字继承父元素颜色（重要：避免覆盖按钮内文字颜色）
     Text: {
-      all: {},
+      all: {
+        'a2-c-inherit': true, // 继承父元素颜色
+      },
       h1: {
         'a2-font-sans': true,
         'a2-fw-600': true,
         'a2-text-hs': true, // 24px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n95': true, // 深色标题
       },
       h2: {
         'a2-font-sans': true,
@@ -288,7 +288,6 @@ export const defaultTheme: Theme = {
         'a2-text-tl': true, // 22px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n95': true,
       },
       h3: {
         'a2-font-sans': true,
@@ -296,7 +295,6 @@ export const defaultTheme: Theme = {
         'a2-text-tm': true, // 16px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n90': true,
       },
       h4: {
         'a2-font-sans': true,
@@ -304,7 +302,6 @@ export const defaultTheme: Theme = {
         'a2-text-bl': true, // 16px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n90': true,
       },
       h5: {
         'a2-font-sans': true,
@@ -312,7 +309,6 @@ export const defaultTheme: Theme = {
         'a2-text-bm': true, // 14px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n80': true,
       },
       h6: {
         'a2-font-sans': true,
@@ -320,26 +316,23 @@ export const defaultTheme: Theme = {
         'a2-text-bs': true, // 12px
         'a2-m-0': true,
         'a2-p-0': true,
-        'a2-c-n70': true,
       },
       body: {
-        'a2-font-sans': true, // 使用 sans-serif 更现代
+        'a2-font-sans': true,
         'a2-fw-400': true,
         'a2-text-bm': true,
         'a2-lh-relaxed': true,
-        'a2-c-n80': true, // 深灰色正文
       },
       caption: {
         'a2-font-sans': true,
         'a2-fw-400': true,
         'a2-text-bs': true,
-        'a2-c-n60': true, // 中灰色说明文字
+        'a2-text-muted-foreground': true,
       },
       label: {
         'a2-font-sans': true,
         'a2-fw-500': true,
         'a2-text-bm': true,
-        'a2-c-n70': true,
       },
     },
 
@@ -388,18 +381,18 @@ export const defaultTheme: Theme = {
       'a2-dsp-iflex': true,
       'a2-al-center': true,
       'a2-td-none': true,
-      'a2-c-p40': true,
+      'a2-text-primary': true,
     },
     audio: {
       'a2-w-full': true,
     },
     body: {
-      'a2-font-serif': true,
+      'a2-font-sans': true,
       'a2-fw-400': true,
       'a2-text-bm': true,
       'a2-mt-0': true,
       'a2-mb-2': true,
-      'a2-c-n90': true,
+      'a2-text-foreground': true,
     },
     button: {
       'a2-font-sans': true,
@@ -407,41 +400,47 @@ export const defaultTheme: Theme = {
       'a2-py-3': true,
       'a2-px-5': true,
       'a2-mb-1': true,
-      'a2-br-4': true,
+      'a2-br-2': true,
       'a2-bw-0': true,
       'a2-bs-solid': true,
-      'a2-bgc-s30': true,
+      'a2-bg-primary': true,
+      'a2-text-primary-foreground': true,
       'a2-ho-80': true,
     },
     h1: {
       'a2-font-sans': true,
-      'a2-fw-500': true,
+      'a2-fw-600': true,
       'a2-mt-0': true,
-      'a2-mb-2': true,
+      'a2-mb-3': true,
+      'a2-text-foreground': true,
     },
     h2: {
       'a2-font-sans': true,
-      'a2-fw-500': true,
+      'a2-fw-600': true,
       'a2-mt-0': true,
-      'a2-mb-2': true,
+      'a2-mb-3': true,
+      'a2-text-foreground': true,
     },
     h3: {
       'a2-font-sans': true,
-      'a2-fw-500': true,
+      'a2-fw-600': true,
       'a2-mt-0': true,
       'a2-mb-2': true,
+      'a2-text-foreground': true,
     },
     h4: {
       'a2-font-sans': true,
       'a2-fw-500': true,
       'a2-mt-0': true,
       'a2-mb-2': true,
+      'a2-text-foreground': true,
     },
     h5: {
       'a2-font-sans': true,
       'a2-fw-500': true,
       'a2-mt-0': true,
       'a2-mb-2': true,
+      'a2-text-foreground': true,
     },
     iframe: {
       'a2-scrollbar-none': true,
@@ -453,22 +452,23 @@ export const defaultTheme: Theme = {
       'a2-py-2': true,
       'a2-br-2': true,
       'a2-border': true,
-      'a2-bc-s70': true,
+      'a2-border-input': true,
       'a2-bs-solid': true,
-      'a2-c-n90': true,
+      'a2-text-foreground': true,
     },
     p: {
-      'a2-font-serif': true,
+      'a2-font-sans': true,
       'a2-fw-400': true,
       'a2-m-0': true,
       'a2-text-bm': true,
-      'a2-c-n90': true,
+      'a2-text-foreground': true,
     },
     pre: {
       'a2-font-mono': true,
       'a2-fw-400': true,
       'a2-text-bm': true,
       'a2-ws-pre': true,
+      'a2-text-foreground': true,
     },
     textarea: {
       'a2-font-sans': true,
@@ -477,9 +477,9 @@ export const defaultTheme: Theme = {
       'a2-py-2': true,
       'a2-br-2': true,
       'a2-border': true,
-      'a2-bc-s70': true,
+      'a2-border-input': true,
       'a2-bs-solid': true,
-      'a2-c-n90': true,
+      'a2-text-foreground': true,
       'a2-resize-y': true,
     },
     video: {
@@ -487,22 +487,22 @@ export const defaultTheme: Theme = {
     },
   },
 
-  // Markdown 渲染样式
+  // Markdown 渲染样式 - 专业简洁的设计
   markdown: {
-    p: ['a2-font-serif', 'a2-fw-400', 'a2-text-bm', 'a2-lh-relaxed', 'a2-c-n90', 'a2-mb-2'],
-    h1: ['a2-font-sans', 'a2-fw-500', 'a2-text-hs', 'a2-m-0', 'a2-mb-2'],
-    h2: ['a2-font-sans', 'a2-fw-500', 'a2-text-tl', 'a2-m-0', 'a2-mb-2'],
-    h3: ['a2-font-sans', 'a2-fw-500', 'a2-text-tm', 'a2-m-0', 'a2-mb-2'],
-    h4: ['a2-font-sans', 'a2-fw-500', 'a2-text-bl', 'a2-m-0', 'a2-mb-2'],
-    h5: ['a2-font-sans', 'a2-fw-500', 'a2-text-bm', 'a2-m-0', 'a2-mb-1', 'a2-c-n70'],
-    ul: ['a2-font-serif', 'a2-fw-400', 'a2-text-bm', 'a2-m-0'],
-    ol: ['a2-font-serif', 'a2-fw-400', 'a2-text-bm', 'a2-m-0'],
-    li: ['a2-font-serif', 'a2-fw-400', 'a2-text-bm'],
-    a: ['a2-font-sans', 'a2-fw-500', 'a2-c-p40', 'a2-td-none'],
-    strong: ['a2-fw-700'],
-    em: ['a2-fs-italic'],
-    code: ['a2-font-mono', 'a2-text-bs', 'a2-bgc-n95', 'a2-px-1', 'a2-br-1'],
-    blockquote: ['a2-pl-4', 'a2-border-l', 'a2-bw-l-3', 'a2-bc-p60', 'a2-c-n50', 'a2-fs-italic'],
+    p: ['a2-md-p'],
+    h1: ['a2-md-h1'],
+    h2: ['a2-md-h2'],
+    h3: ['a2-md-h3'],
+    h4: ['a2-md-h4'],
+    h5: ['a2-md-h5'],
+    ul: ['a2-md-ul'],
+    ol: ['a2-md-ol'],
+    li: ['a2-md-li'],
+    a: ['a2-md-a'],
+    strong: ['a2-md-strong'],
+    em: ['a2-md-em'],
+    code: ['a2-md-code'],
+    blockquote: ['a2-md-blockquote'],
   },
 };
 

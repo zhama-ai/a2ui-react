@@ -45,16 +45,18 @@ export function Column({
   const alignmentClass = alignmentMap[alignment] ?? alignmentMap.stretch;
   const distributionClass = distributionMap[distribution] ?? distributionMap.start;
 
-  // 支持通过属性动态设置间距
-  const props = (component as any).properties ?? {};
-  const spaceYValue = props.spaceY;
+  // 从 component.properties 获取额外的 classes 和间距（v0.9 协议中 classes 在 properties 中）
+  const properties =
+    (component as { properties?: { spaceY?: number; classes?: string[] } }).properties ?? {};
+  const extraClasses = properties.classes ?? [];
+  const spaceYValue = properties.spaceY;
 
   // 使用内联样式支持动态间距值（1 单位 = 4px）
   const style = spaceYValue !== undefined ? { gap: `${spaceYValue * 4}px` } : undefined;
 
   return (
     <section
-      className={cn(theme.components.Column, alignmentClass, distributionClass)}
+      className={cn(theme.components.Column, alignmentClass, distributionClass, ...extraClasses)}
       style={style}
     >
       {children}

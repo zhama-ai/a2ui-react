@@ -40,9 +40,15 @@ export function Text({
     return <span className="a2-c-n50">(empty)</span>;
   }
 
+  // 从 component.properties 获取额外的 classes（v0.9 协议中 classes 在 properties 中）
+  const properties = (component as { properties?: { classes?: string[] } }).properties ?? {};
+  const extraClasses = properties.classes ?? [];
+
   const classes = merge(
     theme.components.Text.all,
-    usageHint ? theme.components.Text[usageHint] : {}
+    usageHint ? theme.components.Text[usageHint] : {},
+    // 将额外的 classes 转换为对象格式
+    Object.fromEntries(extraClasses.map((c) => [c, true]))
   );
 
   // 如果启用 markdown 渲染

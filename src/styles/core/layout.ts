@@ -155,6 +155,21 @@ export function generateLayoutStyles(): string {
     .a2-min-h-0 { min-height: 0; }
     .a2-min-w-0 { min-width: 0; }
     .a2-max-w-full { max-width: 100%; }
+    .a2-max-w-xs { max-width: 20rem; }
+    .a2-max-w-sm { max-width: 24rem; }
+    .a2-max-w-md { max-width: 28rem; }
+    .a2-max-w-lg { max-width: 32rem; }
+    .a2-max-w-xl { max-width: 36rem; }
+    .a2-max-h-20 { max-height: 80px; }
+    .a2-max-h-24 { max-height: 96px; }
+    .a2-max-h-32 { max-height: 128px; }
+    .a2-max-h-40 { max-height: 160px; }
+    .a2-max-h-48 { max-height: 192px; }
+    .a2-max-h-56 { max-height: 224px; }
+    .a2-max-h-64 { max-height: 256px; }
+    .a2-max-h-72 { max-height: 288px; }
+    .a2-max-h-80 { max-height: 320px; }
+    .a2-max-h-96 { max-height: 384px; }
 
     /* Overflow */
     .a2-overflow-auto { overflow: auto; }

@@ -19,13 +19,17 @@ export interface CardProps {
 export function Card({ component, children }: CardProps) {
   const theme = useTheme();
 
-  // 支持动态padding - 从component.properties.padding读取
-  const properties = (component as any).properties ?? {};
+  // 从 component.properties 获取额外的 classes（v0.9 协议中 classes 在 properties 中）
+  const properties =
+    (component as { properties?: { padding?: number; classes?: string[] } }).properties ?? {};
+  const extraClasses = properties.classes ?? [];
+
+  // 支持动态padding
   const paddingValue = properties.padding;
   const style = paddingValue !== undefined ? { padding: `${paddingValue * 0.25}rem` } : undefined;
 
   return (
-    <section className={cn(theme.components.Card)} style={style}>
+    <section className={cn(theme.components.Card, ...extraClasses)} style={style}>
       {children}
     </section>
   );

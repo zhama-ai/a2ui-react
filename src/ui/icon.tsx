@@ -64,14 +64,20 @@ export function Icon({
 
   const variantStyle = variant ? variantStyles[variant] : variantStyles.primary;
 
+  // 检测是否为 loading 类图标，自动添加旋转动画
+  const isLoadingIcon = iconName === 'loader-2' || iconName === 'loader';
+  const animationClass = isLoadingIcon ? 'a2-animate-spin' : '';
+
   const renderIcon = () => {
     if (LucideIcon) {
-      return <LucideIcon size={size} className={cn(theme.components.Icon, className)} />;
+      return (
+        <LucideIcon size={size} className={cn(theme.components.Icon, animationClass, className)} />
+      );
     }
 
     return (
       <span
-        className={cn(theme.components.Icon, 'material-icons', className)}
+        className={cn(theme.components.Icon, animationClass, 'material-icons', className)}
         style={{ fontSize: size }}
       >
         {iconName}

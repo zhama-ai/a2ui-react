@@ -115,6 +115,17 @@ export class A2uiMessageProcessor implements MessageProcessor {
     }
 
     const result = this.getDataByPath(surface.dataModel, finalPath);
+
+    // Debug: 输出 getData 调用信息
+    console.log('[A2UI] getData:', {
+      surfaceId,
+      relativePath,
+      finalPath,
+      result,
+      dataModelSize: surface.dataModel.size,
+      formData: surface.dataModel.get('form'),
+    });
+
     return result;
   }
 
@@ -140,7 +151,14 @@ export class A2uiMessageProcessor implements MessageProcessor {
       finalPath = this.resolvePath(relativePath, node.dataContextPath);
     }
 
+    console.log('[A2UI] setData:', { surfaceId, relativePath, finalPath, value });
     this.setDataByPath(surface.dataModel, finalPath, value);
+
+    // Debug: 输出当前 dataModel 状态
+    console.log('[A2UI] dataModel after setData:', {
+      surfaceId,
+      formData: surface.dataModel.get('form'),
+    });
   }
 
   resolvePath(path: string, dataContextPath?: string): string {
@@ -179,12 +197,59 @@ export class A2uiMessageProcessor implements MessageProcessor {
     // 更新组件
     for (const component of updateComponents.components) {
       surface.components.set(component.id, component);
+    }
 
-      // v0.9: 检查组件的 slotName 来确定根组件
-      // 通常第一个组件或标记为 'root' 的组件是根组件
-      if (!surface.rootComponentId) {
-        surface.rootComponentId = component.id;
+    // v0.9: 确定根组件
+    // 策略：
+    // 1. 优先查找 ID 以 '-root' 结尾的组件
+    // 2. 其次查找没有被其他组件引用的容器组件（Column/Row/List/Card）
+    // 3. 最后使用最后一个组件
+    const components = updateComponents.components;
+    let rootId: string | null = null;
+
+    // 1. 查找 ID 以 '-root' 结尾的组件
+    for (const component of components) {
+      if (component.id.endsWith('-root')) {
+        rootId = component.id;
+        break;
       }
+    }
+
+    // 2. 如果没找到，查找没有被引用的容器组件
+    if (!rootId) {
+      const referencedIds = new this.setCtor<string>();
+      for (const component of components) {
+        const comp = component as Record<string, unknown>;
+        // 收集所有被引用的组件 ID
+        if (Array.isArray(comp.children)) {
+          for (const childId of comp.children) {
+            if (typeof childId === 'string') {
+              referencedIds.add(childId);
+            }
+          }
+        }
+        if (typeof comp.child === 'string') {
+          referencedIds.add(comp.child);
+        }
+      }
+
+      // 查找未被引用的容器组件
+      const containerTypes = ['Column', 'Row', 'List', 'Card'];
+      for (const component of components) {
+        if (!referencedIds.has(component.id) && containerTypes.includes(component.component)) {
+          rootId = component.id;
+          break;
+        }
+      }
+    }
+
+    // 3. 最后使用最后一个组件
+    if (!rootId && components.length > 0) {
+      rootId = components[components.length - 1]!.id;
+    }
+
+    if (rootId) {
+      surface.rootComponentId = rootId;
     }
 
     this.rebuildComponentTree(surface);
@@ -234,7 +299,7 @@ export class A2uiMessageProcessor implements MessageProcessor {
       return;
     }
 
-    let current: DataMap | DataValue[] = root;
+    let current: DataMap | DataValue[] | Record<string, DataValue> = root;
     for (let i = 0; i < segments.length - 1; i++) {
       const segment = segments[i] as string;
       let target: DataValue | undefined;
@@ -243,6 +308,9 @@ export class A2uiMessageProcessor implements MessageProcessor {
         target = current.get(segment);
       } else if (Array.isArray(current) && /^\d+$/.test(segment)) {
         target = current[parseInt(segment, 10)];
+      } else if (isObject(current)) {
+        // 支持普通对象
+        target = (current as Record<string, DataValue>)[segment];
       }
 
       if (target === undefined || typeof target !== 'object' || target === null) {
@@ -251,10 +319,12 @@ export class A2uiMessageProcessor implements MessageProcessor {
           current.set(segment, newMap as unknown as DataValue);
         } else if (Array.isArray(current)) {
           current[parseInt(segment, 10)] = newMap as unknown as DataValue;
+        } else if (isObject(current)) {
+          (current as Record<string, DataValue>)[segment] = newMap as unknown as DataValue;
         }
         target = newMap as unknown as DataValue;
       }
-      current = target as unknown as DataMap | DataValue[];
+      current = target as unknown as DataMap | DataValue[] | Record<string, DataValue>;
     }
 
     const finalSegment = segments[segments.length - 1] as string;
@@ -262,6 +332,9 @@ export class A2uiMessageProcessor implements MessageProcessor {
       current.set(finalSegment, value);
     } else if (Array.isArray(current) && /^\d+$/.test(finalSegment)) {
       current[parseInt(finalSegment, 10)] = value;
+    } else if (isObject(current)) {
+      // 支持普通对象
+      (current as Record<string, DataValue>)[finalSegment] = value;
     }
   }
 

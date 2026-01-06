@@ -202,6 +202,34 @@ export function generateBehaviorStyles(): string {
     }
   `);
 
+  // Animation keyframes
+  styles.push(`
+    @keyframes a2-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes a2-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes a2-bounce {
+      0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+      50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+    }
+    @keyframes a2-ping {
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+  `);
+
+  // Animation classes
+  styles.push(`
+    .a2-animate-spin { animation: a2-spin 1s linear infinite; }
+    .a2-animate-pulse { animation: a2-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .a2-animate-bounce { animation: a2-bounce 1s infinite; }
+    .a2-animate-ping { animation: a2-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    .a2-animate-none { animation: none; }
+  `);
+
   return styles.join('\n');
 }
 
