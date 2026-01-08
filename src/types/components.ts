@@ -20,4 +20,8 @@ export type {
   DateTimeInputComponent as DateTimeInput,
   ChoicePickerComponent as MultipleChoice,
   SliderComponent as Slider,
+  ChartComponent as Chart,
+  ChartType,
+  ChartSeries,
+  ChartAxisConfig,
 } from '@zhama/a2ui-core';

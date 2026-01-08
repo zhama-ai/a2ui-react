@@ -1,0 +1,125 @@
+{
+  "name": "A2UI 组件展示 (Showcase)",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "chat-trigger",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "你是一个 A2UI 组件生成专家。根据用户需求生成 A2UI v0.9 协议的 UI 组件。\n\n# A2UI 组件规范\n\n## 输出格式\n直接输出 JSON 对象（不要使用 markdown 代码块），包含 `a2ui_messages` 数组：\n\n{\n  \"a2ui_messages\": [\n    { \"type\": \"createSurface\", \"surfaceId\": \"main\", \"catalogId\": \"a2ui.org/standard\" },\n    { \"type\": \"updateDataModel\", \"surfaceId\": \"main\", \"data\": {} },\n    { \"type\": \"updateComponents\", \"surfaceId\": \"main\", \"components\": [...], \"rootComponentId\": \"root\" }\n  ]\n}\n\n## 组件速查\n\n| 组件 | 必需属性 | 可选属性 |\n|------|----------|----------|\n| Text | id, component=\"Text\", text | usageHint(h1-h5/caption/body) |\n| Image | id, component=\"Image\", url | fit, usageHint |\n| Icon | id, component=\"Icon\", name | - |\n| Video | id, component=\"Video\", url | - |\n| AudioPlayer | id, component=\"AudioPlayer\", url | description |\n| Row | id, component=\"Row\", children | distribution, alignment |\n| Column | id, component=\"Column\", children | distribution, alignment |\n| List | id, component=\"List\", children | direction, alignment |\n| Card | id, component=\"Card\", child | - |\n| Tabs | id, component=\"Tabs\", tabItems | - |\n| Divider | id, component=\"Divider\" | axis |\n| Modal | id, component=\"Modal\", entryPointChild, contentChild | - |\n| Button | id, component=\"Button\", child, action | primary |\n| CheckBox | id, component=\"CheckBox\", label, value | - |\n| TextField | id, component=\"TextField\", label | text, usageHint, validationRegexp |\n| DateTimeInput | id, component=\"DateTimeInput\", value | enableDate, enableTime, label |\n| ChoicePicker | id, component=\"ChoicePicker\", usageHint, options, value | label |\n| Slider | id, component=\"Slider\", value | label, min, max |\n| Chart | id, component=\"Chart\", chartType, series | title, xAxis, yAxis, legend, tooltip, height |\n\n## Chart 示例\n{\n  \"id\": \"chart-1\",\n  \"component\": \"Chart\",\n  \"chartType\": \"line\",\n  \"title\": \"数据趋势\",\n  \"series\": [{ \"name\": \"数据\", \"data\": [10, 20, 30, 40, 50] }],\n  \"xAxis\": { \"type\": \"category\", \"data\": [\"A\", \"B\", \"C\", \"D\", \"E\"] },\n  \"height\": 300\n}\n\n## 数据绑定\n使用 { \"path\": \"/data/path\" } 绑定数据模型。\n\n## 规则\n1. 每个组件必须有唯一 id\n2. Button.child 必须引用 Text 组件 id\n3. 布局组件的 children 引用子组件 id 数组\n4. 根组件通常是 Column\n5. 使用数据绑定时，在 updateDataModel 中提供初始值\n\n## 预设场景\n\n### 用户说\"展示所有组件\"或\"演示\"\n生成一个完整的组件展示页面，包含所有类型的组件。\n\n### 用户说\"登录表单\"\n生成登录表单：用户名输入框、密码输入框（obscured）、记住我复选框、登录按钮。\n\n### 用户说\"仪表盘\"或\"dashboard\"\n生成仪表盘：统计卡片、图表、最近活动列表。\n\n### 用户说\"商品卡片\"或\"产品列表\"\n生成商品卡片：图片、标题、价格、评分、购买按钮。\n\n请根据用户请求生成合适的 A2UI 组件 JSON。输出必须是纯 JSON 格式，不要包含任何其他文字说明。",
+          "returnIntermediateSteps": false
+        }
+      },
+      "id": "ai-agent",
+      "name": "A2UI Generator",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.5,
+          "responseFormat": "json_object"
+        }
+      },
+      "id": "openai-model",
+      "name": "OpenAI GPT-4o",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [220, 200],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Chat Trigger').item.json.sessionId }}"
+      },
+      "id": "memory",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [400, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析 AI 输出并提取 A2UI 消息\nconst input = $input.first().json;\nconst agentOutput = input.output || input.text || input.response || '';\n\nlet a2uiMessages = [];\nlet parseError = null;\n\ntry {\n  let parsed;\n  \n  if (typeof agentOutput === 'string') {\n    // 清理可能的 markdown 代码块\n    let cleanJson = agentOutput\n      .replace(/```json\\n?/gi, '')\n      .replace(/```\\n?/g, '')\n      .trim();\n    \n    // 尝试找到 JSON 对象\n    const jsonStart = cleanJson.indexOf('{');\n    const jsonEnd = cleanJson.lastIndexOf('}');\n    if (jsonStart !== -1 && jsonEnd !== -1) {\n      cleanJson = cleanJson.substring(jsonStart, jsonEnd + 1);\n    }\n    \n    parsed = JSON.parse(cleanJson);\n  } else if (typeof agentOutput === 'object') {\n    parsed = agentOutput;\n  }\n  \n  if (parsed?.a2ui_messages) {\n    a2uiMessages = parsed.a2ui_messages;\n  } else if (Array.isArray(parsed)) {\n    a2uiMessages = parsed;\n  } else if (parsed?.type) {\n    a2uiMessages = [parsed];\n  } else {\n    // 如果解析结果没有预期的格式，尝试包装\n    throw new Error('Invalid A2UI message format');\n  }\n  \n} catch (e) {\n  parseError = e.message;\n  \n  // 返回友好的错误提示 UI\n  a2uiMessages = [\n    {\n      type: 'createSurface',\n      surfaceId: 'error',\n      catalogId: 'a2ui.org/standard'\n    },\n    {\n      type: 'updateComponents',\n      surfaceId: 'error',\n      components: [\n        { id: 'icon', component: 'Icon', name: 'error' },\n        { id: 'title', component: 'Text', text: '生成失败', usageHint: 'h2' },\n        { id: 'msg', component: 'Text', text: '无法生成 UI 组件，请重新描述您的需求。错误: ' + parseError, usageHint: 'body' },\n        { id: 'header', component: 'Row', children: ['icon', 'title'], alignment: 'center' },\n        { id: 'root', component: 'Column', children: ['header', 'msg'] }\n      ],\n      rootComponentId: 'root'\n    }\n  ];\n}\n\n// 构建最终输出 - 将 a2ui_messages 转换为 JSONL 格式字符串\nconst a2uiJsonl = a2uiMessages.map(m => JSON.stringify(m)).join('\\n');\n\nreturn {\n  json: {\n    // 返回纯文本格式，包含 A2UI JSONL\n    output: a2uiJsonl,\n    // 同时保留结构化数据用于调试\n    _debug: {\n      a2ui_messages: a2uiMessages,\n      success: !parseError,\n      error: parseError\n    }\n  }\n};"
+      },
+      "id": "parse-output",
+      "name": "Parse A2UI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    }
+  ],
+  "connections": {
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "A2UI Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI GPT-4o": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "A2UI Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "A2UI Generator",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "A2UI Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse A2UI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a2ui-demo"
+  }
+}

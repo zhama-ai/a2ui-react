@@ -21,6 +21,7 @@ export { TextField } from './text-field';
 export { DateTimeInput } from './datetime-input';
 export { MultipleChoice } from './multiple-choice';
 export { Slider } from './slider';
+export { Chart } from './chart';
 
 // Root & Surface
 export { Root, ComponentRenderer } from './root';

@@ -28,11 +28,13 @@ import type {
   DateTimeInputNode,
   MultipleChoiceNode,
   SliderNode,
+  ChartNode,
 } from '../types/types';
 
 import { Audio } from './audio';
 import { Button } from './button';
 import { Card } from './card';
+import { Chart } from './chart';
 import { Checkbox } from './checkbox';
 import { Column } from './column';
 import { componentRegistry } from './component-registry';
@@ -452,6 +454,28 @@ function ComponentRenderer({
           min={node.properties.min}
           max={node.properties.max}
           label={node.properties.label}
+        />
+      );
+    }
+
+    case 'Chart': {
+      const node = component as ChartNode;
+      return (
+        <Chart
+          key={node.id}
+          component={node}
+          processor={processor}
+          surfaceId={surfaceId}
+          chartType={node.properties.chartType}
+          title={node.properties.title}
+          series={node.properties.series}
+          xAxis={node.properties.xAxis}
+          yAxis={node.properties.yAxis}
+          legend={node.properties.legend}
+          tooltip={node.properties.tooltip}
+          height={node.properties.height}
+          width={node.properties.width}
+          echartsOption={node.properties.echartsOption}
         />
       );
     }

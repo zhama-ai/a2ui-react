@@ -38,6 +38,10 @@ export type {
   DateTimeInputComponent,
   ChoicePickerComponent,
   SliderComponent,
+  ChartComponent,
+  ChartType,
+  ChartSeries,
+  ChartAxisConfig,
   ChildrenProperty,
   // Messages v0.9
   CreateSurfaceMessage,
@@ -142,6 +146,7 @@ export interface Theme {
       element: Record<string, boolean>;
       label: Record<string, boolean>;
     };
+    Chart: Record<string, boolean>;
     Tabs: {
       container: Record<string, boolean>;
       element: Record<string, boolean>;
@@ -218,6 +223,7 @@ export interface Theme {
     MultipleChoice?: Record<string, string>;
     Row?: Record<string, string>;
     Slider?: Record<string, string>;
+    Chart?: Record<string, string>;
     Tabs?: Record<string, string>;
     Text?:
       | Record<string, string>
@@ -388,6 +394,11 @@ export interface SliderNode extends BaseComponentNode {
   properties: ResolvedSlider;
 }
 
+export interface ChartNode extends BaseComponentNode {
+  type: 'Chart';
+  properties: ResolvedChart;
+}
+
 export interface CustomNode extends BaseComponentNode {
   type: string;
   properties: CustomNodeProperties;
@@ -412,6 +423,7 @@ export type AnyComponentNode =
   | DateTimeInputNode
   | MultipleChoiceNode
   | SliderNode
+  | ChartNode
   | CustomNode;
 
 // ============================================================================
@@ -487,6 +499,31 @@ export interface ResolvedSlider {
   min?: number;
   max?: number;
   value: number | { path: string };
+}
+
+export interface ResolvedChartSeries {
+  name?: string;
+  type?: string;
+  data: number[] | Array<{ name?: string; value: number }> | { path: string };
+}
+
+export interface ResolvedChartAxis {
+  type?: 'category' | 'value' | 'time' | 'log';
+  data?: string[] | { path: string };
+  name?: string;
+}
+
+export interface ResolvedChart {
+  chartType: 'line' | 'bar' | 'pie' | 'scatter' | 'area' | 'radar' | 'gauge';
+  title?: string | { path: string };
+  series: ResolvedChartSeries[] | { path: string };
+  xAxis?: ResolvedChartAxis;
+  yAxis?: ResolvedChartAxis;
+  legend?: boolean;
+  tooltip?: boolean;
+  height?: number;
+  width?: number | string;
+  echartsOption?: Record<string, unknown> | { path: string };
 }
 
 export interface ResolvedRow {

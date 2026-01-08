@@ -80,7 +80,9 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@zhama/a2ui-core": "^0.6.0",
+    "@zhama/a2ui-core": "workspace:*",
+    "echarts": "^5.5.1",
+    "echarts-for-react": "^3.0.2",
     "lucide-react": "^0.469.0",
     "react-markdown": "^9.0.1"
   },

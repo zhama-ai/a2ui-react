@@ -240,6 +240,13 @@ export const defaultTheme: Theme = {
       },
     },
 
+    // Chart - 图表
+    Chart: {
+      'a2-w-full': true,
+      'a2-br-2': true,
+      'a2-overflow-hidden': true,
+    },
+
     // Tabs - 标签页
     Tabs: {
       container: {
