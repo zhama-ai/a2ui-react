@@ -5,9 +5,9 @@
  * 支持 line、bar、pie、scatter、area、radar、gauge 图表类型
  */
 
-import { useMemo, useRef, useEffect } from 'react';
 import * as echarts from 'echarts';
 import type { ECharts, EChartsOption } from 'echarts';
+import { useMemo, useRef, useEffect } from 'react';
 
 import { useTheme } from '../context/theme';
 import type {
@@ -65,12 +65,14 @@ function resolveValue<T>(
 
       const arrayData = processor.getData(component, arrayPath!, surfaceId);
       if (Array.isArray(arrayData)) {
-        return arrayData.map(item => {
-          if (item && typeof item === 'object' && fieldName! in item) {
-            return (item as Record<string, unknown>)[fieldName!];
-          }
-          return undefined;
-        }).filter(v => v !== undefined) as T;
+        return arrayData
+          .map((item) => {
+            if (item && typeof item === 'object' && fieldName! in item) {
+              return (item as Record<string, unknown>)[fieldName!];
+            }
+            return undefined;
+          })
+          .filter((v) => v !== undefined) as T;
       }
       return undefined;
     }
@@ -183,7 +185,9 @@ export function Chart({
     if (chartType !== 'radar') return undefined;
 
     // 从 xAxis.data 获取 indicator
-    const indicatorData = xAxis?.data ? resolveValue(xAxis.data, component, processor, surfaceId) : undefined;
+    const indicatorData = xAxis?.data
+      ? resolveValue(xAxis.data, component, processor, surfaceId)
+      : undefined;
     if (!indicatorData || !Array.isArray(indicatorData)) return { indicator: [] };
 
     return {
@@ -293,4 +297,3 @@ export function Chart({
     </div>
   );
 }
-
