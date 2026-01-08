@@ -75,12 +75,15 @@ export const defaultTheme: Theme = {
       'a2-transition': true,
       'a2-hover-shadow-md': true,
       'a2-overflow-hidden': true,
+      'a2-flex-1': true, // 在 Row 中均匀分布
+      'a2-min-w-0': true, // 防止内容溢出
     },
 
     // Column - 垂直布局
     Column: {
       'a2-dsp-flexvert': true,
       'a2-gap-2': true,
+      'a2-w-full': true, // 占满父容器宽度
     },
 
     // CheckBox - 复选框
@@ -223,6 +226,8 @@ export const defaultTheme: Theme = {
     Row: {
       'a2-dsp-flexhor': true,
       'a2-gap-4': true,
+      'a2-w-full': true, // 占满父容器宽度
+      'a2-flex-wrap': true, // 允许换行
     },
 
     // Slider - 滑块

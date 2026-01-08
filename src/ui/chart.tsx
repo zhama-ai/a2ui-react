@@ -1,14 +1,13 @@
 /**
  * A2UI Chart Component - v0.9 Protocol
  *
- * 基于 echarts-for-react 的图表组件
+ * 直接使用原生 ECharts API，避免 echarts-for-react 在 React 18 严格模式下的问题
  * 支持 line、bar、pie、scatter、area、radar、gauge 图表类型
  */
 
-import { useMemo } from 'react';
-// 使用完整版 echarts-for-react，避免复杂的按需引入配置
-import ReactEChartsComponent from 'echarts-for-react';
-import type { EChartsReactProps } from 'echarts-for-react';
+import { useMemo, useRef, useEffect } from 'react';
+import * as echarts from 'echarts';
+import type { ECharts, EChartsOption } from 'echarts';
 
 import { useTheme } from '../context/theme';
 import type {
@@ -21,9 +20,6 @@ import type {
 } from '../types/types';
 
 import { extractStringValue, cn } from './utils';
-
-// 解决 React 18 类型兼容性问题
-const ReactECharts = ReactEChartsComponent as unknown as React.ComponentType<EChartsReactProps>;
 
 export interface ChartProps {
   component: AnyComponentNode;
@@ -44,6 +40,9 @@ export interface ChartProps {
 /**
  * 解析可能是路径绑定的值
  * 注意：使用严格的 undefined/null 检查，避免丢失 falsy 值（如 0、false、空字符串）
+ *
+ * 支持特殊路径语法：
+ * - `/data/array[].field` - 提取数组中所有元素的指定字段
  */
 function resolveValue<T>(
   value: T | { path: string } | undefined | null,
@@ -55,7 +54,28 @@ function resolveValue<T>(
 
   if (typeof value === 'object' && 'path' in value && value.path) {
     if (!processor || !surfaceId) return undefined;
-    const resolved = processor.getData(component, value.path, surfaceId);
+
+    const path = value.path;
+
+    // 处理 [] 语法：/data/array[].field -> 提取数组中所有元素的 field
+    const arrayExtractMatch = path.match(/^(.+)\[\]\.(.+)$/);
+    if (arrayExtractMatch) {
+      const arrayPath = arrayExtractMatch[1];
+      const fieldName = arrayExtractMatch[2];
+
+      const arrayData = processor.getData(component, arrayPath!, surfaceId);
+      if (Array.isArray(arrayData)) {
+        return arrayData.map(item => {
+          if (item && typeof item === 'object' && fieldName! in item) {
+            return (item as Record<string, unknown>)[fieldName!];
+          }
+          return undefined;
+        }).filter(v => v !== undefined) as T;
+      }
+      return undefined;
+    }
+
+    const resolved = processor.getData(component, path, surfaceId);
     return resolved as T;
   }
 
@@ -229,14 +249,47 @@ export function Chart({
 
   const themeClasses = theme.components.Chart || {};
 
+  // 使用 ref 来管理 ECharts 实例和容器
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<ECharts | null>(null);
+
+  // 初始化和清理 ECharts 实例
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // 初始化 ECharts 实例
+    const chart = echarts.init(containerRef.current, undefined, { renderer: 'canvas' });
+    chartInstanceRef.current = chart;
+
+    // 设置选项
+    chart.setOption(option as EChartsOption, true);
+
+    // 处理窗口 resize
+    const handleResize = () => {
+      chart.resize();
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 清理函数
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.dispose();
+        chartInstanceRef.current = null;
+      }
+    };
+  }, []); // 只在挂载时初始化
+
+  // 当 option 变化时更新图表
+  useEffect(() => {
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.setOption(option as EChartsOption, true);
+    }
+  }, [option]);
+
   return (
     <div className={cn(themeClasses)} style={containerStyle}>
-      <ReactECharts
-        option={option}
-        style={{ height: '100%', width: '100%' }}
-        opts={{ renderer: 'canvas' }}
-        notMerge={true}
-      />
+      <div ref={containerRef} style={{ height: '100%', width: '100%' }} />
     </div>
   );
 }
